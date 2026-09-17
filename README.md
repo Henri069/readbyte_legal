@@ -1,6 +1,6 @@
-# ReadByte website (readbyte_legal)
+# PageBite website (readbyte_legal)
 
-Static website for the ReadByte app: start page, privacy policy, terms of use, account deletion and imprint, in German (root) and English (`en/`). Published with GitHub Pages.
+Static website for the PageBite app: start page, privacy policy, terms of use, account deletion and imprint, in German (root) and English (`en/`). Published with GitHub Pages.
 
 This folder lives inside the app project (`readbyte/legal/`) but is its own Git repository. The app repository ignores it (`/legal/` in its `.gitignore`).
 

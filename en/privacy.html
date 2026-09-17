@@ -4,8 +4,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Privacy policy — ReadByte</title>
-  <meta name="description" content="How ReadByte handles your data: photos stay on your phone, text is processed in the EU." />
+  <title>Privacy policy — PageBite</title>
+  <meta name="description" content="How PageBite handles your data: photos stay on your phone, text is processed in the EU." />
   <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
   <link rel="alternate" hreflang="de" href="../privacy.html" />
   <link rel="stylesheet" href="../style.css" />
@@ -13,7 +13,7 @@
 
 <body>
   <nav class="nav" aria-label="Pages">
-    <a class="brand" href="./index.html">ReadByte</a>
+    <a class="brand" href="./index.html">PageBite</a>
     <a href="./privacy.html" aria-current="page">Privacy</a>
     <a href="./terms.html">Terms of use</a>
     <a href="./delete-account.html">Delete account</a>
@@ -23,7 +23,7 @@
 
   <main>
     <h1>Privacy policy</h1>
-    <p class="meta">ReadByte · Last updated: 16 September 2026</p>
+    <p class="meta">PageBite · Last updated: 17 September 2026</p>
 
     <div class="note">
       <p><strong>The short version</strong></p>
@@ -49,12 +49,12 @@
       Germany
     </address>
     <p>Email: <a href="mailto:henri.irmscher@gmail.com">henri.irmscher@gmail.com</a></p>
-    <p>This policy covers the ReadByte app and this website.</p>
+    <p>This policy covers the PageBite app and this website.</p>
 
     <h2 id="account">2. An anonymous account instead of registration</h2>
     <p>
-      Right before you see the subscription options, the app creates an anonymous account with our service provider
-      Supabase. It consists of a random identifier. We don't need your name or email address for it. We use the same
+      When you scan your free page in onboarding, or at the latest right before you see the subscription options, the
+      app creates an anonymous account with our service provider Supabase. It consists of a random identifier. We don't need your name or email address for it. We use the same
       identifier at RevenueCat to link your subscription to your account.
     </p>
     <p>
@@ -147,11 +147,25 @@
             <td>Until you delete your account or ask us to delete them</td>
           </tr>
           <tr>
-            <td>Counter of pages processed per day</td>
+            <td>Counter of scans per day</td>
             <td>Supabase</td>
-            <td>Protection against abuse and costs (daily limit)</td>
+            <td>Protection against abuse and costs (weekly limit)</td>
             <td>Art. 6(1)(f) GDPR</td>
             <td>30 days</td>
+          </tr>
+          <tr>
+            <td>Cost log of AI requests (account identifier, model, number of tokens, cost; no text)</td>
+            <td>Supabase</td>
+            <td>Monitoring and limiting costs</td>
+            <td>Art. 6(1)(f) GDPR</td>
+            <td>400 days. If you delete your account, we remove the account identifier right away</td>
+          </tr>
+          <tr>
+            <td>Record of the free page (account identifier, time)</td>
+            <td>Supabase</td>
+            <td>One free page per account, protection against abuse</td>
+            <td>Art. 6(1)(f) GDPR</td>
+            <td>Until you delete your account. Anonymous accounts without a subscription: 30 days</td>
           </tr>
           <tr>
             <td>Technical logs (IP address, time, request data)</td>
@@ -178,11 +192,15 @@
     <h2 id="scanning">4. Scanning: photos stay on your phone</h2>
     <ul>
       <li>
-        For scanning, ReadByte uses your phone's document scanner: Apple VisionKit on iPhone, Google's ML Kit Document
+        For scanning, PageBite uses your phone's document scanner: Apple VisionKit on iPhone, Google's ML Kit Document
         Scanner on Android. Text recognition also runs on the device (Apple Vision or Google ML Kit).
       </li>
-      <li>We never upload the photos. The app deletes every photo as soon as the text is read, even if text recognition
-        fails.</li>
+      <li>We never upload the photos. The app deletes every page photo as soon as the text is read, even if text
+        recognition fails.</li>
+      <li>If you scan a book cover, the app keeps only a small picture of it on your phone and deletes the photo right
+        away. The cover is not uploaded and not synced to other devices. The app sends the recognized text of the cover
+        to Google Gemini, so you don't have to type title and author (see section 5). Our server does not store this
+        text.</li>
       <li>
         On Android, Google ML Kit sends technical data to Google, for example the device model, app version,
         performance values and error codes. ML Kit does not send images or texts.
@@ -195,6 +213,12 @@
       Before your first scan, the app asks for your permission. Only then is the recognized text of a page sent to our
       server and from there to Google Gemini. Google Gemini creates the key idea, quiz and flashcards from it. Our
       server does not store the page text and does not write it into any logs.
+    </p>
+    <p>
+      In onboarding you can scan one page for free before you subscribe. Until you buy, the result stays on your phone
+      only. So that each account gets only one free page, our server stores your account identifier and the time. We
+      delete this record with your account. The legal basis is our legitimate interest in limiting abuse and costs
+      (Art. 6(1)(f) GDPR).
     </p>
     <ul>
       <li><strong>Provider:</strong> Google Cloud (Vertex AI), Gemini model. Processing in the EU (location
@@ -342,7 +366,7 @@
 
     <h2 id="age">13. Minimum age</h2>
     <p>
-      ReadByte is intended for people aged 16 and over. We do not knowingly collect data from younger children.
+      PageBite is intended for people aged 16 and over. We do not knowingly collect data from younger children.
     </p>
 
     <h2 id="changes">14. Changes</h2>

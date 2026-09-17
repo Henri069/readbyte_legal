@@ -4,8 +4,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Datenschutzerklärung — ReadByte</title>
-  <meta name="description" content="Wie ReadByte mit deinen Daten umgeht: Fotos bleiben auf dem Handy, Texte werden in der EU verarbeitet." />
+  <title>Datenschutzerklärung — PageBite</title>
+  <meta name="description" content="Wie PageBite mit deinen Daten umgeht: Fotos bleiben auf dem Handy, Texte werden in der EU verarbeitet." />
   <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
   <link rel="alternate" hreflang="en" href="./en/privacy.html" />
   <link rel="stylesheet" href="./style.css" />
@@ -13,7 +13,7 @@
 
 <body>
   <nav class="nav" aria-label="Seiten">
-    <a class="brand" href="./index.html">ReadByte</a>
+    <a class="brand" href="./index.html">PageBite</a>
     <a href="./privacy.html" aria-current="page">Datenschutz</a>
     <a href="./terms.html">Nutzungsbedingungen</a>
     <a href="./delete-account.html">Konto löschen</a>
@@ -23,7 +23,7 @@
 
   <main>
     <h1>Datenschutzerklärung</h1>
-    <p class="meta">ReadByte · Stand: 16. September 2026</p>
+    <p class="meta">PageBite · Stand: 17. September 2026</p>
 
     <div class="note">
       <p><strong>Das Wichtigste in Kürze</strong></p>
@@ -47,11 +47,12 @@
       Deutschland
     </address>
     <p>E-Mail: <a href="mailto:henri.irmscher@gmail.com">henri.irmscher@gmail.com</a></p>
-    <p>Diese Erklärung gilt für die App ReadByte und für diese Website.</p>
+    <p>Diese Erklärung gilt für die App PageBite und für diese Website.</p>
 
     <h2 id="konto">2. Ein anonymes Konto statt Registrierung</h2>
     <p>
-      Kurz bevor du die Abo-Angebote siehst, legt die App ein anonymes Konto bei unserem Dienstleister Supabase an.
+      Wenn du im Onboarding deine kostenlose Seite scannst, spätestens aber kurz bevor du die Abo-Angebote siehst, legt
+      die App ein anonymes Konto bei unserem Dienstleister Supabase an.
       Es besteht aus einer zufälligen Kennung. Name und E-Mail-Adresse brauchen wir dafür nicht. Dieselbe Kennung
       nutzen wir bei RevenueCat, um dein Abo deinem Konto zuzuordnen.
     </p>
@@ -145,11 +146,25 @@
             <td>Bis du dein Konto löschst oder die Löschung verlangst</td>
           </tr>
           <tr>
-            <td>Zähler verarbeiteter Seiten pro Tag</td>
+            <td>Zähler der Scans pro Tag</td>
             <td>Supabase</td>
-            <td>Schutz vor Missbrauch und Kosten (Tageslimit)</td>
+            <td>Schutz vor Missbrauch und Kosten (Wochenlimit)</td>
             <td>Art. 6 Abs. 1 lit. f DSGVO</td>
             <td>30 Tage</td>
+          </tr>
+          <tr>
+            <td>Kosten-Protokoll der KI-Anfragen (Konto-Kennung, Modell, Zahl der Tokens, Kosten; kein Text)</td>
+            <td>Supabase</td>
+            <td>Kosten überwachen und begrenzen</td>
+            <td>Art. 6 Abs. 1 lit. f DSGVO</td>
+            <td>400 Tage. Löschst du dein Konto, entfernen wir die Konto-Kennung sofort</td>
+          </tr>
+          <tr>
+            <td>Vermerk über die kostenlose Seite (Konto-Kennung, Zeitpunkt)</td>
+            <td>Supabase</td>
+            <td>Eine kostenlose Seite pro Konto, Schutz vor Missbrauch</td>
+            <td>Art. 6 Abs. 1 lit. f DSGVO</td>
+            <td>Bis du dein Konto löschst. Anonyme Konten ohne Abo: 30 Tage</td>
           </tr>
           <tr>
             <td>Technische Protokolle (IP-Adresse, Zeitpunkt, Anfrage-Daten)</td>
@@ -177,12 +192,16 @@
     <h2 id="scannen">4. Scannen: Fotos bleiben auf deinem Handy</h2>
     <ul>
       <li>
-        Zum Scannen nutzt ReadByte den Dokumenten-Scanner deines Handys: auf dem iPhone VisionKit von Apple, auf
+        Zum Scannen nutzt PageBite den Dokumenten-Scanner deines Handys: auf dem iPhone VisionKit von Apple, auf
         Android den ML Kit Document Scanner von Google. Die Texterkennung läuft ebenfalls auf dem Gerät (Apple Vision
         oder Google ML Kit).
       </li>
-      <li>Die Fotos laden wir nie hoch. Die App löscht jedes Foto, sobald der Text erkannt ist, auch wenn die Erkennung
-        fehlschlägt.</li>
+      <li>Die Fotos laden wir nie hoch. Die App löscht jedes Seitenfoto, sobald der Text erkannt ist, auch wenn die
+        Erkennung fehlschlägt.</li>
+      <li>Scannst du ein Buchcover, speichert die App davon nur ein kleines Bild auf deinem Handy und löscht das Foto
+        sofort. Das Cover wird nicht hochgeladen und nicht mit anderen Geräten abgeglichen. Den erkannten Text des Covers
+        schickt die App an Google Gemini, damit du Titel und Autor nicht abtippen musst (siehe Abschnitt 5). Unser
+        Server speichert diesen Text nicht.</li>
       <li>
         Auf Android sendet Google ML Kit technische Daten an Google, zum Beispiel Gerätemodell, App-Version,
         Leistungswerte und Fehlercodes. Bilder und Texte sendet ML Kit nicht.
@@ -195,6 +214,12 @@
       Bevor du zum ersten Mal scannst, fragt dich die App um Erlaubnis. Erst dann geht der erkannte Text einer Seite
       an unseren Server und von dort an Google Gemini. Google Gemini erstellt daraus Kernidee, Quiz und Karteikarten.
       Unser Server speichert den Seitentext nicht und schreibt ihn in keine Protokolle.
+    </p>
+    <p>
+      Im Onboarding kannst du eine Seite kostenlos scannen, bevor du ein Abo abschließt. Das Ergebnis bleibt bis zum
+      Kauf nur auf deinem Handy. Damit jedes Konto nur eine kostenlose Seite bekommt, speichern wir auf unserem Server
+      deine Konto-Kennung und den Zeitpunkt. Diesen Eintrag löschen wir mit deinem Konto. Rechtsgrundlage ist unser
+      berechtigtes Interesse, Missbrauch und Kosten zu begrenzen (Art. 6 Abs. 1 lit. f DSGVO).
     </p>
     <ul>
       <li><strong>Anbieter:</strong> Google Cloud (Vertex AI), Modell Gemini. Verarbeitung in der EU (Standort
@@ -349,7 +374,7 @@
 
     <h2 id="alter">13. Mindestalter</h2>
     <p>
-      ReadByte richtet sich an Menschen ab 16 Jahren. Wir erheben nicht bewusst Daten von jüngeren Kindern.
+      PageBite richtet sich an Menschen ab 16 Jahren. Wir erheben nicht bewusst Daten von jüngeren Kindern.
     </p>
 
     <h2 id="aenderungen">14. Änderungen</h2>
