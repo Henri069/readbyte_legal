@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="de">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>Seite nicht gefunden · PageBite</title>
+  <script>
+    // GitHub Pages zeigt diese Seite für jede unbekannte Adresse. Der kurze Creator-Link "c/emelie" (auch "en/c/emelie")
+    // wird zu "c/?code=emelie", der eigentlichen Seite.
+    (function () {
+      var match = location.pathname.match(/^(.*\/)c\/([^\/]+)\/?$/);
+      if (match) location.replace(match[1] + 'c/?code=' + encodeURIComponent(match[2]));
+    })();
+  </script>
+  <style>
+    /* Eigene Stile: relative Pfade zeigen von hier aus je nach Adresse auf verschiedene Ordner. */
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 34rem;
+      margin: 0 auto;
+      padding: 15vh 16px 48px;
+      color: rgba(43, 36, 32, 0.85);
+      background: #efe7dc;
+    }
+
+    h1 {
+      color: #2b2420;
+      font-size: 1.6rem;
+      line-height: 1.2;
+    }
+
+    a {
+      color: #c75b39;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Seite nicht gefunden</h1>
+  <p>Diese Seite gibt es nicht. <a data-home href="/">Zur Startseite</a></p>
+  <p lang="en">This page does not exist. <a data-home href="/">Go to the start page</a></p>
+  <script>
+    // Auf GitHub Pages liegt die Website unter /readbyte_legal/, auf einer eigenen Domain unter /.
+    (function () {
+      var home = /\.github\.io$/.test(location.hostname) ? '/' + location.pathname.split('/')[1] + '/' : '/';
+      Array.prototype.forEach.call(document.querySelectorAll('[data-home]'), function (link) {
+        link.href = home;
+      });
+    })();
+  </script>
+</body>
+
+</html>

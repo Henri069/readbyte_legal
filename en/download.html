@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Get PageBite</title>
+  <meta name="description" content="PageBite for iPhone and Android: scan the QR code or open the App Store or Google Play directly." />
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+  <link rel="alternate" hreflang="de" href="../download.html" />
+  <link rel="stylesheet" href="../style.css" />
+  <!-- Phones go straight to their store, before the page is drawn. -->
+  <script src="../assets/stores.js"></script>
+  <script>PageBiteStores.startDownloadPage();</script>
+</head>
+
+<body>
+  <p class="redirect-notice" role="status">
+    <span class="only-ios">Opening the App Store.</span>
+    <span class="only-android">Opening Google Play.</span>
+    <a class="only-ios" href="https://apps.apple.com/app/id6812806136">Tap here if nothing happens</a>
+    <a class="only-android" href="https://play.google.com/store/apps/details?id=com.readbyte.app">Tap here if nothing happens</a>
+  </p>
+
+  <div class="page">
+    <nav class="nav" aria-label="Pages">
+      <a class="brand" href="./index.html">PageBite</a>
+      <a href="./privacy.html">Privacy</a>
+      <a href="./terms.html">Terms of use</a>
+      <a href="./delete-account.html">Delete account</a>
+      <a href="./imprint.html">Imprint</a>
+      <a class="lang" href="../download.html" hreflang="de" lang="de">Deutsch</a>
+    </nav>
+
+    <main>
+      <section class="hero">
+        <h1>Get PageBite</h1>
+        <p class="tagline">Turn the pages you read into cards you remember.</p>
+        <p class="lede">Scan the QR code with your phone's camera. Or open the store directly.</p>
+      </section>
+
+      <div class="stores">
+        <section class="card store" aria-labelledby="store-ios">
+          <h2 id="store-ios">iPhone and iPad</h2>
+          <p class="store-name">App Store</p>
+          <img class="qr" src="../assets/qr-app-store.svg" width="176" height="176" alt="QR code: PageBite on the App Store" />
+          <a class="store-badge" href="https://apps.apple.com/app/id6812806136">
+            <img src="../assets/badge-app-store-en.svg" width="132" height="44" alt="Download on the App Store" />
+          </a>
+        </section>
+
+        <section class="card store" aria-labelledby="store-android">
+          <h2 id="store-android">Android</h2>
+          <p class="store-name">Google Play</p>
+          <img class="qr" src="../assets/qr-google-play.svg" width="176" height="176" alt="QR code: PageBite on Google Play" />
+          <a class="store-badge" href="https://play.google.com/store/apps/details?id=com.readbyte.app">
+            <img src="../assets/badge-google-play-en.png" width="148" height="44" alt="Get it on Google Play" />
+          </a>
+        </section>
+      </div>
+
+      <p class="trademarks">Apple, the Apple logo and App Store are trademarks of Apple Inc. Google Play and the Google Play logo are trademarks of Google LLC.</p>
+    </main>
+
+    <footer>
+      <p>
+        <a href="./privacy.html">Privacy</a> ·
+        <a href="./terms.html">Terms of use</a> ·
+        <a href="./delete-account.html">Delete account</a> ·
+        <a href="./imprint.html">Imprint</a> ·
+        <a href="../download.html" hreflang="de" lang="de">Deutsch</a>
+      </p>
+    </footer>
+  </div>
+</body>
+
+</html>
