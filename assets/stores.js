@@ -79,9 +79,14 @@
     return null;
   }
 
-  /** Where a creator link sends a phone. Android stays on the page: the code has to be typed into the app there. */
+  /**
+   * Where a creator link sends a phone, or null for a computer. iPhone: Apple's redeem page with the code filled in.
+   * Android: Google Play with the creator's campaign; the app reads it after the install and opens the discount itself.
+   */
   function creatorTarget(platform, code) {
-    return platform === 'ios' ? appleRedeemUrl(code) : null;
+    if (platform === 'ios') return appleRedeemUrl(code);
+    if (platform === 'android') return playStoreUrl(creatorCampaign(code));
+    return null;
   }
 
   /** True when none of the browser's languages is German. */
@@ -119,24 +124,51 @@
     each('[data-play-store]', function (link) {
       link.href = playStoreUrl(creatorCampaign(code));
     });
+    var codeElement = global.document.querySelector('.coupon [data-code]');
     each('[data-copy-code]', function (button) {
       button.addEventListener('click', function () {
-        var clipboard = global.navigator.clipboard;
-        if (!clipboard || !clipboard.writeText) return;
-        // A blocked clipboard changes nothing: the code is on the page to type.
-        clipboard.writeText(code).then(
-          function () {
-            button.textContent = button.getAttribute('data-copied-label');
-          },
-          function () {}
-        );
+        copyCode(code, codeElement).then(function (copied) {
+          if (copied) button.textContent = button.getAttribute('data-copied-label');
+        });
       });
     });
   }
 
   /**
+   * Copies the code. In-app browsers (Instagram, TikTok) often block the clipboard, so the fallback selects the code
+   * and tries the old copy command. If that fails too, the code stays selected, ready for the phone's own copy menu.
+   * Resolves to whether the code was copied.
+   */
+  function copyCode(code, codeElement) {
+    var viaSelection = function () {
+      var selection = global.getSelection ? global.getSelection() : null;
+      if (!selection || !codeElement) return false;
+      var range = global.document.createRange();
+      range.selectNodeContents(codeElement);
+      selection.removeAllRanges();
+      selection.addRange(range);
+      var copied = false;
+      try {
+        copied = global.document.execCommand('copy') === true;
+      } catch (error) {
+        copied = false;
+      }
+      // After a copy the highlight has done its job. Without one it stays, ready for the phone's copy menu.
+      if (copied) selection.removeAllRanges();
+      return copied;
+    };
+    var clipboard = global.navigator.clipboard;
+    if (!clipboard || !clipboard.writeText) return Promise.resolve(viaSelection());
+    return clipboard.writeText(code).then(function () {
+      return true;
+    }, viaSelection);
+  }
+
+  /**
    * Creator link "c/emelie" (404.html hands it over as "c/?code=emelie"). Runs in the head.
-   * iPhone: Apple's redeem page. Android and computers: the page with the code and the steps.
+   * iPhone: Apple's redeem page, the page stays hidden. Android: Google Play with the creator's campaign, while the page
+   * stays behind it with the code and how to type it, for everyone the install link does not reach (the app is already
+   * installed, or installed another way). Computers: the page with both ways.
    * `language` is the language of this page; a German page sends browsers without German to the English one.
    */
   function startCreatorPage(language) {
@@ -151,7 +183,7 @@
       fillCreatorPage(code);
     });
     var target = creatorTarget(platform, code);
-    if (target) {
+    if (platform === 'ios' && target) {
       redirect(target, platform);
       return;
     }
@@ -164,6 +196,8 @@
       global.history.replaceState(null, '', creatorPath(address.pathname, code));
     }
     global.document.documentElement.classList.add(platform === 'android' ? 'platform-android' : 'platform-computer');
+    // Android usually opens the Play Store app on top, and this page stays in the browser with the code.
+    if (platform === 'android' && target) address.assign(target);
   }
 
   global.PageBiteStores = {

@@ -18,7 +18,7 @@ This folder lives inside the app project (`readbyte/legal/`) but is its own Git 
 | Creator link (`c/?code=EMELIE`) | `c/index.html` | `en/c/index.html` |
 | Not found, and the short creator link `c/emelie` | `404.html` | same page |
 
-Published address: `https://henri069.github.io/readbyte_legal/` (for example `https://henri069.github.io/readbyte_legal/privacy.html`).
+Published address: `https://pagebite.eu/` (custom domain, file `CNAME`; DNS at Hostinger points to GitHub Pages). The old address `https://henri069.github.io/readbyte_legal/` forwards there, so links in app builds and store consoles keep working.
 
 ## Download page and creator links
 
@@ -26,7 +26,7 @@ Both use `assets/stores.js`. It holds the Apple app ID (`6812806136`) and the An
 
 - **Download page** (`…/download`): iPhones and iPads go straight to the App Store, Android phones straight to Google Play. The page stays hidden; only a short note with a link shows while the store opens. Computers see two QR codes and the two official store badges.
 - **Store badges** in `assets/`: Apple's "Download on the App Store" / "Laden im App Store" (SVG, from Apple's marketing tools, `toolbox.marketingtools.apple.com`) and Google's "Get it on Google Play" / "Jetzt bei Google Play" (PNG, from `play.google.com/intl/en_us/badges/`), downloaded 2026-09-18. They stay unchanged; only the transparent margin of Google's PNGs was cut off, so both badges show at the same height. Apple and Google allow the badges, not their bare logos. The trademark notes below the badges are part of the rules.
-- **Creator link** (`…/c/emelie` or `…/c/?code=EMELIE`): iPhones go straight to Apple's redeem page with the code filled in (Apple installs the app first if needed). Android shows the code, a copy button, three steps and a Google Play button, because on Android the code is typed into the app. Computers see both. Browsers without German get the English page. Invalid codes go to the download page.
+- **Creator link** (`…/c/emelie` or `…/c/?code=EMELIE`): iPhones go straight to Apple's redeem page with the code filled in (Apple installs the app first if needed). Android phones go to Google Play with the campaign `creator-<code>`; the app reads it after the install (Google Play Install Referrer) and opens the discount by itself. The page is not hidden on Android: it stays in the browser with the code, a copy button and how to type the code, for people the install link does not reach. Computers see both ways. Browsers without German get the English page. Invalid codes go to the download page.
 - The short form `c/emelie` works through `404.html`, because GitHub Pages has no routes. The page answers with status 404 but sends the visitor on at once. If a platform refuses a link that answers 404, use the long form `c/?code=EMELIE`.
 - Nothing is created per creator. The store setup per creator is in the app repository: `docs/redeem-codes.md`.
 - No cookies, no storage, no tracking pixel. The code only ends up in the store links. The Google Play link of a creator carries the campaign `creator-<code>`, so the Play Console counts installs per creator.

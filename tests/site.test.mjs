@@ -45,35 +45,75 @@ function browser({
   pathname = '/readbyte_legal/c/',
   search = '',
   clipboard,
+  /** What the old copy command answers; null when the browser has none. */
+  copyCommand = null,
 } = {}) {
   const replaced = [];
+  const assigned = [];
   const addressBar = [];
   const classes = new Set();
   const listeners = {};
+  const selected = [];
+  const everSelected = [];
+  const copyCommands = [];
+  const couponCode = fakeElement();
   const elements = {
-    '[data-code]': [fakeElement(), fakeElement()],
+    '[data-code]': [couponCode, fakeElement()],
+    '.coupon [data-code]': [couponCode],
     '[data-apple-redeem]': [fakeElement(), fakeElement()],
     '[data-play-store]': [fakeElement()],
     '[data-copy-code]': [fakeElement({ 'data-copied-label': 'Kopiert' })],
   };
   const window = {
     navigator: { userAgent, platform, maxTouchPoints, languages, clipboard },
-    location: { pathname, search, replace: (url) => replaced.push(url) },
+    location: { pathname, search, replace: (url) => replaced.push(url), assign: (url) => assigned.push(url) },
     history: { replaceState: (_state, _title, url) => addressBar.push(url) },
+    getSelection: () => ({
+      removeAllRanges: () => selected.splice(0),
+      addRange: (range) => {
+        selected.push(range.node);
+        everSelected.push(range.node);
+      },
+    }),
     document: {
       documentElement: { classList: { add: (...names) => names.forEach((name) => classes.add(name)) } },
       addEventListener: (type, listener) => {
         listeners[type] = listener;
       },
       querySelectorAll: (selector) => elements[selector] ?? [],
+      querySelector: (selector) => elements[selector]?.[0] ?? null,
+      createRange: () => ({
+        selectNodeContents(node) {
+          this.node = node;
+        },
+      }),
+      execCommand: (command) => {
+        copyCommands.push(command);
+        if (copyCommand === null) throw new Error('not supported');
+        return copyCommand;
+      },
     },
     URLSearchParams,
   };
   window.window = window;
   vm.createContext(window);
   vm.runInContext(STORES_SOURCE, window);
-  return { stores: window.PageBiteStores, replaced, addressBar, classes, elements, domReady: () => listeners.DOMContentLoaded?.() };
+  return {
+    stores: window.PageBiteStores,
+    replaced,
+    assigned,
+    addressBar,
+    classes,
+    elements,
+    selected,
+    everSelected,
+    copyCommands,
+    domReady: () => listeners.DOMContentLoaded?.(),
+  };
 }
+
+/** Lets pending promises (the clipboard) settle. */
+const settle = () => new Promise((resolve) => setImmediate(resolve));
 
 const { stores } = browser();
 
@@ -169,9 +209,12 @@ describe('creator links', () => {
     assert.equal(page.elements['[data-apple-redeem]'][0].href, 'https://apps.apple.com/redeem?ctx=offercodes&id=6812806136&code=EMELIE');
   });
 
-  test('an Android phone stays on the page: the code has to be typed into the app', () => {
+  test('an Android phone goes to Google Play with the creator’s campaign, and the page with the code stays behind it', () => {
     const page = browser({ userAgent: ANDROID, platform: 'Linux armv8l', maxTouchPoints: 5, search: '?code=emelie' });
     page.stores.startCreatorPage('de');
+    // The app reads the campaign after the install and opens the discount by itself.
+    assert.deepEqual(page.assigned, [stores.playStoreUrl('creator-emelie')]);
+    // The page is not hidden: it stays in the browser behind the Play Store app, with the code.
     assert.deepEqual(page.replaced, []);
     assert.deepEqual([...page.classes], ['platform-android']);
     // The address bar shows the link the creator shared, without "?code=".
@@ -185,10 +228,28 @@ describe('creator links', () => {
     assert.equal(page.elements['[data-play-store]'][0].href, stores.playStoreUrl('creator-emelie'));
   });
 
+  test('sends phones to their store and computers nowhere', () => {
+    assert.equal(stores.creatorTarget('ios', 'EMELIE'), 'https://apps.apple.com/redeem?ctx=offercodes&id=6812806136&code=EMELIE');
+    assert.equal(stores.creatorTarget('android', 'EMELIE'), stores.playStoreUrl('creator-emelie'));
+    assert.equal(stores.creatorTarget(null, 'EMELIE'), null);
+  });
+
+  test('an Android browser without German gets the English page first, which then opens Google Play', () => {
+    const german = browser({ userAgent: ANDROID, platform: 'Linux armv8l', maxTouchPoints: 5, search: '?code=emelie', languages: ['en-US'] });
+    german.stores.startCreatorPage('de');
+    assert.deepEqual(german.replaced, ['../en/c/?code=emelie']);
+    assert.deepEqual(german.assigned, []);
+
+    const english = browser({ userAgent: ANDROID, platform: 'Linux armv8l', maxTouchPoints: 5, pathname: '/readbyte_legal/en/c/', search: '?code=emelie', languages: ['en-US'] });
+    english.stores.startCreatorPage('en');
+    assert.deepEqual(english.assigned, [stores.playStoreUrl('creator-emelie')]);
+  });
+
   test('a computer sees both ways, in English when the browser has no German', () => {
     const german = browser({ search: '?code=emelie' });
     german.stores.startCreatorPage('de');
     assert.deepEqual(german.replaced, []);
+    assert.deepEqual(german.assigned, []);
     assert.deepEqual([...german.classes], ['platform-computer']);
 
     const english = browser({ search: '?code=emelie', languages: ['en-GB', 'fr'] });
@@ -225,18 +286,47 @@ describe('creator links', () => {
     assert.deepEqual(bare.replaced, ['../download.html']);
   });
 
-  test('copies the code and says so', async () => {
-    const written = [];
-    const clipboard = { writeText: async (text) => void written.push(text) };
-    const page = browser({ search: '?code=emelie', clipboard });
+  /** The creator page on an Android phone, with the copy button pressed. */
+  async function pressCopy(options) {
+    const page = browser({ userAgent: ANDROID, platform: 'Linux armv8l', maxTouchPoints: 5, search: '?code=emelie', ...options });
     page.stores.startCreatorPage('de');
     page.domReady();
-
     const button = page.elements['[data-copy-code]'][0];
     button.click();
-    await new Promise((resolve) => setImmediate(resolve));
+    await settle();
+    return { page, button };
+  }
+
+  test('copies the code with the clipboard and says so', async () => {
+    const written = [];
+    const { page, button } = await pressCopy({ clipboard: { writeText: async (text) => void written.push(text) } });
     assert.deepEqual(written, ['EMELIE']);
     assert.equal(button.textContent, 'Kopiert');
+    assert.deepEqual(page.copyCommands, []);
+  });
+
+  test('falls back to the old copy command when an in-app browser blocks the clipboard', async () => {
+    const blocked = { writeText: async () => Promise.reject(new Error('Write permission denied')) };
+    const { page, button } = await pressCopy({ clipboard: blocked, copyCommand: true });
+    assert.deepEqual(page.copyCommands, ['copy']);
+    // The old command copies the selection, so the code in the coupon is selected first, and the highlight goes again.
+    assert.deepEqual(page.everSelected, [page.elements['.coupon [data-code]'][0]]);
+    assert.deepEqual(page.selected, []);
+    assert.equal(button.textContent, 'Kopiert');
+  });
+
+  test('uses the old copy command where there is no clipboard at all', async () => {
+    const { page, button } = await pressCopy({ copyCommand: true });
+    assert.deepEqual(page.copyCommands, ['copy']);
+    assert.equal(button.textContent, 'Kopiert');
+  });
+
+  test('leaves the code selected for the phone’s own copy menu when nothing can copy', async () => {
+    for (const copyCommand of [false, null]) {
+      const { page, button } = await pressCopy({ copyCommand });
+      assert.equal(button.textContent, '', `copy command ${copyCommand}`);
+      assert.deepEqual(page.selected, [page.elements['.coupon [data-code]'][0]]);
+    }
   });
 });
 
@@ -318,9 +408,22 @@ describe('pages', () => {
     assert.ok(read('en/c/index.html').split('<body>')[0].includes("PageBiteStores.startCreatorPage('en');"));
     for (const file of ['c/index.html', 'en/c/index.html']) {
       const page = read(file);
-      for (const hook of ['data-code', 'data-copy-code', 'data-play-store', 'data-apple-redeem', 'only-computer']) {
+      for (const hook of ['data-code', 'data-copy-code', 'data-play-store', 'data-apple-redeem', 'only-computer', 'android-redirect-card']) {
         assert.ok(page.includes(hook), `${file}: ${hook}`);
       }
+    }
+  });
+
+  test('the Android card of the creator pages names the code for typing it in the app', () => {
+    for (const [file, redeem] of [
+      ['c/index.html', '„Code einlösen“'],
+      ['en/c/index.html', '“Redeem code”'],
+    ]) {
+      const card = read(file).split('android-redirect-card')[1].split('</section>')[0];
+      assert.ok(card.includes('<strong data-code></strong>'), file);
+      // The same words as the app's button.
+      assert.ok(card.includes(redeem), file);
+      assert.ok(card.includes('data-play-store'), file);
     }
   });
 

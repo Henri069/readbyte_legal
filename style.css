@@ -325,7 +325,7 @@ footer a {
 }
 
 .button:focus-visible,
-.copy-button:focus-visible {
+.coupon-copy:focus-visible {
   outline: 3px solid var(--primary);
   outline-offset: 3px;
 }
@@ -363,6 +363,15 @@ html.redirect-ios .only-android,
 html.redirect-android .only-ios,
 html.platform-android .only-computer {
   display: none;
+}
+
+/* Creator link on Android: Google Play opens, and this card with the typing fallback stays behind it. */
+.android-redirect-card {
+  display: none;
+}
+
+html.platform-android .android-redirect-card {
+  display: block;
 }
 
 .stores {
@@ -430,31 +439,61 @@ html.platform-android .only-computer {
 
 /* Creator link */
 
-.creator-code {
-  color: var(--primary);
-  letter-spacing: 0.03em;
+/* "Dein Creator-Code" stays on one line on a phone. */
+.creator-hero h1 {
+  font-size: clamp(1.9rem, 7.5vw, 2.6rem);
 }
 
-.copy-button {
+/* The code as a coupon: big terracotta letters on a card, the copy button inside it. */
+.coupon {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  max-width: 26rem;
+  margin: 0.6rem 0 1.2rem;
+  padding: 12px 12px 12px 20px;
+  border: 2px solid var(--ink);
+  border-radius: 16px;
+  background: var(--surface);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+.coupon-code {
+  min-width: 0;
+  color: var(--primary);
+  font-family: "Bricolage Grotesque", "DM Sans", sans-serif;
+  font-size: 1.9rem;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: 0.06em;
+  overflow-wrap: anywhere;
+}
+
+.coupon-copy {
+  flex: none;
   min-height: 44px;
-  padding: 8px 20px;
+  padding: 8px 18px;
   border: 2px solid var(--ink);
   border-radius: 999px;
-  background: var(--surface);
+  background: var(--primary);
   box-shadow: 3px 3px 0 var(--ink);
-  color: var(--ink);
+  color: var(--surface);
   font: inherit;
   font-weight: 700;
+  line-height: 1.2;
   cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
 }
 
-.copy-button:active {
+.coupon-copy:active {
   box-shadow: 1px 1px 0 var(--ink);
   transform: translate(2px, 2px);
 }
 
 .steps {
-  margin: 1.4rem 0;
+  margin: 2.2rem 0;
   padding: 18px 20px 22px;
 }
 

@@ -29,14 +29,26 @@
     </nav>
 
     <main>
-      <section class="hero">
-        <h1>Dein Code: <span class="creator-code" data-code></span></h1>
+      <section class="hero creator-hero">
+        <h1>Dein Creator-Code</h1>
+        <div class="coupon">
+          <span class="coupon-code" data-code></span>
+          <button type="button" class="coupon-copy" data-copy-code data-copied-label="Kopiert">Kopieren</button>
+        </div>
         <p class="lede">Damit wird dein erstes Jahr PageBite günstiger. Den Preis siehst du vor dem Kauf.</p>
-        <button type="button" class="copy-button" data-copy-code data-copied-label="Kopiert">Code kopieren</button>
       </section>
 
-      <section class="card steps" aria-labelledby="android-title">
+      <!-- Android: Google Play opens with the creator's campaign; this stays behind it for everyone the link does not reach. -->
+      <section class="card steps android-redirect-card" aria-labelledby="android-redirect-title">
+        <h2 id="android-redirect-title">Wir öffnen Google Play</h2>
+        <p>Installiere PageBite von dort. Auf der Abo-Seite zeigt die App deinen Rabatt dann von selbst.</p>
+        <p>Falls er nicht erscheint: Tippe in der App auf der Abo-Seite oben auf die drei Punkte, dann auf „Code einlösen“, und gib <strong data-code></strong> ein.</p>
+        <a class="button" href="https://play.google.com/store/apps/details?id=com.readbyte.app" data-play-store>Zu Google Play</a>
+      </section>
+
+      <section class="card steps only-computer" aria-labelledby="android-title">
         <h2 id="android-title">Auf Android</h2>
+        <p>Öffne diese Seite auf deinem Android-Handy, dann zeigt PageBite deinen Rabatt nach der Installation von selbst. Oder so:</p>
         <ol>
           <li>Lade PageBite bei Google Play.</li>
           <li>Öffne die App. Auf der Abo-Seite tippst du oben auf die drei Punkte und dann auf „Code einlösen“. Du findest es auch in den Einstellungen.</li>
