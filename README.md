@@ -18,7 +18,11 @@ This folder lives inside the app project (`readbyte/legal/`) but is its own Git 
 | Creator link (`c/?code=EMELIE`) | `c/index.html` | `en/c/index.html` |
 | Not found, and the short creator link `c/emelie` | `404.html` | same page |
 
-Published address: `https://pagebite.eu/` (custom domain, file `CNAME`; DNS at Hostinger points to GitHub Pages). The old address `https://henri069.github.io/readbyte_legal/` forwards there, so links in app builds and store consoles keep working.
+Published address: `https://pagebite.eu/` (custom domain, file `CNAME`; DNS at Hostinger, nameservers `*.dns-parking.com`, records point to GitHub Pages). The old address `https://henri069.github.io/readbyte_legal/` forwards there, so links in app builds and store consoles keep working.
+
+## Email
+
+`info@pagebite.eu` is the only address on the pages (before 2026-09-22 it was the operator's private Gmail address). It is a real mailbox at Hostinger (MX `mx1`/`mx2.hostinger.com`, SPF `_spf.mail.hostinger.com`), so nothing is forwarded anywhere else. The privacy policy describes it in section 3, "Wenn du uns eine E-Mail schreibst" / "If you write us an email", and lists Hostinger as a processor in section 9. Move the mailbox, change those two places and spec §14.1/§14.2 in the same week.
 
 ## Download page and creator links
 
@@ -76,7 +80,7 @@ They check the platform detection, the redirects, the creator codes, the short l
 
 - [ ] Operator name, address and email are correct (taken from the Mr. Viral imprint). Add a VAT ID if you have one.
 - [ ] Minimum age 16 (spec §17 point 7, still a proposal).
-- [ ] Data processing agreements signed with Supabase, Google Cloud, PostHog and RevenueCat.
+- [ ] Data processing agreements signed with Supabase, Google Cloud, PostHog and RevenueCat. Hostinger's DPA (`hostinger.com/legal/dpa`) is annexed to its terms, nothing to sign.
 - [ ] Vertex AI: request-response logging off, data caching off (spec §14.5). Keep the 90-day abuse monitoring sentence until Google approves the exception.
 - [ ] PostHog: "Discard client IP data" on, shortest practical retention.
 - [ ] Have a lawyer or a legal text service review privacy policy, terms and imprint.

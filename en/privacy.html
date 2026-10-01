@@ -23,14 +23,15 @@
 
   <main>
     <h1>Privacy policy</h1>
-    <p class="meta">PageBite · Last updated: 19 September 2026</p>
+    <p class="meta">PageBite · Last updated: 29 September 2026</p>
 
     <div class="note">
       <p><strong>The short version</strong></p>
       <ul>
         <li>Photos of your book pages stay on your phone. They are deleted as soon as the text is read.</li>
-        <li>Only the recognized text is sent briefly to Google Gemini (Google Cloud, processed in the EU) to create the
-          key idea, quiz and flashcards. The original text stays on your phone.</li>
+        <li>Only the recognized text is sent briefly to Google Gemini (Google Cloud, processed in the EU), together with
+          the characters and terms PageBite already knows from the book, to create the key idea, quiz and flashcards.
+          The original text stays on your phone.</li>
         <li>You don't have to register. The app creates an anonymous account. Signing in with an email code is
           optional.</li>
         <li>We only collect usage statistics if you agree. Never page texts, card texts or book titles.</li>
@@ -48,7 +49,7 @@
       60389 Frankfurt am Main<br />
       Germany
     </address>
-    <p>Email: <a href="mailto:henri.irmscher@gmail.com">henri.irmscher@gmail.com</a></p>
+    <p>Email: <a href="mailto:info@pagebite.eu">info@pagebite.eu</a></p>
     <p>This policy covers the PageBite app and this website.</p>
 
     <h2 id="account">2. An anonymous account instead of registration</h2>
@@ -91,14 +92,23 @@
               <a href="#ai">section 5</a></td>
           </tr>
           <tr>
-            <td>AI output (key ideas, quizzes, flashcards)</td>
+            <td>AI output (key ideas or what happens, quizzes, flashcards)</td>
             <td>Phone and Supabase (Frankfurt am Main)</td>
             <td>Learning, backup, sync</td>
             <td>Art. 6(1)(b) GDPR</td>
             <td>Until you delete it or your account</td>
           </tr>
           <tr>
-            <td>Books (title, author, chosen cover color) and page labels</td>
+            <td>Characters (fiction) and terms (non-fiction) of a book: name, a short description and one fact per page.
+              Created by the AI</td>
+            <td>Phone and Supabase (Frankfurt am Main). Name and short description are sent briefly to Google Gemini
+              with the next scanned page of that book</td>
+            <td>Looking up who is who and what a term means; the AI adds to them with every page</td>
+            <td>Art. 6(1)(b) GDPR</td>
+            <td>Until you delete them, their book, their page or your account</td>
+          </tr>
+          <tr>
+            <td>Books (title, author, kind of book non-fiction or fiction, chosen cover color) and page labels</td>
             <td>Phone and Supabase</td>
             <td>Organizing cards</td>
             <td>Art. 6(1)(b) GDPR</td>
@@ -175,6 +185,13 @@
             <td>Until you delete your account. Anonymous accounts without a subscription: 30 days</td>
           </tr>
           <tr>
+            <td>Emails to us (your address, your name if you give it, and the content)</td>
+            <td>Our mailbox at Hostinger (EU)</td>
+            <td>Answering your request</td>
+            <td>Art. 6(1)(b), (c) or (f) GDPR, see <a href="#emails">below</a></td>
+            <td>Until your request is done, unless the law requires longer</td>
+          </tr>
+          <tr>
             <td>Technical logs (IP address, time, request data)</td>
             <td>Supabase, Google Cloud, PostHog, RevenueCat</td>
             <td>Security and operations</td>
@@ -212,6 +229,23 @@
       goes into usage statistics.
     </p>
 
+    <h3 id="emails">If you write us an email</h3>
+    <p>
+      If you write to <a href="mailto:info@pagebite.eu">info@pagebite.eu</a>, we process your email address, your name
+      if you give it, and the content of your message. We only use this to answer you.
+    </p>
+    <ul>
+      <li><strong>Mailbox:</strong> Our mailbox is at Hostinger (Hostinger International Ltd., Cyprus). That is where
+        your email arrives, is checked for spam automatically and waits until we answer it. Hostinger states that it
+        stores data in the EU and the United Kingdom. Some of Hostinger's own service providers, for example for
+        spam protection, can sit outside the EU; EU Standard Contractual Clauses apply to them.</li>
+      <li><strong>Legal basis:</strong> If it is about your subscription or the app, Art. 6(1)(b) GDPR. If you exercise
+        your rights from <a href="#rights">section 12</a>, Art. 6(1)(c) GDPR. Otherwise our legitimate interest in
+        answering requests (Art. 6(1)(f) GDPR).</li>
+      <li><strong>How long:</strong> We delete your email when your request is done and we no longer need it. We keep
+        it longer only if the law requires that.</li>
+    </ul>
+
     <h2 id="scanning">4. Scanning: photos stay on your phone</h2>
     <ul>
       <li>
@@ -222,8 +256,8 @@
         recognition fails.</li>
       <li>If you scan a book cover, the app keeps only a small picture of it on your phone and deletes the photo right
         away. The cover is not uploaded and not synced to other devices. The app sends the recognized text of the cover
-        to Google Gemini, so you don't have to type title and author (see section 5). Our server does not store this
-        text.</li>
+        to Google Gemini, so you don't have to type title and author and the app can suggest whether it is non-fiction
+        or fiction (see section 5). Our server does not store this text.</li>
       <li>
         On Android, Google ML Kit sends technical data to Google, for example the device model, app version,
         performance values and error codes. ML Kit does not send images or texts.
@@ -237,6 +271,13 @@
       recognized text of a page sent to our server and from there to Google Gemini. If you choose "Not now", nothing
       is sent, and the text stays on your phone only until you leave the screen. Google Gemini creates the key idea, quiz and flashcards from it. Our
       server does not store the page text and does not write it into any logs.
+    </p>
+    <p>
+      Together with the page text go the kind of book (non-fiction or fiction) and the characters or terms PageBite
+      already knows from this book: for each one its name and a short description, at most 50. They were themselves
+      made by the AI, from pages you scanned earlier. This lets Gemini add to them instead of creating them twice.
+      Earlier page texts and the book title are not sent. For the free page in onboarding there is no book yet, so
+      Gemini decides from the page whether it comes from a novel.
     </p>
     <p>
       In onboarding you can scan one page for free before you subscribe. Until you buy, the result stays on your phone
@@ -267,7 +308,8 @@
       <li><strong>Provider:</strong> PostHog, EU servers. The IP address is discarded, location lookup is off, and there
         are no session recordings.</li>
       <li><strong>What we collect:</strong> which screens you open, certain actions (for example "scan started" or
-        "quiz completed" with the score), your onboarding answers, device type, operating system, app version and a
+        "quiz completed" with the score), your answers and choices during onboarding (for example, whether you want a
+        reminder), device type, operating system, app version and a
         random device identifier. Once you have an account, we link the data to your account identifier.</li>
       <li><strong>What we never collect:</strong> page texts, card texts, book titles, authors, page labels or any
         other free text.</li>
@@ -337,6 +379,12 @@
             <td>USA</td>
             <td>Data processing agreement; EU Standard Contractual Clauses and EU-US Data Privacy Framework</td>
           </tr>
+          <tr>
+            <td>Hostinger International Ltd.</td>
+            <td>Email mailbox for info@pagebite.eu</td>
+            <td>EU (Cyprus, Lithuania, the Netherlands) and the United Kingdom</td>
+            <td>Data processing agreement (part of Hostinger's terms); EU Standard Contractual Clauses</td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -350,7 +398,8 @@
       RevenueCat processes data in the USA. Supabase, Google and PostHog are US companies, even though your data is
       stored in the EU. For the USA, the European Commission's adequacy decision for the EU-US Data Privacy Framework
       applies (Art. 45 GDPR). In addition, the agreements include EU Standard Contractual Clauses (Art. 46(2)(c) GDPR).
-      Your content such as cards and page texts stays in the EU.
+      Your content such as cards and page texts stays in the EU, and our mailbox for your emails is with a provider
+      from the EU.
     </p>
 
     <h2 id="retention">10. Retention and deletion</h2>
@@ -385,7 +434,7 @@
       <li>Withdrawal of consent with effect for the future (Art. 7(3))</li>
     </ul>
     <p>
-      To use them, write to <a href="mailto:henri.irmscher@gmail.com">henri.irmscher@gmail.com</a>. This also covers
+      To use them, write to <a href="mailto:info@pagebite.eu">info@pagebite.eu</a>. This also covers
       data held by our service providers, for example at PostHog.
     </p>
     <p>
