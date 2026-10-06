@@ -42,7 +42,7 @@ function browser({
   platform = 'MacIntel',
   maxTouchPoints = 0,
   languages = ['de-DE', 'de'],
-  pathname = '/readbyte_legal/c/',
+  pathname = '/readbyte_legal/code/',
   search = '',
   clipboard,
   /** What the old copy command answers; null when the browser has none. */
@@ -169,18 +169,19 @@ describe('creator links', () => {
     assert.equal(stores.readCreatorCode('?code=AB'), 'AB');
   });
 
-  test('also reads the code from the short address "c/emelie"', () => {
-    assert.equal(stores.readCreatorCode('', '/readbyte_legal/c/emelie'), 'EMELIE');
-    assert.equal(stores.readCreatorCode('', '/c/Books24/'), 'BOOKS24');
-    assert.equal(stores.readCreatorCode('', '/readbyte_legal/c/'), null);
+  test('also reads the code from the short address "code/emelie"', () => {
+    assert.equal(stores.readCreatorCode('', '/readbyte_legal/code/emelie'), 'EMELIE');
+    assert.equal(stores.readCreatorCode('', '/code/Books24/'), 'BOOKS24');
+    assert.equal(stores.readCreatorCode('', '/readbyte_legal/code/'), null);
+    assert.equal(stores.readCreatorCode('', '/barcode/emelie'), null);
     // "?code=" wins when both are there.
-    assert.equal(stores.readCreatorCode('?code=first', '/c/second'), 'FIRST');
+    assert.equal(stores.readCreatorCode('?code=first', '/code/second'), 'FIRST');
   });
 
   test('builds the short address for the address bar', () => {
-    assert.equal(stores.creatorPath('/readbyte_legal/c/', 'EMELIE'), '/readbyte_legal/c/emelie');
-    assert.equal(stores.creatorPath('/readbyte_legal/en/c/index.html', 'EMELIE'), '/readbyte_legal/en/c/emelie');
-    assert.equal(stores.creatorPath('/c/', 'BOOKS24'), '/c/books24');
+    assert.equal(stores.creatorPath('/readbyte_legal/code/', 'EMELIE'), '/readbyte_legal/code/emelie');
+    assert.equal(stores.creatorPath('/readbyte_legal/en/code/index.html', 'EMELIE'), '/readbyte_legal/en/code/emelie');
+    assert.equal(stores.creatorPath('/code/', 'BOOKS24'), '/code/books24');
   });
 
   test('rejects anything Apple custom codes cannot carry', () => {
@@ -218,7 +219,7 @@ describe('creator links', () => {
     assert.deepEqual(page.replaced, []);
     assert.deepEqual([...page.classes], ['platform-android']);
     // The address bar shows the link the creator shared, without "?code=".
-    assert.deepEqual(page.addressBar, ['/readbyte_legal/c/emelie']);
+    assert.deepEqual(page.addressBar, ['/readbyte_legal/code/emelie']);
 
     page.domReady();
     assert.deepEqual(
@@ -237,10 +238,10 @@ describe('creator links', () => {
   test('an Android browser without German gets the English page first, which then opens Google Play', () => {
     const german = browser({ userAgent: ANDROID, platform: 'Linux armv8l', maxTouchPoints: 5, search: '?code=emelie', languages: ['en-US'] });
     german.stores.startCreatorPage('de');
-    assert.deepEqual(german.replaced, ['../en/c/?code=emelie']);
+    assert.deepEqual(german.replaced, ['../en/code/?code=emelie']);
     assert.deepEqual(german.assigned, []);
 
-    const english = browser({ userAgent: ANDROID, platform: 'Linux armv8l', maxTouchPoints: 5, pathname: '/readbyte_legal/en/c/', search: '?code=emelie', languages: ['en-US'] });
+    const english = browser({ userAgent: ANDROID, platform: 'Linux armv8l', maxTouchPoints: 5, pathname: '/readbyte_legal/en/code/', search: '?code=emelie', languages: ['en-US'] });
     english.stores.startCreatorPage('en');
     assert.deepEqual(english.assigned, [stores.playStoreUrl('creator-emelie')]);
   });
@@ -254,7 +255,7 @@ describe('creator links', () => {
 
     const english = browser({ search: '?code=emelie', languages: ['en-GB', 'fr'] });
     english.stores.startCreatorPage('de');
-    assert.deepEqual(english.replaced, ['../en/c/?code=emelie']);
+    assert.deepEqual(english.replaced, ['../en/code/?code=emelie']);
 
     // The English page never sends anyone back.
     const onEnglishPage = browser({ search: '?code=emelie', languages: ['de-DE'] });
@@ -262,8 +263,8 @@ describe('creator links', () => {
     assert.deepEqual(onEnglishPage.replaced, []);
   });
 
-  test('works when a host serves the page at "c/emelie" itself, and leaves that address alone', () => {
-    const page = browser({ userAgent: ANDROID, platform: 'Linux armv8l', maxTouchPoints: 5, pathname: '/c/emelie' });
+  test('works when a host serves the page at "code/emelie" itself, and leaves that address alone', () => {
+    const page = browser({ userAgent: ANDROID, platform: 'Linux armv8l', maxTouchPoints: 5, pathname: '/code/emelie' });
     page.stores.startCreatorPage('de');
     assert.deepEqual(page.replaced, []);
     assert.deepEqual(page.addressBar, []);
@@ -271,9 +272,9 @@ describe('creator links', () => {
     assert.equal(page.elements['[data-code]'][0].textContent, 'EMELIE');
 
     // Browsers without German still get the English page, with the code.
-    const english = browser({ pathname: '/c/emelie', languages: ['en-US'] });
+    const english = browser({ pathname: '/code/emelie', languages: ['en-US'] });
     english.stores.startCreatorPage('de');
-    assert.deepEqual(english.replaced, ['../en/c/?code=emelie']);
+    assert.deepEqual(english.replaced, ['../en/code/?code=emelie']);
   });
 
   test('without a valid code the visitor gets the download page', () => {
@@ -281,7 +282,7 @@ describe('creator links', () => {
     page.stores.startCreatorPage('de');
     assert.deepEqual(page.replaced, ['../download.html']);
 
-    const bare = browser({ pathname: '/readbyte_legal/c/' });
+    const bare = browser({ pathname: '/readbyte_legal/code/' });
     bare.stores.startCreatorPage('de');
     assert.deepEqual(bare.replaced, ['../download.html']);
   });
@@ -334,11 +335,11 @@ describe('short creator links (404.html)', () => {
   const html = read('404.html');
   const [routeScript, homeScript] = [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].map((match) => match[1]);
 
-  function visit(pathname, hostname = 'henri069.github.io') {
+  function visit(pathname, hostname = 'henri069.github.io', search = '') {
     const replaced = [];
     const links = [{ href: '/' }, { href: '/' }];
     const context = {
-      location: { pathname, hostname, replace: (url) => replaced.push(url) },
+      location: { pathname, hostname, search, replace: (url) => replaced.push(url) },
       document: { querySelectorAll: () => links },
     };
     vm.createContext(context);
@@ -347,12 +348,21 @@ describe('short creator links (404.html)', () => {
     return { replaced, home: links[0].href };
   }
 
-  test('"c/emelie" opens the creator page', () => {
-    assert.deepEqual(visit('/readbyte_legal/c/emelie').replaced, ['/readbyte_legal/c/?code=emelie']);
-    assert.deepEqual(visit('/readbyte_legal/c/Emelie/').replaced, ['/readbyte_legal/c/?code=Emelie']);
-    assert.deepEqual(visit('/readbyte_legal/en/c/emelie').replaced, ['/readbyte_legal/en/c/?code=emelie']);
-    // On an own domain later.
-    assert.deepEqual(visit('/c/emelie', 'pagebite.example').replaced, ['/c/?code=emelie']);
+  test('"code/emelie" opens the creator page', () => {
+    assert.deepEqual(visit('/readbyte_legal/code/emelie').replaced, ['/readbyte_legal/code/?code=emelie']);
+    assert.deepEqual(visit('/readbyte_legal/code/Emelie/').replaced, ['/readbyte_legal/code/?code=Emelie']);
+    assert.deepEqual(visit('/readbyte_legal/en/code/emelie').replaced, ['/readbyte_legal/en/code/?code=emelie']);
+    assert.deepEqual(visit('/code/emelie', 'pagebite.eu').replaced, ['/code/?code=emelie']);
+  });
+
+  test('old links with "c/" still open the creator page', () => {
+    assert.deepEqual(visit('/c/emelie', 'pagebite.eu').replaced, ['/code/?code=emelie']);
+    assert.deepEqual(visit('/readbyte_legal/c/Emelie/').replaced, ['/readbyte_legal/code/?code=Emelie']);
+    assert.deepEqual(visit('/en/c/emelie', 'pagebite.eu').replaced, ['/en/code/?code=emelie']);
+    // The old long form "c/?code=EMELIE".
+    assert.deepEqual(visit('/c/', 'pagebite.eu', '?code=EMELIE').replaced, ['/code/?code=EMELIE']);
+    assert.deepEqual(visit('/en/c/index.html', 'pagebite.eu', '?code=EMELIE').replaced, ['/en/code/?code=EMELIE']);
+    assert.deepEqual(visit('/c', 'pagebite.eu', '?code=EMELIE').replaced, ['/code/?code=EMELIE']);
   });
 
   test('other unknown addresses show "not found" with a link to the start page', () => {
@@ -361,7 +371,11 @@ describe('short creator links (404.html)', () => {
     assert.equal(missing.home, '/readbyte_legal/');
     assert.equal(visit('/unknown', 'pagebite.example').home, '/');
     // Never a loop: the creator page's folder itself is no short link.
-    assert.deepEqual(visit('/readbyte_legal/x/c/').replaced, []);
+    assert.deepEqual(visit('/readbyte_legal/x/code/').replaced, []);
+    assert.deepEqual(visit('/code/', 'pagebite.eu', '?code=EMELIE').replaced, []);
+    // Words that only end in "c" or "code" are no creator links.
+    assert.deepEqual(visit('/abc/emelie', 'pagebite.eu').replaced, []);
+    assert.deepEqual(visit('/barcode/emelie', 'pagebite.eu').replaced, []);
   });
 });
 
@@ -385,7 +399,7 @@ describe('pages', () => {
   });
 
   test('every new page exists in German and English', () => {
-    for (const page of ['download.html', 'c/index.html']) {
+    for (const page of ['download.html', 'code/index.html']) {
       assert.ok(existsSync(join(ROOT, page)), page);
       assert.ok(existsSync(join(ROOT, 'en', page)), `en/${page}`);
     }
@@ -404,9 +418,9 @@ describe('pages', () => {
   });
 
   test('the creator pages start in the head with their own language', () => {
-    assert.ok(read('c/index.html').split('<body>')[0].includes("PageBiteStores.startCreatorPage('de');"));
-    assert.ok(read('en/c/index.html').split('<body>')[0].includes("PageBiteStores.startCreatorPage('en');"));
-    for (const file of ['c/index.html', 'en/c/index.html']) {
+    assert.ok(read('code/index.html').split('<body>')[0].includes("PageBiteStores.startCreatorPage('de');"));
+    assert.ok(read('en/code/index.html').split('<body>')[0].includes("PageBiteStores.startCreatorPage('en');"));
+    for (const file of ['code/index.html', 'en/code/index.html']) {
       const page = read(file);
       for (const hook of ['data-code', 'data-copy-code', 'data-play-store', 'data-apple-redeem', 'only-computer', 'android-redirect-card']) {
         assert.ok(page.includes(hook), `${file}: ${hook}`);
@@ -416,8 +430,8 @@ describe('pages', () => {
 
   test('the Android card of the creator pages names the code for typing it in the app', () => {
     for (const [file, redeem] of [
-      ['c/index.html', '„Code einlösen“'],
-      ['en/c/index.html', '“Redeem code”'],
+      ['code/index.html', '„Code einlösen“'],
+      ['en/code/index.html', '“Redeem code”'],
     ]) {
       const card = read(file).split('android-redirect-card')[1].split('</section>')[0];
       assert.ok(card.includes('<strong data-code></strong>'), file);
@@ -485,14 +499,15 @@ describe('local preview (tools/preview-server.mjs) answers like GitHub Pages', (
     assert.deepEqual(answer('/download'), { status: 200, file: 'download.html' });
     assert.deepEqual(answer('/download.html'), { status: 200, file: 'download.html' });
     assert.deepEqual(answer('/en/download'), { status: 200, file: join('en', 'download.html') });
-    assert.deepEqual(answer('/c/'), { status: 200, file: join('c', 'index.html') });
-    assert.deepEqual(answer('/c'), { status: 301, location: '/c/' });
+    assert.deepEqual(answer('/code/'), { status: 200, file: join('code', 'index.html') });
+    assert.deepEqual(answer('/code'), { status: 301, location: '/code/' });
     assert.deepEqual(answer('/assets/stores.js'), { status: 200, file: join('assets', 'stores.js') });
   });
 
   test('answers unknown addresses, like the short creator link, with 404.html', () => {
+    assert.deepEqual(answer('/code/emily'), { status: 404, file: '404.html' });
+    assert.deepEqual(answer('/en/code/emily'), { status: 404, file: '404.html' });
     assert.deepEqual(answer('/c/emily'), { status: 404, file: '404.html' });
-    assert.deepEqual(answer('/en/c/emily'), { status: 404, file: '404.html' });
   });
 
   test('never serves anything outside the website folder', () => {

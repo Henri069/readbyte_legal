@@ -7,11 +7,18 @@
   <meta name="robots" content="noindex" />
   <title>Seite nicht gefunden · PageBite</title>
   <script>
-    // GitHub Pages zeigt diese Seite für jede unbekannte Adresse. Der kurze Creator-Link "c/emelie" (auch "en/c/emelie")
-    // wird zu "c/?code=emelie", der eigentlichen Seite.
+    // GitHub Pages zeigt diese Seite für jede unbekannte Adresse. Der kurze Creator-Link "code/emelie" (auch "en/code/emelie")
+    // wird zu "code/?code=emelie", der eigentlichen Seite. Alte Links mit "c/" (bis 2026-10-05) führen auf dieselbe Seite:
+    // "c/emelie" und die lange Form "c/?code=EMELIE".
     (function () {
-      var match = location.pathname.match(/^(.*\/)c\/([^\/]+)\/?$/);
-      if (match) location.replace(match[1] + 'c/?code=' + encodeURIComponent(match[2]));
+      var path = location.pathname;
+      var short = path.match(/^(.*\/)(?:code|c)\/([^\/]+)\/?$/);
+      if (short && short[2] !== 'index.html') {
+        location.replace(short[1] + 'code/?code=' + encodeURIComponent(short[2]));
+        return;
+      }
+      var long = path.match(/^(.*\/)c(?:\/(?:index\.html)?)?$/);
+      if (long && /[?&]code=/.test(location.search || '')) location.replace(long[1] + 'code/' + location.search);
     })();
   </script>
   <style>

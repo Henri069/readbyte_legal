@@ -1,6 +1,6 @@
 // Local preview that answers like GitHub Pages: "download" serves download.html, a folder serves its index.html,
 // a folder without "/" is redirected, and every unknown address gets 404.html. The short creator link
-// "c/emelie" only works through that 404 page, so a plain file server cannot show it.
+// "code/emelie" only works through that 404 page, so a plain file server cannot show it.
 // Start it from anywhere: node tools/preview-server.mjs [port]   (default 8765, only on this computer)
 import { createReadStream, statSync } from 'node:fs';
 import { createServer } from 'node:http';

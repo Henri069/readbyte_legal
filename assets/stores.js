@@ -32,8 +32,8 @@
 
   /**
    * The creator code of the address, in capitals, or null when there is none or it cannot be a code.
-   * Creators share "c/emelie". GitHub Pages has no routes, so 404.html hands the code over as "c/?code=emelie";
-   * a host with routes may serve this page at "c/emelie" itself.
+   * Creators share "code/emelie". GitHub Pages has no routes, so 404.html hands the code over as "code/?code=emelie";
+   * a host with routes may serve this page at "code/emelie" itself.
    */
   function readCreatorCode(search, pathname) {
     var raw = null;
@@ -43,16 +43,16 @@
       raw = null;
     }
     if (!raw) {
-      var match = /\/c\/([^\/]+)\/?$/.exec(String(pathname || ''));
+      var match = /\/code\/([^\/]+)\/?$/.exec(String(pathname || ''));
       raw = match ? match[1] : null;
     }
     var code = String(raw || '').trim().toUpperCase();
     return CREATOR_CODE.test(code) ? code : null;
   }
 
-  /** The short address creators share, "…/c/emelie", for the address bar. */
+  /** The short address creators share, "…/code/emelie", for the address bar. */
   function creatorPath(pathname, code) {
-    return String(pathname || '/').replace(/\/c\/.*$/, '/c/') + code.toLowerCase();
+    return String(pathname || '/').replace(/\/code\/.*$/, '/code/') + code.toLowerCase();
   }
 
   /** The same name as the Play offer ID, so both reports line up. */
@@ -165,7 +165,7 @@
   }
 
   /**
-   * Creator link "c/emelie" (404.html hands it over as "c/?code=emelie"). Runs in the head.
+   * Creator link "code/emelie" (404.html hands it over as "code/?code=emelie"). Runs in the head.
    * iPhone: Apple's redeem page, the page stays hidden. Android: Google Play with the creator's campaign, while the page
    * stays behind it with the code and how to type it, for everyone the install link does not reach (the app is already
    * installed, or installed another way). Computers: the page with both ways.
@@ -188,7 +188,7 @@
       return;
     }
     if (language === 'de' && prefersEnglish(global.navigator)) {
-      address.replace('../en/c/?code=' + encodeURIComponent(code.toLowerCase()));
+      address.replace('../en/code/?code=' + encodeURIComponent(code.toLowerCase()));
       return;
     }
     // The address bar keeps the short link the creator shared, not the "?code=" form.
