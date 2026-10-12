@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="de">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>Teste PageBite einen Monat gratis</title>
+  <meta name="description" content="Mit dem Code deiner Freunde testest du PageBite einen Monat lang gratis." />
+  <meta property="og:title" content="Teste PageBite einen Monat gratis" />
+  <meta property="og:description" content="Seite scannen. Kernidee, Quiz und Karteikarten bekommen. Mit diesem Link einen Monat gratis." />
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+  <link rel="alternate" hreflang="en" href="./en/friends.html" />
+  <link rel="stylesheet" href="./style.css" />
+  <!-- iPhones gehen direkt zu Apples Einlöse-Seite mit eingetragenem Code, bevor die Seite gezeichnet wird.
+       Der Code steht nur in assets/stores.js (FRIENDS_CODE). Den Gratis-Zeitraum unten mit dem Store-Angebot gleich halten. -->
+  <script src="./assets/stores.js"></script>
+  <script>PageBiteStores.startFriendsPage('de');</script>
+</head>
+
+<body>
+  <p class="redirect-notice" role="status">
+    Wir öffnen den App Store. Dein Code ist schon eingetragen.
+    <a href="https://apps.apple.com/app/id6812806136" data-apple-redeem>Hier tippen, falls nichts passiert</a>
+  </p>
+
+  <div class="page">
+    <nav class="nav" aria-label="Seiten">
+      <a class="brand" href="./index.html">PageBite</a>
+      <a href="./privacy.html">Datenschutz</a>
+      <a href="./terms.html">Nutzungsbedingungen</a>
+      <a href="./imprint.html">Impressum</a>
+      <a class="lang" href="./en/friends.html" hreflang="en" lang="en">English</a>
+    </nav>
+
+    <main>
+      <section class="hero creator-hero">
+        <h1>Ein Monat PageBite gratis</h1>
+        <div class="coupon">
+          <span class="coupon-code" data-code></span>
+          <button type="button" class="coupon-copy" data-copy-code data-copied-label="Kopiert">Kopieren</button>
+        </div>
+        <p class="lede">Seite scannen. Kernidee, Quiz und Karteikarten bekommen. Mit diesem Code testest du PageBite einen Monat lang gratis. Danach geht es mit dem Jahresabo weiter, außer du kündigst vorher. Den Preis siehst du, bevor du startest.</p>
+      </section>
+
+      <!-- Android: Google Play öffnet sich mit der Kampagne des Codes; diese Karte bleibt dahinter für alle, die der Link nicht erreicht. -->
+      <section class="card steps android-redirect-card" aria-labelledby="android-redirect-title">
+        <h2 id="android-redirect-title">Wir öffnen Google Play</h2>
+        <p>Installiere PageBite von dort. Auf der Abo-Seite zeigt die App deinen Gratismonat dann von selbst.</p>
+        <p>Falls er nicht erscheint: Tippe in der App auf der Abo-Seite oben auf „Code einlösen“ und gib <strong data-code></strong> ein.</p>
+        <a class="button" href="https://play.google.com/store/apps/details?id=com.readbyte.app" data-play-store>Zu Google Play</a>
+      </section>
+
+      <section class="card steps only-computer" aria-labelledby="android-title">
+        <h2 id="android-title">Auf Android</h2>
+        <p>Öffne diese Seite auf deinem Android-Handy, dann zeigt PageBite deinen Gratismonat nach der Installation von selbst. Oder so:</p>
+        <ol>
+          <li>Lade PageBite bei Google Play.</li>
+          <li>Öffne die App. Auf der Abo-Seite tippst du oben auf „Code einlösen“. Du findest es auch in den Einstellungen.</li>
+          <li>Gib <strong data-code></strong> ein. Dein Gratismonat erscheint sofort.</li>
+        </ol>
+        <a class="button" href="https://play.google.com/store/apps/details?id=com.readbyte.app" data-play-store>Zu Google Play</a>
+      </section>
+
+      <section class="card steps only-computer" aria-labelledby="ios-title">
+        <h2 id="ios-title">Auf dem iPhone</h2>
+        <p>Öffne diese Seite auf deinem iPhone. Der App Store öffnet sich mit deinem Code.</p>
+        <a class="button" href="https://apps.apple.com/app/id6812806136" data-apple-redeem>Im App Store einlösen</a>
+      </section>
+
+      <p class="meta">Gilt, wenn du PageBite gerade nicht abonniert hast. Kündigen kannst du jederzeit in den Abo-Einstellungen des App Store oder von Google Play.</p>
+    </main>
+
+    <footer>
+      <p>
+        <a href="./privacy.html">Datenschutz</a> ·
+        <a href="./terms.html">Nutzungsbedingungen</a> ·
+        <a href="./imprint.html">Impressum</a>
+      </p>
+    </footer>
+  </div>
+</body>
+
+</html>

@@ -331,6 +331,69 @@ describe('creator links', () => {
   });
 });
 
+describe('friends link (friends.html)', () => {
+  const FRIENDS = { pathname: '/friends' };
+
+  test('holds one code that Apple custom codes can carry', () => {
+    assert.match(stores.FRIENDS_CODE, /^[A-Z0-9]{2,30}$/);
+  });
+
+  test('an iPhone goes straight to Apple’s redeem page with the friends code filled in', () => {
+    const page = browser({ userAgent: IPHONE, platform: 'iPhone', maxTouchPoints: 5, ...FRIENDS });
+    page.stores.startFriendsPage('de');
+    assert.deepEqual(page.replaced, [stores.appleRedeemUrl(stores.FRIENDS_CODE)]);
+    assert.ok(page.classes.has('redirecting'));
+  });
+
+  test('an Android phone goes to Google Play with the code’s campaign, and the page with the code stays behind it', () => {
+    const page = browser({ userAgent: ANDROID, platform: 'Linux armv8l', maxTouchPoints: 5, ...FRIENDS });
+    page.stores.startFriendsPage('de');
+    assert.deepEqual(page.assigned, [stores.playStoreUrl(stores.creatorCampaign(stores.FRIENDS_CODE))]);
+    assert.deepEqual(page.replaced, []);
+    assert.deepEqual([...page.classes], ['platform-android']);
+    // The address stays the short link the app shared.
+    assert.deepEqual(page.addressBar, []);
+
+    page.domReady();
+    assert.deepEqual(
+      page.elements['[data-code]'].map((element) => element.textContent),
+      [stores.FRIENDS_CODE, stores.FRIENDS_CODE],
+    );
+  });
+
+  test('a computer sees both ways, in English when the browser has no German', () => {
+    const german = browser(FRIENDS);
+    german.stores.startFriendsPage('de');
+    assert.deepEqual(german.replaced, []);
+    assert.deepEqual(german.assigned, []);
+    assert.deepEqual([...german.classes], ['platform-computer']);
+
+    const english = browser({ ...FRIENDS, languages: ['en-GB'] });
+    english.stores.startFriendsPage('de');
+    assert.deepEqual(english.replaced, ['en/friends.html']);
+
+    const onEnglishPage = browser({ pathname: '/en/friends', languages: ['de-DE'] });
+    onEnglishPage.stores.startFriendsPage('en');
+    assert.deepEqual(onEnglishPage.replaced, []);
+  });
+
+  test('both pages start in the head with their own language and promise the same free month', () => {
+    for (const [file, language, month] of [
+      ['friends.html', 'de', 'einen Monat lang gratis'],
+      ['en/friends.html', 'en', 'free for a month'],
+    ]) {
+      const page = read(file);
+      assert.ok(page.split('<body>')[0].includes(`PageBiteStores.startFriendsPage('${language}');`), file);
+      for (const hook of ['data-code', 'data-copy-code', 'data-play-store', 'data-apple-redeem', 'only-computer', 'android-redirect-card']) {
+        assert.ok(page.includes(hook), `${file}: ${hook}`);
+      }
+      assert.ok(page.includes(month), file);
+      // No price on the page: the store shows it in the visitor's currency before the start.
+      assert.doesNotMatch(page, /€|EUR|\$\d/, file);
+    }
+  });
+});
+
 describe('short creator links (404.html)', () => {
   const html = read('404.html');
   const [routeScript, homeScript] = [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].map((match) => match[1]);
@@ -399,7 +462,7 @@ describe('pages', () => {
   });
 
   test('every new page exists in German and English', () => {
-    for (const page of ['download.html', 'code/index.html']) {
+    for (const page of ['download.html', 'code/index.html', 'friends.html']) {
       assert.ok(existsSync(join(ROOT, page)), page);
       assert.ok(existsSync(join(ROOT, 'en', page)), `en/${page}`);
     }

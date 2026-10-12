@@ -16,6 +16,7 @@ This folder lives inside the app project (`readbyte/legal/`) but is its own Git 
 | Imprint | `imprint.html` | `en/imprint.html` |
 | Download (QR codes, phones go straight to their store) | `download.html` | `en/download.html` |
 | Creator link (`code/?code=EMELIE`) | `code/index.html` | `en/code/index.html` |
+| Friends link (`friends`, shared by the app) | `friends.html` | `en/friends.html` |
 | Not found, and the short creator link `code/emelie` | `404.html` | same page |
 
 Published address: `https://pagebite.eu/` (custom domain, file `CNAME`; DNS at Hostinger, nameservers `*.dns-parking.com`, records point to GitHub Pages). The old address `https://henri069.github.io/readbyte_legal/` forwards there, so links in app builds and store consoles keep working.
@@ -34,6 +35,7 @@ Both use `assets/stores.js`. It holds the Apple app ID (`6812806136`) and the An
 - The short form `code/emelie` works through `404.html`, because GitHub Pages has no routes. The page answers with status 404 but sends the visitor on at once. If a platform refuses a link that answers 404, use the long form `code/?code=EMELIE`.
 - Until 2026-10-05 the creator link was `c/emelie`. `404.html` still sends old links (`c/emelie`, `c/?code=EMELIE`, also with `en/`) to `code/`, so links already shared keep working. Keep that forwarding.
 - Nothing is created per creator. The store setup per creator is in the app repository: `docs/redeem-codes.md`.
+- **Friends link** (`…/friends`): the app shares it at a streak milestone and from Settings → "Invite friends". It works like a creator link with the code `FRIENDS_CODE` from `assets/stores.js`, so the app never knows the code. To change the code or the free time, follow `docs/redeem-codes.md` "Friends code" in the app repository: new store offers first, then `FRIENDS_CODE` and the texts of both friends pages.
 - No cookies, no storage, no tracking pixel. The code only ends up in the store links. The Google Play link of a creator carries the campaign `creator-<code>`, so the Play Console counts installs per creator.
 
 The QR codes are SVG files in `assets/`, generated and checked on a Mac with macOS's own QR encoder (no download):

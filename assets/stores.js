@@ -1,5 +1,5 @@
 /*
- * Store links for the download page and the creator links.
+ * Store links for the download page, the creator links and the friends link.
  * Phones go straight to their store; computers see the page with QR codes.
  * No cookies, no storage, no requests: a creator code only ends up in the store links.
  * The app side of creator codes: readbyte docs/redeem-codes.md.
@@ -11,6 +11,12 @@
   var ANDROID_PACKAGE = 'com.readbyte.app';
   /** Apple's custom offer codes allow capitals and digits only (app: src/domain/subscription/redeem-code.ts). */
   var CREATOR_CODE = /^[A-Z0-9]{2,30}$/;
+  /**
+   * The friends code behind "pagebite.eu/friends", the link the app shares ("Invite friends", readbyte spec §6.5, §6.8).
+   * The app never knows the code: changing it here changes it for every link already sent. It needs the store offers
+   * `creator-<code>` (readbyte docs/redeem-codes.md "Friends code"); keep the free time in friends.html in line with them.
+   */
+  var FRIENDS_CODE = 'FRIENDS';
 
   /** Without a country, so Apple opens the store of the visitor's country. */
   var APP_STORE_URL = 'https://apps.apple.com/app/id' + APPLE_APP_ID;
@@ -200,6 +206,30 @@
     if (platform === 'android' && target) address.assign(target);
   }
 
+  /**
+   * Friends link "friends" (friends.html, en/friends.html). Runs in the head. Like a creator link with the friends code:
+   * iPhone to Apple's redeem page, Android to Google Play with the campaign while the page stays behind it, computers see
+   * both ways. `language` is the language of this page; a German page sends browsers without German to the English one.
+   */
+  function startFriendsPage(language) {
+    var address = global.location;
+    var platform = detectPlatform(global.navigator);
+    global.document.addEventListener('DOMContentLoaded', function () {
+      fillCreatorPage(FRIENDS_CODE);
+    });
+    var target = creatorTarget(platform, FRIENDS_CODE);
+    if (platform === 'ios' && target) {
+      redirect(target, platform);
+      return;
+    }
+    if (language === 'de' && prefersEnglish(global.navigator)) {
+      address.replace('en/friends.html');
+      return;
+    }
+    global.document.documentElement.classList.add(platform === 'android' ? 'platform-android' : 'platform-computer');
+    if (platform === 'android' && target) address.assign(target);
+  }
+
   global.PageBiteStores = {
     APP_STORE_URL: APP_STORE_URL,
     PLAY_STORE_URL: PLAY_STORE_URL,
@@ -214,5 +244,7 @@
     prefersEnglish: prefersEnglish,
     startDownloadPage: startDownloadPage,
     startCreatorPage: startCreatorPage,
+    FRIENDS_CODE: FRIENDS_CODE,
+    startFriendsPage: startFriendsPage,
   };
 })(typeof window !== 'undefined' ? window : this);
