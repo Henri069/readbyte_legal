@@ -23,7 +23,7 @@
 
   <main>
     <h1>Privacy policy</h1>
-    <p class="meta">PageBite · Last updated: 4 October 2026</p>
+    <p class="meta">PageBite · Last updated: 12 October 2026</p>
 
     <div class="note">
       <p><strong>The short version</strong></p>
@@ -150,9 +150,9 @@
             <td>Until you delete your account</td>
           </tr>
           <tr>
-            <td>Onboarding answers (what PageBite should do for you, reading goal)</td>
+            <td>Onboarding answers (what PageBite should do for you, how many books you read a year and how much you still know from the last one, reading goal, on the iPhone your time on social media)</td>
             <td>Phone; at PostHog only with consent</td>
-            <td>Default settings, for example new cards per day; statistics</td>
+            <td>Default settings, for example new cards per day; the calculation in onboarding, for example your reading hours a year; statistics</td>
             <td>Art. 6(1)(b) GDPR; PostHog: Art. 6(1)(a) GDPR</td>
             <td>Until you delete the app. PostHog see <a href="#statistics">section 6</a></td>
           </tr>
@@ -198,6 +198,15 @@
             <td>Reading your feedback, finding bugs, improving the app and answering you if you want</td>
             <td>Art. 6(1)(f) GDPR, see <a href="#feedback">below</a></td>
             <td>Until you delete your account, at most 12 months. Anonymous accounts without a subscription: 30 days</td>
+          </tr>
+          <tr>
+            <td>Answer to the question after a cancellation (the reason you tapped; whether it was the trial or a paid
+              subscription; your message and your email address for a reply, if you give them; account identifier, app
+              version, operating system and its version, app language)</td>
+            <td>Supabase (Frankfurt am Main); the reason at PostHog only with consent</td>
+            <td>Understanding why people cancel, improving the app and answering you if you want</td>
+            <td>Art. 6(1)(f) GDPR, see <a href="#cancellation">below</a>; PostHog: Art. 6(1)(a) GDPR</td>
+            <td>Until you delete your account, at most 12 months</td>
           </tr>
           <tr>
             <td>Technical logs (IP address, time, request data)</td>
@@ -252,6 +261,24 @@
         delete your feedback with it. We delete anonymous accounts without a subscription after 30 days, and their
         feedback with them.</li>
       <li>Your feedback is part of the data export (Settings → Export my data).</li>
+    </ul>
+
+    <h3 id="cancellation">If you tell us why you cancelled</h3>
+    <p>
+      If you cancelled your trial or your subscription, the app asks you once for the reason the next time you open it.
+      You tap a reason or "I'd rather not say". We store the reason right away, together with whether it was the trial
+      or a paid subscription, your account identifier, the app version, your phone's operating system and its version,
+      and the app language. After that you can add a message if you want. You only give an email address if you want
+      an answer. We use it for nothing else.
+    </p>
+    <ul>
+      <li><strong>Where:</strong> In our database at Supabase in Frankfurt am Main. If you agreed to usage statistics,
+        the reason you tapped also goes to PostHog, never your message or your email address.</li>
+      <li><strong>Legal basis:</strong> Our legitimate interest in understanding why people cancel, improving the app
+        and answering you (Art. 6(1)(f) GDPR). For PostHog your consent (Art. 6(1)(a) GDPR).</li>
+      <li><strong>How long:</strong> At most 12 months, then we delete your answer automatically. If you delete your
+        account, we delete it with it.</li>
+      <li>Your answer is part of the data export (Settings → Export my data).</li>
     </ul>
 
     <h3 id="emails">If you write us an email</h3>
@@ -334,7 +361,8 @@
         are no session recordings.</li>
       <li><strong>What we collect:</strong> which screens you open, certain actions (for example "scan started" or
         "quiz completed" with the score), your answers and choices during onboarding (for example, whether you want a
-        reminder or turn on the app lock — never which apps), device type, operating system, app version and a
+        reminder or turn on the app lock — never which apps), the reason you tap after a cancellation, device type,
+        operating system, app version and a
         random device identifier. Once you have an account, we link the data to your account identifier.</li>
       <li><strong>What we never collect:</strong> page texts, card texts, book titles, authors, page labels or any
         other free text.</li>
@@ -433,7 +461,8 @@
       <li>Data on our servers stays as long as your account exists. If your subscription ends, it stays stored until
         you delete your account.</li>
       <li>We automatically delete anonymous accounts without a subscription after 30 days.</li>
-      <li>We automatically delete feedback from the app after 12 months at the latest.</li>
+      <li>We automatically delete feedback from the app and answers to the question after a cancellation after 12
+        months at the latest.</li>
       <li>When you delete your account, we delete your data at Supabase, your customer record at RevenueCat and, if you
         had agreed to statistics, your data at PostHog. Here's how: <a href="./delete-account.html">Delete account</a>.
       </li>

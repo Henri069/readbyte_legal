@@ -23,7 +23,7 @@
 
   <main>
     <h1>Datenschutzerklärung</h1>
-    <p class="meta">PageBite · Stand: 4. Oktober 2026</p>
+    <p class="meta">PageBite · Stand: 12. Oktober 2026</p>
 
     <div class="note">
       <p><strong>Das Wichtigste in Kürze</strong></p>
@@ -149,9 +149,9 @@
             <td>Bis du dein Konto löschst</td>
           </tr>
           <tr>
-            <td>Antworten im Onboarding (was PageBite für dich tun soll, Leseziel)</td>
+            <td>Antworten im Onboarding (was PageBite für dich tun soll, wie viele Bücher du im Jahr liest und wie viel du vom letzten noch weißt, Leseziel, auf dem iPhone deine Zeit auf Social Media)</td>
             <td>Handy; bei PostHog nur mit Einwilligung</td>
-            <td>Voreinstellungen, zum Beispiel neue Karten pro Tag; Statistik</td>
+            <td>Voreinstellungen, zum Beispiel neue Karten pro Tag; die Rechnung im Onboarding, zum Beispiel deine Lesestunden im Jahr; Statistik</td>
             <td>Art. 6 Abs. 1 lit. b DSGVO; PostHog: Art. 6 Abs. 1 lit. a DSGVO</td>
             <td>Bis du die App löschst. PostHog siehe <a href="#statistik">Abschnitt 6</a></td>
           </tr>
@@ -197,6 +197,15 @@
             <td>Dein Feedback lesen, Fehler finden, die App verbessern und dir auf Wunsch antworten</td>
             <td>Art. 6 Abs. 1 lit. f DSGVO, siehe <a href="#feedback">unten</a></td>
             <td>Bis du dein Konto löschst, höchstens 12 Monate. Anonyme Konten ohne Abo: 30 Tage</td>
+          </tr>
+          <tr>
+            <td>Antwort auf die Frage nach einer Kündigung (der angetippte Grund; ob es das Probeabo oder ein bezahltes
+              Abo war; freiwillig deine Nachricht und deine E-Mail-Adresse für eine Antwort; Konto-Kennung, App-Version,
+              Betriebssystem mit Version, Sprache der App)</td>
+            <td>Supabase (Frankfurt am Main); der Grund bei PostHog nur mit Einwilligung</td>
+            <td>Verstehen, warum jemand kündigt, die App verbessern und dir auf Wunsch antworten</td>
+            <td>Art. 6 Abs. 1 lit. f DSGVO, siehe <a href="#kuendigung">unten</a>; PostHog: Art. 6 Abs. 1 lit. a DSGVO</td>
+            <td>Bis du dein Konto löschst, höchstens 12 Monate</td>
           </tr>
           <tr>
             <td>Technische Protokolle (IP-Adresse, Zeitpunkt, Anfrage-Daten)</td>
@@ -252,6 +261,25 @@
       <li><strong>Wie lange:</strong> Höchstens 12 Monate, dann löschen wir es automatisch. Löschst du dein Konto,
         löschen wir dein Feedback mit. Anonyme Konten ohne Abo löschen wir nach 30 Tagen, ihr Feedback mit ihnen.</li>
       <li>Dein Feedback ist im Daten-Export enthalten (Einstellungen → Meine Daten exportieren).</li>
+    </ul>
+
+    <h3 id="kuendigung">Wenn du uns sagst, warum du gekündigt hast</h3>
+    <p>
+      Hast du dein Probeabo oder dein Abo gekündigt, fragt dich die App beim nächsten Öffnen einmal nach dem Grund. Du
+      tippst einen Grund an oder „Möchte ich nicht sagen“. Den Grund speichern wir sofort, zusammen mit der Angabe, ob
+      es das Probeabo oder ein bezahltes Abo war, deiner Konto-Kennung, der App-Version, dem Betriebssystem deines Handys
+      mit seiner Version und der Sprache der App. Danach kannst du freiwillig eine Nachricht dazuschreiben. Eine
+      E-Mail-Adresse gibst du nur an, wenn du eine Antwort möchtest. Wir nutzen sie nur dafür.
+    </p>
+    <ul>
+      <li><strong>Wo:</strong> In unserer Datenbank bei Supabase in Frankfurt am Main. Hast du der Statistik
+        zugestimmt, geht der angetippte Grund auch an PostHog, nie deine Nachricht oder deine E-Mail-Adresse.</li>
+      <li><strong>Rechtsgrundlage:</strong> Unser berechtigtes Interesse zu verstehen, warum jemand kündigt, die App zu
+        verbessern und dir zu antworten (Art. 6 Abs. 1 lit. f DSGVO). Für PostHog deine Einwilligung (Art. 6 Abs. 1
+        lit. a DSGVO).</li>
+      <li><strong>Wie lange:</strong> Höchstens 12 Monate, dann löschen wir deine Antwort automatisch. Löschst du dein
+        Konto, löschen wir sie mit.</li>
+      <li>Deine Antwort ist im Daten-Export enthalten (Einstellungen → Meine Daten exportieren).</li>
     </ul>
 
     <h3 id="e-mails">Wenn du uns eine E-Mail schreibst</h3>
@@ -338,7 +366,8 @@
         Sitzungsaufzeichnungen gibt es nicht.</li>
       <li><strong>Was wir erfassen:</strong> welche Bildschirme du öffnest, bestimmte Aktionen (zum Beispiel „Scan
         gestartet“ oder „Quiz beendet“ mit Punktzahl), deine Antworten und Entscheidungen im Onboarding (zum Beispiel,
-        ob du eine Erinnerung möchtest oder das App-Schloss einschaltest — nie, welche Apps), Gerätetyp,
+        ob du eine Erinnerung möchtest oder das App-Schloss einschaltest — nie, welche Apps), den Grund, den du nach
+        einer Kündigung antippst, Gerätetyp,
         Betriebssystem, App-Version und eine zufällige Geräte-Kennung. Sobald du ein Konto hast, verknüpfen wir die
         Daten mit deiner Konto-Kennung.</li>
       <li><strong>Was wir nie erfassen:</strong> Seitentexte, Kartentexte, Buchtitel, Autoren, Seitenangaben oder
@@ -441,7 +470,8 @@
       <li>Daten auf unseren Servern bleiben, solange dein Konto besteht. Endet dein Abo, bleiben sie gespeichert, bis du
         dein Konto löschst.</li>
       <li>Anonyme Konten ohne Abo löschen wir nach 30 Tagen automatisch.</li>
-      <li>Feedback aus der App löschen wir spätestens nach 12 Monaten automatisch.</li>
+      <li>Feedback aus der App und Antworten auf die Frage nach einer Kündigung löschen wir spätestens nach 12 Monaten
+        automatisch.</li>
       <li>Wenn du dein Konto löschst, löschen wir deine Daten bei Supabase, deinen Kundeneintrag bei RevenueCat und,
         falls du der Statistik zugestimmt hattest, deine Daten bei PostHog. So geht's: <a
           href="./delete-account.html">Konto löschen</a>.</li>
