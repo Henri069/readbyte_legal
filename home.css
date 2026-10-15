@@ -343,14 +343,20 @@ body.home {
   }
 }
 
-/* The hero drawing: a book page, a phone that scans it, a flashcard that comes out. */
+/* The hero drawing, built like the App Store search video (readbyte marketing/promo/src/store/SearchResult.tsx):
+   a terracotta phone straight over a book page, the shutter, a flash, page and phone move apart, the sweep reads
+   the page on the phone, a flashcard comes out of the phone and its answer folds down, then everything goes back
+   to the first picture. One loop of 10 s. Sizes are in cqw of the stage, so the drawing scales as one picture.
+   The book page is 660 x 840 units like the video's, so its text keeps the video's proportions. */
 
 .stage {
+  --loop: 10s;
   position: relative;
   width: 100%;
-  max-width: 520px;
-  aspect-ratio: 1 / 1.02;
+  max-width: 540px;
+  aspect-ratio: 1 / 1.04;
   margin: 0 auto;
+  container-type: inline-size;
 }
 
 .illustration-label {
@@ -371,161 +377,439 @@ body.home {
 .blob {
   position: absolute;
   border-radius: 50%;
-  filter: blur(2px);
 }
 
 .blob-1 {
-  width: 62%;
+  width: 80%;
   aspect-ratio: 1;
-  left: 22%;
-  top: 12%;
-  background: radial-gradient(circle, rgba(199, 91, 57, 0.22), rgba(199, 91, 57, 0) 70%);
+  left: 10%;
+  top: 6%;
+  background: radial-gradient(circle, rgba(199, 91, 57, 0.18), rgba(199, 91, 57, 0) 68%);
   animation: breathe 7s ease-in-out infinite alternate;
 }
 
 .blob-2 {
-  width: 44%;
+  width: 50%;
   aspect-ratio: 1;
-  left: 0;
-  bottom: 0;
-  background: radial-gradient(circle, rgba(46, 94, 90, 0.18), rgba(46, 94, 90, 0) 70%);
+  left: -6%;
+  bottom: -4%;
+  background: radial-gradient(circle, rgba(46, 94, 90, 0.16), rgba(46, 94, 90, 0) 70%);
   animation: breathe 9s ease-in-out infinite alternate-reverse;
 }
 
 @keyframes breathe {
   to {
-    transform: scale(1.15) translate(4%, -3%);
+    transform: scale(1.12) translate(3%, -3%);
   }
 }
 
-.book-page {
+/* A book page with real public-domain text. --pw is its width; every size inside is in units of 1/660 of it. */
+.bpage {
+  --u: calc(var(--pw) / 660);
   position: absolute;
-  left: 2%;
-  top: 8%;
-  width: 46%;
-  aspect-ratio: 0.7;
-  padding: 7% 5.5%;
-  border: 2px solid var(--ink);
-  border-radius: 10px;
+  width: var(--pw);
+  height: calc(840 * var(--u));
+  border: calc(5 * var(--u)) solid var(--ink);
+  border-radius: calc(22 * var(--u));
   background: #f8f1e4;
-  box-shadow: 5px 5px 0 var(--ink);
-  transform: rotate(-7deg);
-  font-family: Georgia, "Times New Roman", serif;
-  color: rgba(43, 36, 32, 0.82);
+  box-shadow: calc(12 * var(--u)) calc(12 * var(--u)) 0 var(--ink);
+}
+
+.bpage-sheet {
+  position: absolute;
+  inset: 0;
   overflow: hidden;
-  animation: float-a 7s ease-in-out infinite alternate;
+  border-radius: calc(17 * var(--u));
 }
 
-.book-page .bp-author {
+.bpage-text {
+  position: absolute;
+  inset: 0;
+  padding: calc(64 * var(--u)) calc(66 * var(--u)) 0;
+  color: rgba(43, 36, 32, 0.88);
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  text-align: center;
+}
+
+.bpage-text p {
   margin: 0;
-  text-align: center;
-  font-size: clamp(0.42rem, 1.1vw, 0.56rem);
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--muted);
 }
 
-.book-page .bp-title {
-  margin: 4px 0 8px;
-  text-align: center;
-  font-size: clamp(0.62rem, 1.6vw, 0.85rem);
-  font-weight: 700;
+.bpage-author {
+  font-size: calc(21 * var(--u));
+  letter-spacing: calc(5 * var(--u));
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.bpage-kicker {
+  margin-top: calc(20 * var(--u)) !important;
+  font-size: calc(26 * var(--u));
+}
+
+.bpage-title {
+  margin-top: calc(4 * var(--u)) !important;
+  font-size: calc(40 * var(--u));
+  font-weight: 600;
   color: var(--ink);
 }
 
-.book-page .bp-body {
-  margin: 0;
-  font-size: clamp(0.42rem, 1.05vw, 0.58rem);
-  line-height: 1.55;
+.bpage-dots {
+  margin-top: calc(12 * var(--u)) !important;
+  font-size: calc(22 * var(--u));
+  letter-spacing: calc(12 * var(--u));
+  opacity: 0.7;
+}
+
+.bpage-body {
+  margin-top: calc(22 * var(--u)) !important;
+  font-size: calc(23.5 * var(--u));
+  line-height: 1.46;
   text-align: justify;
   hyphens: auto;
 }
 
-@keyframes float-a {
-  to {
-    transform: rotate(-5deg) translateY(-8px);
-  }
+/* The read text: the same text in terracotta, uncovered from the top as the sweep passes. */
+.bpage-lit {
+  color: var(--primary);
+  clip-path: inset(0 0 100% 0);
+  opacity: 0.55;
 }
 
-.phone {
+.bpage-lit .bpage-title {
+  color: var(--primary);
+}
+
+.bpage-sweep {
   position: absolute;
-  right: 6%;
-  top: 2%;
-  width: 46%;
-  aspect-ratio: 0.5;
-  padding: 3.2%;
-  border: 2px solid var(--ink);
-  border-radius: 34px;
-  background: var(--primary);
-  box-shadow: 6px 6px 0 var(--ink);
-  transform: rotate(4deg);
-  animation: float-b 6s ease-in-out infinite alternate;
-}
-
-@keyframes float-b {
-  to {
-    transform: rotate(3deg) translateY(-10px);
-  }
-}
-
-.phone-screen {
-  position: relative;
-  height: 100%;
-  border: 2px solid var(--ink);
-  border-radius: 26px;
-  background: var(--camera);
-  overflow: hidden;
-}
-
-.phone-screen::before {
-  content: "";
-  position: absolute;
-  top: 3.5%;
-  left: 50%;
-  width: 30%;
-  height: 3.2%;
+  left: calc(-34 * var(--u));
+  right: calc(-34 * var(--u));
+  top: 0;
+  height: calc(12 * var(--u));
   border-radius: 99px;
-  background: #000;
-  transform: translateX(-50%);
+  background: var(--primary);
+  box-shadow: 0 0 calc(28 * var(--u)) calc(6 * var(--u)) rgba(199, 91, 57, 0.45);
+  opacity: 0;
+}
+
+/* The page on the table: straight behind the phone, then off to the left, tilted. */
+.stage > .bpage {
+  --pw: 47cqw;
+  left: 26.5cqw;
+  top: 21cqw;
+  animation: page-apart var(--loop) cubic-bezier(0.45, 0, 0.25, 1) infinite;
+}
+
+@keyframes page-apart {
+  0%,
+  10% {
+    transform: none;
+  }
+  22%,
+  86% {
+    transform: translate(-22cqw, 4cqw) rotate(-8deg);
+  }
+  94%,
+  100% {
+    transform: none;
+  }
+}
+
+/* The phone: a drawing in the brand style, not a real device. */
+.hero-phone {
+  position: absolute;
+  left: 30cqw;
+  top: 6cqw;
+  width: 40cqw;
+  height: 82cqw;
+  border: 1.15cqw solid var(--ink);
+  border-radius: 6.6cqw;
+  background: var(--primary);
+  box-shadow: 1.6cqw 1.6cqw 0 var(--ink);
   z-index: 2;
+  animation: phone-apart var(--loop) cubic-bezier(0.45, 0, 0.25, 1) infinite;
 }
 
-.phone .scan-page {
-  position: absolute;
-  left: 12%;
-  right: 12%;
-  top: 17%;
-  bottom: 24%;
+@keyframes phone-apart {
+  0%,
+  10% {
+    transform: none;
+  }
+  22%,
+  86% {
+    transform: translate(13cqw, -1cqw) rotate(4deg);
+  }
+  94%,
+  100% {
+    transform: none;
+  }
 }
 
-.phone-shutter {
-  position: absolute;
-  left: 50%;
-  bottom: 7%;
-  width: 17%;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  border: 3px solid #fff;
-  transform: translateX(-50%);
-}
-
-.phone-shutter::after {
+.hero-phone::before {
   content: "";
   position: absolute;
-  inset: 12%;
-  border-radius: 50%;
-  background: #fff;
-  animation: shutter 4s ease-in-out infinite;
+  top: 0.45cqw;
+  left: 50%;
+  width: 7cqw;
+  height: 0.9cqw;
+  border-radius: 99px;
+  background: rgba(251, 246, 238, 0.6);
+  transform: translateX(-50%);
 }
 
-@keyframes shutter {
+.hero-screen {
+  position: absolute;
+  inset: 1.8cqw 1.6cqw;
+  border: 0.9cqw solid var(--ink);
+  border-radius: 4.8cqw;
+  background: #ddd2c1;
+  overflow: hidden;
+  animation: screen-photo var(--loop) linear infinite;
+}
+
+/* Camera view first (the light table), after the photo PageBite's processing screen. */
+@keyframes screen-photo {
   0%,
-  86%,
-  100% {
-    transform: scale(1);
+  9.4% {
+    background-color: #ddd2c1;
   }
+  9.6%,
+  90% {
+    background-color: var(--bg);
+  }
+  90.2%,
+  100% {
+    background-color: #ddd2c1;
+  }
+}
+
+.hero-screen .bpage {
+  --pw: 32cqw;
+  left: 0.9cqw;
+  top: 12cqw;
+  box-shadow: calc(8 * var(--u)) calc(8 * var(--u)) 0 var(--ink);
+  animation: screen-page var(--loop) linear infinite;
+}
+
+@keyframes screen-page {
+  0%,
+  9.4% {
+    transform: rotate(-1deg);
+  }
+  9.6%,
+  90% {
+    transform: translateY(2cqw) scale(0.9);
+  }
+  90.2%,
+  100% {
+    transform: rotate(-1deg);
+  }
+}
+
+.hero-screen .bpage-sweep {
+  animation: hero-sweep var(--loop) ease-in-out infinite;
+}
+
+@keyframes hero-sweep {
+  0%,
+  15.5% {
+    top: 0;
+    opacity: 0;
+  }
+  16% {
+    top: 0;
+    opacity: 1;
+  }
+  31.5% {
+    top: calc(100% - 6 * var(--u));
+    opacity: 1;
+  }
+  32%,
+  100% {
+    top: calc(100% - 6 * var(--u));
+    opacity: 0;
+  }
+}
+
+.hero-screen .bpage-lit {
+  animation: hero-read var(--loop) ease-in-out infinite;
+}
+
+@keyframes hero-read {
+  0%,
+  16% {
+    clip-path: inset(0 0 100% 0);
+  }
+  31.5%,
+  90% {
+    clip-path: inset(0 0 0 0);
+  }
+  90.2%,
+  100% {
+    clip-path: inset(0 0 100% 0);
+  }
+}
+
+/* The shutter: a white ring with a cream button that is pressed once. Gone after the photo. */
+.hero-shutter {
+  position: absolute;
+  left: 50%;
+  bottom: 3.4cqw;
+  display: grid;
+  place-items: center;
+  width: 8.4cqw;
+  height: 8.4cqw;
+  margin-left: -4.2cqw;
+  border: 0.7cqw solid var(--surface);
+  border-radius: 50%;
+  box-shadow: 0 0 0 0.3cqw rgba(43, 36, 32, 0.55), inset 0 0 0 0.3cqw rgba(43, 36, 32, 0.55);
+  animation: shutter-gone var(--loop) linear infinite;
+}
+
+.hero-shutter::after {
+  content: "";
+  width: 5.9cqw;
+  height: 5.9cqw;
+  border-radius: 50%;
+  background: var(--surface);
+  box-shadow: 0 0 0 0.3cqw var(--ink);
+  animation: shutter-press var(--loop) ease-in-out infinite;
+}
+
+@keyframes shutter-gone {
+  0%,
+  9.4% {
+    opacity: 1;
+  }
+  9.6%,
   92% {
-    transform: scale(0.8);
+    opacity: 0;
+  }
+  95%,
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes shutter-press {
+  0%,
+  6% {
+    transform: none;
+  }
+  7% {
+    transform: scale(0.82);
+  }
+  9%,
+  100% {
+    transform: none;
+  }
+}
+
+.hero-flash {
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  opacity: 0;
+  animation: hero-flash var(--loop) linear infinite;
+}
+
+@keyframes hero-flash {
+  0%,
+  8% {
+    opacity: 0;
+  }
+  9.5% {
+    opacity: 0.95;
+  }
+  14%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* The flashcard grows out of the phone's screen, lands in front of the page and its answer folds down. */
+.stage .flashcard {
+  position: absolute;
+  left: 0;
+  top: 52cqw;
+  width: 60cqw;
+  border-width: 0.5cqw;
+  border-radius: 3.4cqw;
+  box-shadow: 1.2cqw 1.2cqw 0 var(--ink);
+  z-index: 3;
+  transform-origin: 50% 0;
+  animation: card-out var(--loop) cubic-bezier(0.25, 0.8, 0.3, 1) infinite;
+}
+
+@keyframes card-out {
+  0%,
+  35% {
+    transform: translate(43cqw, -24cqw) rotate(4deg) scale(0.32);
+    opacity: 0;
+  }
+  37% {
+    opacity: 1;
+  }
+  45%,
+  86% {
+    transform: none;
+    opacity: 1;
+  }
+  91%,
+  100% {
+    transform: translate(-6cqw, 4cqw) scale(0.94);
+    opacity: 0;
+  }
+}
+
+.stage .fc-top {
+  padding: 3.2cqw 3.6cqw 2.8cqw;
+}
+
+.stage .fc-meta {
+  margin-bottom: 1.4cqw;
+}
+
+.stage .fc-label {
+  font-size: max(0.6rem, 2cqw);
+}
+
+.stage .ai-badge {
+  padding: 0.3cqw 1.6cqw;
+  font-size: max(0.56rem, 1.8cqw);
+}
+
+.stage .fc-question {
+  font-size: max(0.82rem, 4cqw);
+  line-height: 1.15;
+}
+
+.stage .fc-answer {
+  padding: 2.6cqw 3.6cqw 2.8cqw;
+  animation: hero-fold var(--loop) cubic-bezier(0.3, 1.45, 0.5, 1) infinite;
+}
+
+.stage .fc-answer p {
+  font-size: max(0.78rem, 3.2cqw);
+}
+
+.stage .fc-answer .disclaimer {
+  font-size: max(0.58rem, 1.9cqw);
+}
+
+@keyframes hero-fold {
+  0%,
+  49% {
+    transform: rotateX(-100deg);
+    opacity: 0;
+  }
+  49.5% {
+    opacity: 1;
+  }
+  57%,
+  100% {
+    transform: none;
+    opacity: 1;
   }
 }
 
@@ -751,64 +1035,6 @@ body.home {
   }
   100% {
     transform: rotateX(-92deg);
-    opacity: 0;
-  }
-}
-
-.stage .flashcard {
-  position: absolute;
-  left: 0;
-  bottom: 4%;
-  width: 62%;
-  z-index: 3;
-  transform: rotate(-3deg);
-  animation: float-c 5s ease-in-out infinite alternate;
-}
-
-@keyframes float-c {
-  to {
-    transform: rotate(-1.5deg) translateY(-8px);
-  }
-}
-
-.stamp {
-  position: absolute;
-  display: grid;
-  place-items: center;
-  border: 2px solid var(--ink);
-  border-radius: 50%;
-  background: var(--primary);
-  color: var(--surface);
-  box-shadow: 3px 3px 0 var(--ink);
-}
-
-.stamp svg {
-  width: 46%;
-  height: 46%;
-}
-
-.stage .stamp {
-  right: 0;
-  bottom: 18%;
-  width: 18%;
-  aspect-ratio: 1;
-  z-index: 4;
-  animation: stamp-drop 5s cubic-bezier(0.3, 1.5, 0.5, 1) infinite;
-}
-
-@keyframes stamp-drop {
-  0%,
-  40% {
-    transform: scale(1.8) rotate(-24deg);
-    opacity: 0;
-  }
-  52%,
-  94% {
-    transform: scale(1) rotate(-8deg);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1) rotate(-8deg);
     opacity: 0;
   }
 }
@@ -1941,8 +2167,30 @@ body.home {
     display: none;
   }
 
-  .stage .stamp {
-    transform: rotate(-8deg);
+  /* The hero stands in the middle of its story: page and phone apart, the page read, the card open. */
+  .stage > .bpage {
+    transform: translate(-22cqw, 4cqw) rotate(-8deg);
+  }
+
+  .hero-phone {
+    transform: translate(13cqw, -1cqw) rotate(4deg);
+  }
+
+  .hero-screen {
+    background-color: var(--bg);
+  }
+
+  .hero-screen .bpage {
+    transform: translateY(2cqw) scale(0.9);
+  }
+
+  .hero-screen .bpage-lit {
+    clip-path: none;
+  }
+
+  .hero-shutter,
+  .hero-flash {
+    display: none;
   }
 
   .quiz li.right {

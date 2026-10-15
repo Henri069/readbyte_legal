@@ -680,6 +680,27 @@ describe('start pages (index.html, en/index.html)', () => {
     }
   });
 
+  test('the hero phone is the App Store video phone: a public-domain page on the table and on the screen, read by the sweep', () => {
+    for (const [file, author, title] of [
+      ['index.html', 'Marc Aurel', 'Viertes Buch.'],
+      ['en/index.html', 'Marcus Aurelius', 'The Fourth Book.'],
+    ]) {
+      const stage = read(file).split('class="stage')[1].split('</section>')[0];
+      for (const hook of ['class="hero-phone"', 'class="hero-screen"', 'class="hero-shutter"', 'class="hero-flash"', 'class="bpage-sweep"', 'bpage-lit']) {
+        assert.ok(stage.includes(hook), `${file}: ${hook}`);
+      }
+      // The page on the table, the page on the screen and its read copy.
+      assert.equal(stage.split(`<p class="bpage-author">${author}</p>`).length - 1, 3, file);
+      assert.equal(stage.split(`<p class="bpage-title">${title}</p>`).length - 1, 3, file);
+      // Drawn in HTML and CSS: no image file.
+      assert.doesNotMatch(stage, /<img|<video/, file);
+    }
+    const css = read('home.css');
+    for (const name of ['page-apart', 'phone-apart', 'hero-sweep', 'hero-read', 'shutter-press', 'hero-flash', 'card-out', 'hero-fold']) {
+      assert.match(css, new RegExp(`@keyframes ${name} \\{`), name);
+    }
+  });
+
   test('show the store badges in their language with the trademark note', () => {
     for (const { file, lang, trademarks } of PAGES) {
       const page = read(file);
