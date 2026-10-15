@@ -1,6 +1,6 @@
 // Tests for the download page and the creator links. Run with: node --test tests/
 import assert from 'node:assert/strict';
-import { existsSync, readdirSync, readFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import { dirname, join, relative } from 'node:path';
 import { describe, test } from 'node:test';
 import { fileURLToPath } from 'node:url';
@@ -11,6 +11,7 @@ import { resolveRequest } from '../tools/preview-server.mjs';
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const read = (path) => readFileSync(join(ROOT, path), 'utf8');
 const STORES_SOURCE = read('assets/stores.js');
+const QR_SOURCE = read('assets/qr.js');
 
 const APP_STORE = 'https://apps.apple.com/app/id6812806136';
 const PLAY_STORE = 'https://play.google.com/store/apps/details?id=com.readbyte.app';
@@ -28,6 +29,7 @@ function fakeElement(attributes = {}) {
   return {
     textContent: '',
     href: '',
+    src: '',
     getAttribute: (name) => attributes[name] ?? null,
     addEventListener: (type, listener) => {
       listeners[type] = listener;
@@ -63,6 +65,7 @@ function browser({
     '[data-apple-redeem]': [fakeElement(), fakeElement()],
     '[data-play-store]': [fakeElement()],
     '[data-copy-code]': [fakeElement({ 'data-copied-label': 'Kopiert' })],
+    '[data-qr]': [fakeElement()],
   };
   const window = {
     navigator: { userAgent, platform, maxTouchPoints, languages, clipboard },
@@ -97,9 +100,11 @@ function browser({
   };
   window.window = window;
   vm.createContext(window);
+  vm.runInContext(QR_SOURCE, window);
   vm.runInContext(STORES_SOURCE, window);
   return {
     stores: window.PageBiteStores,
+    qr: window.PageBiteQr,
     replaced,
     assigned,
     addressBar,
@@ -198,6 +203,7 @@ describe('creator links', () => {
       `${PLAY_STORE}&referrer=utm_source%3Dpagebite-website%26utm_medium%3Dcreator-link%26utm_campaign%3Dcreator-emelie`,
     );
     assert.equal(stores.playStoreUrl(null), PLAY_STORE);
+    assert.equal(stores.creatorLink('EMELIE'), 'https://pagebite.eu/code/emelie');
   });
 
   test('an iPhone goes straight to Apple’s redeem page with the code filled in', () => {
@@ -261,6 +267,18 @@ describe('creator links', () => {
     const onEnglishPage = browser({ search: '?code=emelie', languages: ['de-DE'] });
     onEnglishPage.stores.startCreatorPage('en');
     assert.deepEqual(onEnglishPage.replaced, []);
+  });
+
+  test('a computer gets a QR code with the creator link, in ink on surface like the download page', () => {
+    const page = browser({ search: '?code=emelie' });
+    page.stores.startCreatorPage('de');
+    page.domReady();
+    const src = page.elements['[data-qr]'][0].src;
+    assert.ok(src.startsWith('data:image/svg+xml,'), src);
+    const svg = decodeURIComponent(src.slice('data:image/svg+xml,'.length));
+    assert.equal(svg, page.qr.toSvg('https://pagebite.eu/code/emelie', '#2B2420', '#FBF6EE'));
+    // Nothing that a browser would fetch.
+    assert.doesNotMatch(svg, /<script|href=|url\(|<image/i);
   });
 
   test('works when a host serves the page at "code/emelie" itself, and leaves that address alone', () => {
@@ -442,6 +460,60 @@ describe('short creator links (404.html)', () => {
   });
 });
 
+describe('QR code (assets/qr.js)', () => {
+  const { qr } = browser();
+  const finderAt = (modules, top, left) =>
+    [0, 1, 2, 3, 4, 5, 6].every((y) =>
+      [0, 1, 2, 3, 4, 5, 6].every((x) => {
+        const ring = x === 0 || y === 0 || x === 6 || y === 6;
+        const core = x >= 2 && x <= 4 && y >= 2 && y <= 4;
+        return modules[top + y][left + x] === (ring || core);
+      }),
+    );
+
+  test('builds the same QR code as macOS for the Google Play address of the download page', () => {
+    // assets/qr-google-play.svg comes from CoreImage (tools/qr-svg.swift), which read it back. Same data, same mask.
+    assert.equal(qr.toSvg(PLAY_STORE, '#2B2420', '#FBF6EE'), read('assets/qr-google-play.svg').trim());
+  });
+
+  test('takes the smallest version that holds the text', () => {
+    const size = (text) => qr.encode(text).length;
+    assert.equal(size('x'.repeat(14)), 21);
+    assert.equal(size('x'.repeat(15)), 25);
+    assert.equal(size('https://pagebite.eu/code/emelie'), 29);
+    // The longest creator code, 30 characters.
+    assert.equal(size(`https://pagebite.eu/code/${'a'.repeat(30)}`), 33);
+    assert.equal(size('z'.repeat(213)), 57);
+    // Characters outside ASCII count as their UTF-8 bytes.
+    assert.equal(size('ü'.repeat(7)), 21);
+    assert.equal(size('ü'.repeat(8)), 25);
+  });
+
+  test('has the finder patterns in three corners, the timing lines and the dark module', () => {
+    for (const text of ['https://pagebite.eu/code/emelie', 'z'.repeat(213)]) {
+      const modules = qr.encode(text);
+      const size = modules.length;
+      assert.ok(finderAt(modules, 0, 0) && finderAt(modules, 0, size - 7) && finderAt(modules, size - 7, 0), text);
+      assert.ok(!finderAt(modules, size - 7, size - 7), text);
+      for (let i = 8; i < size - 8; i++) {
+        assert.equal(modules[6][i], i % 2 === 0);
+        assert.equal(modules[i][6], i % 2 === 0);
+      }
+      assert.equal(modules[size - 8][8], true);
+    }
+  });
+
+  test('refuses text longer than version 10 holds', () => {
+    assert.throws(() => qr.encode('z'.repeat(214)), /Text too long/);
+  });
+
+  test('draws one square with a 4-module margin', () => {
+    const svg = qr.toSvg('https://pagebite.eu/code/emelie', '#2B2420', '#FBF6EE');
+    assert.ok(svg.startsWith('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 37 37" shape-rendering="crispEdges">'));
+    assert.ok(svg.includes('<rect width="37" height="37" fill="#FBF6EE"/><path fill="#2B2420" d="M4 4h7v1h-7z'));
+  });
+});
+
 describe('pages', () => {
   const htmlFiles = (function list(folder) {
     return readdirSync(join(ROOT, folder), { withFileTypes: true }).flatMap((entry) => {
@@ -488,6 +560,20 @@ describe('pages', () => {
       for (const hook of ['data-code', 'data-copy-code', 'data-play-store', 'data-apple-redeem', 'only-computer', 'android-redirect-card']) {
         assert.ok(page.includes(hook), `${file}: ${hook}`);
       }
+    }
+  });
+
+  test('the creator pages show the QR code on computers only, with the encoder loaded before the store script', () => {
+    for (const [file, alt] of [
+      ['code/index.html', 'QR-Code: dein Creator-Link für PageBite'],
+      ['en/code/index.html', 'QR code: your creator link for PageBite'],
+    ]) {
+      const page = read(file);
+      const head = page.split('<body>')[0];
+      assert.ok(head.indexOf('assets/qr.js') > -1 && head.indexOf('assets/qr.js') < head.indexOf('assets/stores.js'), file);
+      const card = page.split('qr-card')[1].split('</section>')[0];
+      assert.ok(page.includes('class="card store qr-card only-computer"'), file);
+      assert.ok(card.includes(`<img class="qr" data-qr width="176" height="176" alt="${alt}" />`), file);
     }
   });
 
@@ -548,6 +634,94 @@ describe('pages', () => {
   test('the start pages link to the download page', () => {
     assert.ok(read('index.html').includes('href="./download.html"'));
     assert.ok(read('en/index.html').includes('href="./download.html"'));
+  });
+});
+
+describe('start pages (index.html, en/index.html)', () => {
+  const PAGES = [
+    { file: 'index.html', root: './', lang: 'de', ai: 'KI-erstellt', disclaimer: 'Kann Fehler enthalten. Prüfe den Original-Text.', trademarks: 'Marken von Apple Inc.' },
+    { file: 'en/index.html', root: '../', lang: 'en', ai: 'AI-generated', disclaimer: 'Can contain errors. Check the original text.', trademarks: 'trademarks of Apple Inc.' },
+  ];
+  const sections = (page) => [...page.matchAll(/<section class="([^"]+)"/g)].map((match) => match[1]);
+
+  test('both languages have the same sections in the same order', () => {
+    const [german, english] = PAGES.map(({ file }) => read(file));
+    assert.ok(sections(german).length >= 7);
+    assert.deepEqual(sections(english), sections(german));
+    // Same number of drawings, cards and steps.
+    for (const hook of ['class="step ', 'class="flashcard', 'class="ai-badge"', 'class="feature', 'class="privacy-item', '<li>']) {
+      assert.equal(english.split(hook).length, german.split(hook).length, hook);
+    }
+  });
+
+  test('load the start page styles and script from this site only, and nothing else changes for the legal pages', () => {
+    for (const { file, root } of PAGES) {
+      const page = read(file);
+      assert.ok(page.includes(`<link rel="stylesheet" href="${root}home.css" />`), file);
+      assert.ok(page.includes(`<script src="${root}assets/home.js"></script>`), file);
+      // The script that hides parts until they scroll in only runs with home.js behind it.
+      assert.ok(page.split('<body')[0].includes("document.documentElement.classList.add('js');"), file);
+    }
+    for (const file of ['privacy.html', 'terms.html', 'imprint.html', 'delete-account.html', 'download.html']) {
+      assert.ok(!read(file).includes('home.css'), file);
+      assert.ok(!read(`en/${file}`).includes('home.css'), `en/${file}`);
+    }
+  });
+
+  test('every drawn AI card is labelled and the hero drawing says it is an illustration (R10, R18)', () => {
+    for (const { file, ai, disclaimer } of PAGES) {
+      const page = read(file);
+      const cards = page.split('class="fc-question"').length - 1;
+      assert.equal(cards, 3, file);
+      assert.equal(page.split(`<span class="ai-badge">${ai}</span>`).length - 1, cards, file);
+      assert.equal(page.split(`<p class="disclaimer">${disclaimer}</p>`).length - 1, 2, file);
+      assert.ok(page.includes('<p class="illustration-label" aria-hidden="true">Illustration</p>'), file);
+      assert.match(page, /class="stage[^"]*" role="img" aria-label="Illustration: /, file);
+    }
+  });
+
+  test('show the store badges in their language with the trademark note', () => {
+    for (const { file, lang, trademarks } of PAGES) {
+      const page = read(file);
+      assert.ok(page.includes(`assets/badge-app-store-${lang}.svg"`), file);
+      assert.ok(page.includes(`assets/badge-google-play-${lang}.png"`), file);
+      assert.ok(page.includes(`href="${APP_STORE}"`) && page.includes(`href="${PLAY_STORE}"`), file);
+      assert.ok(page.includes(trademarks), file);
+    }
+  });
+
+  test('play the video of their own language, small, with a poster and only on demand', () => {
+    for (const { file, root, lang } of PAGES) {
+      const page = read(file);
+      assert.ok(page.includes(`<source src="${root}assets/home/promo-${lang}.mp4" type="video/mp4" />`), file);
+      assert.ok(page.includes(`poster="${root}assets/home/promo-poster-${lang}.jpg"`), file);
+      assert.match(page, /<video controls preload="none" playsinline /, file);
+      assert.doesNotMatch(page, /autoplay/, file);
+    }
+    for (const lang of ['de', 'en']) {
+      const size = statSync(join(ROOT, 'assets', 'home', `promo-${lang}.mp4`)).size;
+      assert.ok(size < 3_000_000, `promo-${lang}.mp4 is ${size} bytes`);
+    }
+  });
+
+  test('promise nothing the app rules forbid', () => {
+    for (const { file } of PAGES) {
+      const page = read(file).toLowerCase();
+      for (const word of ['risk free', 'risikofrei', 'zero data retention', '5 stars', '5 sterne', 'under 2 seconds', 'darwin', 'natural selection', 'never forget', 'nie wieder vergessen']) {
+        assert.ok(!page.includes(word), `${file}: ${word}`);
+      }
+      // The app is never "free"; only the first page is.
+      assert.doesNotMatch(page, /free app|kostenlose app|gratis-app/, file);
+    }
+  });
+
+  test('stand still with Reduce Motion', () => {
+    const css = read('home.css');
+    const reduced = css.split('@media (prefers-reduced-motion: reduce)')[1];
+    assert.ok(reduced, 'home.css has a Reduce Motion block');
+    assert.match(reduced, /animation: none !important;/);
+    assert.match(reduced, /transition: none !important;/);
+    assert.match(reduced, /\.js \.reveal \{\s*opacity: 1;/);
   });
 });
 

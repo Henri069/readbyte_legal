@@ -21,6 +21,14 @@ This folder lives inside the app project (`readbyte/legal/`) but is its own Git 
 
 Published address: `https://pagebite.eu/` (custom domain, file `CNAME`; DNS at Hostinger, nameservers `*.dns-parking.com`, records point to GitHub Pages). The old address `https://henri069.github.io/readbyte_legal/` forwards there, so links in app builds and store consoles keep working.
 
+## Start page
+
+Since 2026-10-15 the start page has its own wide layout and animations: `home.css` (only the two start pages load it; the legal pages keep `style.css` alone) and `assets/home.js` (parts slide in when they scroll into view). The drawings (phone with scan sweep, quiz, flashcard fold, app lock, streak stamps) are plain HTML and CSS, no image files. With Reduce Motion everything stands still.
+
+- Every drawn AI card carries "KI-erstellt" / "AI-generated" and the drawings say "Illustration" (R10, R18). Book text only from public-domain Marcus Aurelius (Schneider in German, George Long in English).
+- The video is the 30-second promo of the app repository (`marketing/promo/out/pagebite-16x9-<lang>.mp4`), made smaller for the web: `ffmpeg -i pagebite-16x9-de.mp4 -vf scale=1280:-2 -c:v libx264 -preset slow -crf 26 -pix_fmt yuv420p -c:a aac -b:a 96k -movflags +faststart assets/home/promo-de.mp4`. The poster is the frame at 20.6 s. It only loads when someone presses play.
+- The app lock section says "iPhone only", because Google Play has no app lock (readbyte docs/store-defaults.md).
+
 ## Email
 
 `info@pagebite.eu` is the only address on the pages (before 2026-09-22 it was the operator's private Gmail address). It is a real mailbox at Hostinger (MX `mx1`/`mx2.hostinger.com`, SPF `_spf.mail.hostinger.com`), so nothing is forwarded anywhere else. The privacy policy describes it in section 3, "Wenn du uns eine E-Mail schreibst" / "If you write us an email", and lists Hostinger as a processor in section 9. Move the mailbox, change those two places and spec §14.1/§14.2 in the same week.
@@ -31,7 +39,7 @@ Both use `assets/stores.js`. It holds the Apple app ID (`6812806136`) and the An
 
 - **Download page** (`…/download`): iPhones and iPads go straight to the App Store, Android phones straight to Google Play. The page stays hidden; only a short note with a link shows while the store opens. Computers see two QR codes and the two official store badges.
 - **Store badges** in `assets/`: Apple's "Download on the App Store" / "Laden im App Store" (SVG, from Apple's marketing tools, `toolbox.marketingtools.apple.com`) and Google's "Get it on Google Play" / "Jetzt bei Google Play" (PNG, from `play.google.com/intl/en_us/badges/`), downloaded 2026-09-18. They stay unchanged; only the transparent margin of Google's PNGs was cut off, so both badges show at the same height. Apple and Google allow the badges, not their bare logos. The trademark notes below the badges are part of the rules.
-- **Creator link** (`…/code/emelie` or `…/code/?code=EMELIE`): iPhones go straight to Apple's redeem page with the code filled in (Apple installs the app first if needed). Android phones go to Google Play with the campaign `creator-<code>`; the app reads it after the install (Google Play Install Referrer) and opens the discount by itself. The page is not hidden on Android: it stays in the browser with the code, a copy button and how to type the code, for people the install link does not reach. Computers see both ways. Browsers without German get the English page. Invalid codes go to the download page.
+- **Creator link** (`…/code/emelie` or `…/code/?code=EMELIE`): iPhones go straight to Apple's redeem page with the code filled in (Apple installs the app first if needed). Android phones go to Google Play with the campaign `creator-<code>`; the app reads it after the install (Google Play Install Referrer) and opens the discount by itself. The page is not hidden on Android: it stays in the browser with the code, a copy button and how to type the code, for people the install link does not reach. Computers see one QR code with the creator link `https://pagebite.eu/code/<code>` and both ways; the phone that scans it then takes its own way as above. Browsers without German get the English page. Invalid codes go to the download page.
 - The short form `code/emelie` works through `404.html`, because GitHub Pages has no routes. The page answers with status 404 but sends the visitor on at once. If a platform refuses a link that answers 404, use the long form `code/?code=EMELIE`.
 - Until 2026-10-05 the creator link was `c/emelie`. `404.html` still sends old links (`c/emelie`, `c/?code=EMELIE`, also with `en/`) to `code/`, so links already shared keep working. Keep that forwarding.
 - Nothing is created per creator. The store setup per creator is in the app repository: `docs/redeem-codes.md`.
@@ -46,6 +54,8 @@ swift tools/qr-svg.swift "https://play.google.com/store/apps/details?id=com.read
 ```
 
 The script reads each QR code back and stops if it does not say the same address.
+
+The QR code of a creator link cannot be a file, because every creator has their own code. `assets/qr.js` builds it in the browser (our own encoder: byte mode, level M, versions 1 to 10, nothing downloaded or sent). The tests compare it with the CoreImage file `assets/qr-google-play.svg`, which it matches exactly. macOS's QR reader decoded it on 2026-10-15.
 
 ## Preview on this computer
 

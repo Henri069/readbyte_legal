@@ -18,6 +18,12 @@
    */
   var FRIENDS_CODE = 'FRIENDS';
 
+  /** The published website, for the QR code of a creator link (README "Published address"). */
+  var SITE_URL = 'https://pagebite.eu/';
+  /** QR code colors, the same as the download page's QR codes: ink on surface. */
+  var QR_DARK = '#2B2420';
+  var QR_LIGHT = '#FBF6EE';
+
   /** Without a country, so Apple opens the store of the visitor's country. */
   var APP_STORE_URL = 'https://apps.apple.com/app/id' + APPLE_APP_ID;
   var PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=' + ANDROID_PACKAGE;
@@ -59,6 +65,14 @@
   /** The short address creators share, "…/code/emelie", for the address bar. */
   function creatorPath(pathname, code) {
     return String(pathname || '/').replace(/\/code\/.*$/, '/code/') + code.toLowerCase();
+  }
+
+  /**
+   * The short creator link on the published website, "https://pagebite.eu/code/emelie". The QR code holds it, so the
+   * phone that scans it gets the same way to its store as from the creator's bio.
+   */
+  function creatorLink(code) {
+    return SITE_URL + 'code/' + code.toLowerCase();
   }
 
   /** The same name as the Play offer ID, so both reports line up. */
@@ -130,6 +144,12 @@
     each('[data-play-store]', function (link) {
       link.href = playStoreUrl(creatorCampaign(code));
     });
+    // The QR code for computers, built here because every creator has their own (assets/qr.js, nothing is loaded).
+    if (global.PageBiteQr) {
+      each('[data-qr]', function (image) {
+        image.src = 'data:image/svg+xml,' + encodeURIComponent(global.PageBiteQr.toSvg(creatorLink(code), QR_DARK, QR_LIGHT));
+      });
+    }
     var codeElement = global.document.querySelector('.coupon [data-code]');
     each('[data-copy-code]', function (button) {
       button.addEventListener('click', function () {
@@ -237,6 +257,7 @@
     appleRedeemUrl: appleRedeemUrl,
     readCreatorCode: readCreatorCode,
     creatorPath: creatorPath,
+    creatorLink: creatorLink,
     creatorCampaign: creatorCampaign,
     detectPlatform: detectPlatform,
     downloadTarget: downloadTarget,

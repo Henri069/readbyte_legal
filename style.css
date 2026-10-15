@@ -507,3 +507,13 @@ html.platform-android .android-redirect-card {
 .steps .button {
   margin-top: 8px;
 }
+
+/* Creator link on a computer: one QR code with the link itself, so the phone takes its own way to its store. */
+.qr-card {
+  margin: 2.2rem 0;
+}
+
+.qr-card p {
+  max-width: 22rem;
+  margin: 0;
+}

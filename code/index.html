@@ -10,6 +10,7 @@
   <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="../style.css" />
   <!-- iPhones gehen direkt zu Apples Einlöse-Seite mit eingetragenem Code, bevor die Seite gezeichnet wird. -->
+  <script src="../assets/qr.js"></script>
   <script src="../assets/stores.js"></script>
   <script>PageBiteStores.startCreatorPage('de');</script>
 </head>
@@ -36,6 +37,13 @@
           <button type="button" class="coupon-copy" data-copy-code data-copied-label="Kopiert">Kopieren</button>
         </div>
         <p class="lede">Damit wird dein erstes Jahr PageBite günstiger. Den Preis siehst du vor dem Kauf.</p>
+      </section>
+
+      <!-- Computer: one QR code with this creator link, built in assets/stores.js. The phone then takes its own way. -->
+      <section class="card store qr-card only-computer" aria-labelledby="qr-title">
+        <h2 id="qr-title">Mit dem Handy scannen</h2>
+        <img class="qr" data-qr width="176" height="176" alt="QR-Code: dein Creator-Link für PageBite" />
+        <p>Scanne den QR-Code mit der Kamera deines Handys. Er öffnet den passenden Store, dein Code ist schon dabei.</p>
       </section>
 
       <!-- Android: Google Play opens with the creator's campaign; this stays behind it for everyone the link does not reach. -->

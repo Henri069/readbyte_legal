@@ -6,81 +6,366 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>PageBite — Turn the pages you read into cards you remember</title>
   <meta name="description" content="PageBite turns scanned book pages into a key idea, a quiz and flashcards, and plans your reviews." />
+  <meta name="theme-color" content="#efe7dc" />
   <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
   <link rel="alternate" hreflang="de" href="../index.html" />
   <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../home.css" />
+  <script>document.documentElement.classList.add('js');</script>
 </head>
 
-<body>
-  <nav class="nav" aria-label="Pages">
-    <a class="brand" href="./index.html" aria-current="page">PageBite</a>
-    <a href="./privacy.html">Privacy</a>
-    <a href="./terms.html">Terms of use</a>
-    <a href="./delete-account.html">Delete account</a>
-    <a href="./imprint.html">Imprint</a>
-    <a class="lang" href="../index.html" hreflang="de" lang="de">Deutsch</a>
-  </nav>
+<body class="home">
+  <header class="topbar">
+    <div class="wrap">
+      <a class="logo" href="./index.html" aria-current="page"><img src="../favicon.svg" width="34" height="34" alt="" />PageBite</a>
+      <a class="topbar-link" href="#how">How it works</a>
+      <a class="topbar-link" href="./privacy.html">Privacy</a>
+      <a class="lang" href="../index.html" hreflang="de" lang="de">Deutsch</a>
+      <a class="button small" href="./download.html">Get the app</a>
+    </div>
+  </header>
 
   <main>
-    <section class="hero">
-      <h1>PageBite</h1>
-      <p class="tagline">Turn the pages you read into cards you remember.</p>
-      <p class="lede">Scan a page. Get a key idea, a quiz and flashcards.</p>
-      <p class="platforms">For iPhone and Android</p>
-      <p class="hero-actions"><a class="button" href="./download.html">Get the app</a></p>
+    <section class="hero-home">
+      <div class="wrap">
+        <div>
+          <h1 class="rise rise-1">PageBite</h1>
+          <p class="tagline rise rise-2">Turn the pages you read into cards you <span class="underline">remember.</span></p>
+          <p class="lede rise rise-3">Scan a page. Get a key idea, a quiz and flashcards. The app plans when you review.</p>
+          <p class="hero-actions-row rise rise-4">
+            <a class="button" href="./download.html">Get the app</a>
+            <a class="button ghost" href="#how">How it works</a>
+          </p>
+          <p class="platform-line rise rise-5">For iPhone and Android</p>
+        </div>
+
+        <div class="stage rise rise-3" role="img" aria-label="Illustration: A phone scans a book page, and it becomes a flashcard.">
+          <p class="illustration-label" aria-hidden="true">Illustration</p>
+          <span class="blob blob-1"></span>
+          <span class="blob blob-2"></span>
+          <div class="book-page" aria-hidden="true">
+            <p class="bp-author">Marcus Aurelius</p>
+            <p class="bp-title">The Fourth Book.</p>
+            <p class="bp-body" lang="en">Men seek retreats for themselves, houses in the country, sea-shores, and mountains; and thou too art wont to desire such things very much. But this is altogether a mark of the most common sort of men, for it is in thy power whenever thou shalt choose to retire into thyself. For nowhere either with more quiet or more freedom from trouble does a man retire than into his own soul, particularly when he has within him such thoughts that by looking into them he is immediately in perfect tranquillity.</p>
+          </div>
+          <div class="phone" aria-hidden="true">
+            <div class="phone-screen">
+              <div class="scan-corners"></div>
+              <div class="scan-page">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <span class="sweep"></span>
+              </div>
+              <span class="phone-shutter"></span>
+            </div>
+          </div>
+          <div class="flashcard fold" aria-hidden="true">
+            <div class="fc-top">
+              <div class="fc-meta"><span class="fc-label">Question</span><span class="ai-badge">AI-generated</span></div>
+              <p class="fc-question">What is tranquillity, according to Marcus?</p>
+            </div>
+            <div class="fc-answer">
+              <span class="fc-label">Answer</span>
+              <p>Nothing else than the good ordering of the mind.</p>
+              <p class="disclaimer">Can contain errors. Check the original text.</p>
+            </div>
+          </div>
+          <span class="stamp" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg></span>
+        </div>
+      </div>
     </section>
 
-    <h2>What the app does</h2>
-    <div class="cards">
-      <div class="card">
-        <h3>Scan a page</h3>
-        <p>Take photos of one to five pages from your book. The app reads the text on your phone.</p>
-      </div>
-      <div class="card">
-        <h3>Key idea and quiz</h3>
-        <p>An AI sums up the key idea and asks you three quiz questions about it. Everything is marked as
-          "AI-generated".</p>
-      </div>
-      <div class="card">
-        <h3>Daily review</h3>
-        <p>Every page becomes flashcards. The app plans when you review them. This works offline, too.</p>
+    <div class="strip" aria-label="For books from every subject">
+      <div class="strip-track">
+        <ul>
+          <li>Biology</li>
+          <li>Psychology</li>
+          <li>History</li>
+          <li>Philosophy</li>
+          <li>Medicine</li>
+          <li>Economics</li>
+          <li>Law</li>
+          <li>Education</li>
+          <li>Chemistry</li>
+          <li>Novels</li>
+          <li>Classics</li>
+        </ul>
+        <ul aria-hidden="true">
+          <li>Biology</li>
+          <li>Psychology</li>
+          <li>History</li>
+          <li>Philosophy</li>
+          <li>Medicine</li>
+          <li>Economics</li>
+          <li>Law</li>
+          <li>Education</li>
+          <li>Chemistry</li>
+          <li>Novels</li>
+          <li>Classics</li>
+        </ul>
       </div>
     </div>
 
-    <h2>Your data</h2>
-    <ul>
-      <li>Photos stay on your phone. Page photos are deleted as soon as the text is read, a book cover is kept as a small picture.</li>
-      <li>Only the recognized text is processed in the EU to create your cards.</li>
-      <li>You don't need an account with an email address. Backup with an email code is optional.</li>
-      <li>Usage statistics only if you agree.</li>
-    </ul>
-    <p>All details are in the <a href="./privacy.html">privacy policy</a>.</p>
+    <section class="section" id="how" aria-labelledby="steps-title">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <p class="kicker">How it works</p>
+          <h2 id="steps-title">Three steps from the page <span class="accent">into your head.</span></h2>
+          <p>You read like always. PageBite turns the page into something you can learn with.</p>
+        </div>
 
-    <h2>Subscription</h2>
-    <p>
-      PageBite comes as a yearly plan, which can include a free trial, or as a monthly plan. You see the prices and
-      the trial length in the app before you buy. You can cancel anytime in your App Store or Google Play settings.
-    </p>
+        <ol class="steps-grid" role="list">
+          <li class="step reveal">
+            <div class="step-scene" role="img" aria-label="Illustration: A book page is scanned.">
+              <div class="scan-frame" aria-hidden="true">
+                <div class="scan-corners"></div>
+                <div class="scan-page">
+                  <div class="bar"></div>
+                  <div class="bar"></div>
+                  <div class="bar"></div>
+                  <div class="bar"></div>
+                  <div class="bar"></div>
+                  <div class="bar"></div>
+                  <div class="bar"></div>
+                  <span class="sweep"></span>
+                </div>
+              </div>
+            </div>
+            <div class="step-body">
+              <h3>Scan a page</h3>
+              <p>Take photos of one to five pages from your book. The app reads the text on your phone.</p>
+            </div>
+          </li>
 
-    <h2>In your language</h2>
-    <p>
-      The app is available in English and German. Key ideas, quizzes and flashcards stay in the language of the
-      scanned page.
-    </p>
+          <li class="step reveal reveal-delay-1">
+            <div class="step-scene" role="img" aria-label="Illustration: A key idea and a quiz question, the right answer turns green.">
+              <div class="quiz" aria-hidden="true">
+                <div class="key-idea">
+                  <div class="fc-meta"><span class="fc-label">Key idea</span><span class="ai-badge">AI-generated</span></div>
+                  <p>You don’t need a faraway place to find calm. You can retreat into yourself at any time.</p>
+                </div>
+                <p class="fc-question">Where does Marcus say you can best retreat?</p>
+                <ol>
+                  <li data-letter="A">To the country</li>
+                  <li data-letter="B" class="right">Into your own soul<span class="tap"></span></li>
+                  <li data-letter="C">To the sea-shore</li>
+                </ol>
+                <span class="correct">Correct!</span>
+              </div>
+            </div>
+            <div class="step-body">
+              <h3>Key idea and quiz</h3>
+              <p>An AI sums up the key idea and asks you three quiz questions about it. Everything is marked as "AI-generated".</p>
+            </div>
+          </li>
 
-    <h2>Contact</h2>
-    <p>Questions or feedback? Write to <a href="mailto:info@pagebite.eu">info@pagebite.eu</a>.</p>
+          <li class="step reveal reveal-delay-2">
+            <div class="step-scene" role="img" aria-label="Illustration: A flashcard, the answer folds open.">
+              <div class="review-scene" aria-hidden="true">
+                <div class="flashcard fold">
+                  <div class="fc-top">
+                    <div class="fc-meta"><span class="fc-label">Question</span><span class="ai-badge">AI-generated</span></div>
+                    <p class="fc-question">When can you retire into yourself, according to Marcus?</p>
+                  </div>
+                  <div class="fc-answer">
+                    <span class="fc-label">Answer</span>
+                    <p>Whenever you choose.</p>
+                    <p class="disclaimer">Can contain errors. Check the original text.</p>
+                  </div>
+                  <div class="ratings"><span>Again</span><span>Hard</span><span class="pick">Good</span><span>Easy</span></div>
+                </div>
+                <span class="show-answer">Show answer</span>
+              </div>
+            </div>
+            <div class="step-body">
+              <h3>Daily review</h3>
+              <p>Every page becomes flashcards. The app plans when you review them. This works offline, too.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section video-section" aria-labelledby="video-title">
+      <div class="wrap">
+        <div class="reveal">
+          <p class="kicker">Video</p>
+          <h2 id="video-title">Explained in <span class="accent">30 seconds.</span></h2>
+          <p>From the photo of a page to the flashcard that comes back just before you forget it.</p>
+          <p class="note-small">With sound. The app in the video is an illustration.</p>
+        </div>
+        <div class="video-frame reveal reveal-delay-1">
+          <video controls preload="none" playsinline width="1280" height="720" poster="../assets/home/promo-poster-en.jpg" aria-label="Video: How PageBite works">
+            <source src="../assets/home/promo-en.mp4" type="video/mp4" />
+          </video>
+        </div>
+      </div>
+    </section>
+
+    <section class="section lock-section" aria-labelledby="lock-title">
+      <div class="wrap">
+        <div class="reveal">
+          <p class="kicker">App lock · iPhone</p>
+          <h2 id="lock-title">Learn before <span class="accent">you scroll.</span></h2>
+          <p>Put a lock on distracting apps. Before they open, you answer a few key questions from your own pages.</p>
+          <ol class="lock-steps">
+            <li>You open a distracting app.</li>
+            <li>First you see the PageBite lock with a few key questions.</li>
+            <li>The app is open for a while, then it locks again.</li>
+          </ol>
+          <p class="fine">iPhone only, using your iPhone’s Screen Time. PageBite never learns which apps you pick. You can turn the lock off anytime.</p>
+        </div>
+        <div class="folder-stage reveal reveal-delay-1" role="img" aria-label="A folder of apps gets a lock.">
+          <div class="folder" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+          <span class="badge-9" aria-hidden="true">9+</span>
+          <span class="padlock" aria-hidden="true">
+            <svg viewBox="0 0 100 110">
+              <path class="shackle" d="M28 50V34a22 22 0 0 1 44 0v16" fill="none" stroke="#2b2420" stroke-width="10" stroke-linecap="round" />
+              <rect x="10" y="46" width="80" height="60" rx="16" fill="#c75b39" stroke="#2b2420" stroke-width="4" />
+              <circle cx="50" cy="72" r="8" fill="#2b2420" />
+              <path d="M50 76v12" stroke="#2b2420" stroke-width="6" stroke-linecap="round" />
+            </svg>
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="more-title">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <p class="kicker">In the app</p>
+          <h2 id="more-title">Made to help you <span class="accent">keep going.</span></h2>
+        </div>
+
+        <div class="feature-grid">
+          <div class="feature big reveal">
+            <h3>A streak with stamps</h3>
+            <p>Every learning day gets a stamp, like on an old library card. Days without due cards are rest days and don’t end your streak.</p>
+            <ul class="week" aria-label="Sample week">
+              <li><span class="day stamped"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg></span><span>Mo</span><span class="visually-hidden">learned</span></li>
+              <li><span class="day stamped"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg></span><span>Tu</span><span class="visually-hidden">learned</span></li>
+              <li><span class="day stamped"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg></span><span>We</span><span class="visually-hidden">learned</span></li>
+              <li><span class="day rest"></span><span>Th</span><span class="visually-hidden">rest day</span></li>
+              <li><span class="day stamped"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg></span><span>Fr</span><span class="visually-hidden">learned</span></li>
+              <li><span class="day stamped"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg></span><span>Sa</span><span class="visually-hidden">learned</span></li>
+              <li><span class="day today"></span><span>Su</span><span class="visually-hidden">today</span></li>
+            </ul>
+          </div>
+
+          <div class="feature reveal reveal-delay-1">
+            <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9a6 6 0 0 1 12 0c0 6 2.5 7.5 2.5 7.5h-17S6 15 6 9" /><path d="M10 20a2.2 2.2 0 0 0 4 0" /></svg></span>
+            <h3>Daily reminder</h3>
+            <p>Once a day, at the time you pick. The reminder comes straight from your phone.</p>
+          </div>
+
+          <div class="feature reveal">
+            <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4v16H5zM10 4h4v16h-4z" /><path d="M15.5 5.2l3.8-1 3.2 15.6-3.8 1z" /></svg></span>
+            <h3>Your books</h3>
+            <p>Every page goes to its book. A photo of the cover stays on your phone as a small picture.</p>
+          </div>
+
+          <div class="feature reveal reveal-delay-1">
+            <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8.5a15 15 0 0 1 20 0M5.5 12a10 10 0 0 1 13 0M9 15.5a5 5 0 0 1 6 0" /><path d="M3 3l18 18" /></svg></span>
+            <h3>Works offline</h3>
+            <p>Reviews work without internet. The app only needs a connection to make new cards.</p>
+          </div>
+
+          <div class="feature reveal reveal-delay-2">
+            <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h9M8.5 3v2M6 5c.5 3.5 3 6.5 6 8M11 5c-.8 3.8-3.4 7-7 9" /><path d="M13 21l4-10 4 10M14.4 17.5h5.2" /></svg></span>
+            <h3>In your language</h3>
+            <p>The app is available in English and German. Key ideas, quizzes and flashcards stay in the language of the scanned page.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section privacy-section" aria-labelledby="data-title">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <p class="kicker">Your data</p>
+          <h2 id="data-title">Your pages <span class="accent">stay yours.</span></h2>
+        </div>
+        <div class="privacy-grid">
+          <div class="privacy-item reveal">
+            <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2.5" width="12" height="19" rx="3" /><path d="M10.5 18.5h3" /></svg></span>
+            <h3>Photos stay on your phone</h3>
+            <p>Page photos are deleted as soon as the text is read. A book cover is kept as a small picture.</p>
+          </div>
+          <div class="privacy-item reveal reveal-delay-1">
+            <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3c2.5 2.7 3.6 5.7 3.6 9s-1.1 6.3-3.6 9c-2.5-2.7-3.6-5.7-3.6-9S9.5 5.7 12 3" /></svg></span>
+            <h3>Processed in the EU</h3>
+            <p>Only the recognized text is processed in the EU to create your cards.</p>
+          </div>
+          <div class="privacy-item reveal reveal-delay-2">
+            <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4" /><path d="M4 21c.8-4 4-6 8-6s7.2 2 8 6" /></svg></span>
+            <h3>No account needed</h3>
+            <p>You don’t need an account with an email address. Backup with an email code is optional.</p>
+          </div>
+          <div class="privacy-item reveal reveal-delay-3">
+            <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2" /></svg></span>
+            <h3>Statistics only with a yes</h3>
+            <p>Usage statistics only if you agree.</p>
+          </div>
+        </div>
+        <p class="privacy-more reveal">All details are in the <a href="./privacy.html">privacy policy</a>.</p>
+      </div>
+    </section>
+
+    <section class="section" aria-label="Subscription and contact">
+      <div class="wrap facts">
+        <div class="fact reveal">
+          <h2>Subscription</h2>
+          <p><span class="free-page">Your first page is free.</span></p>
+          <p>PageBite comes as a yearly plan, which can include a free trial, or as a monthly plan. You see the prices and the trial length in the app before you buy. You can cancel anytime in your App Store or Google Play settings.</p>
+        </div>
+        <div class="fact reveal reveal-delay-1">
+          <h2>Contact</h2>
+          <p>Questions or feedback? Write to <a href="mailto:info@pagebite.eu">info@pagebite.eu</a>.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section cta" aria-labelledby="cta-title">
+      <div class="cta-cards" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+      <div class="wrap reveal">
+        <h2 id="cta-title">Remember what you read.</h2>
+        <p>For iPhone and Android.</p>
+        <p class="hero-actions-row"><a class="button ink" href="./download.html">Get the app</a></p>
+        <div class="cta-badges">
+          <a class="store-badge" href="https://apps.apple.com/app/id6812806136">
+            <img src="../assets/badge-app-store-en.svg" width="132" height="44" alt="Download on the App Store" />
+          </a>
+          <a class="store-badge" href="https://play.google.com/store/apps/details?id=com.readbyte.app">
+            <img src="../assets/badge-google-play-en.png" width="148" height="44" alt="Get it on Google Play" />
+          </a>
+        </div>
+        <p class="trademarks">Apple, the Apple logo and App Store are trademarks of Apple Inc. Google Play and the Google Play logo are trademarks of Google LLC.</p>
+      </div>
+    </section>
   </main>
 
-  <footer>
-    <p>
-      <a href="./privacy.html">Privacy</a> ·
-      <a href="./terms.html">Terms of use</a> ·
-      <a href="./delete-account.html">Delete account</a> ·
-      <a href="./imprint.html">Imprint</a> ·
-      <a href="../index.html" hreflang="de" lang="de">Deutsch</a>
-    </p>
+  <footer class="site-footer">
+    <div class="wrap">
+      <div>
+        <a class="logo" href="./index.html"><img src="../favicon.svg" width="34" height="34" alt="" />PageBite</a>
+        <p><a href="mailto:info@pagebite.eu">info@pagebite.eu</a></p>
+      </div>
+      <nav aria-label="Pages">
+        <a href="./privacy.html">Privacy</a>
+        <a href="./terms.html">Terms of use</a>
+        <a href="./delete-account.html">Delete account</a>
+        <a href="./imprint.html">Imprint</a>
+        <a href="../index.html" hreflang="de" lang="de">Deutsch</a>
+      </nav>
+    </div>
   </footer>
+
+  <script src="../assets/home.js"></script>
 </body>
 
 </html>
