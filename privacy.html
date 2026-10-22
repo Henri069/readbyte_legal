@@ -91,6 +91,14 @@
               <a href="#ki">Abschnitt 5</a></td>
           </tr>
           <tr>
+            <td>Importierte Kindle-Markierungen (Text, Seite oder Position, Farbe, Amazons Kennung von Buch und Markierung) und deine Notizen dazu</td>
+            <td>Nur auf deinem Handy; der Text der Markierungen (nicht deine Notizen) kurz an Google Gemini gesendet</td>
+            <td>Zu jeder Markierung eine Karteikarte erstellen, die Markierung bei ihrer Karte zeigen</td>
+            <td>Art. 6 Abs. 1 lit. b DSGVO</td>
+            <td>Auf dem Handy, bis du die Markierung, ihr Buch, dein Konto oder die App löschst. Siehe
+              <a href="#kindle">Abschnitt 6</a></td>
+          </tr>
+          <tr>
             <td>KI-Ergebnisse (Kernideen oder Handlung, Quiz, Karteikarten)</td>
             <td>Handy und Supabase (Frankfurt am Main)</td>
             <td>Lernen, Backup, Sync</td>
@@ -153,7 +161,7 @@
             <td>Handy; bei PostHog nur mit Einwilligung</td>
             <td>Voreinstellungen, zum Beispiel neue Karten pro Tag; die Rechnung im Onboarding, zum Beispiel deine Lesestunden im Jahr; Statistik</td>
             <td>Art. 6 Abs. 1 lit. b DSGVO; PostHog: Art. 6 Abs. 1 lit. a DSGVO</td>
-            <td>Bis du die App löschst. PostHog siehe <a href="#statistik">Abschnitt 6</a></td>
+            <td>Bis du die App löschst. PostHog siehe <a href="#statistik">Abschnitt 7</a></td>
           </tr>
           <tr>
             <td>Nutzungsstatistik</td>
@@ -163,7 +171,7 @@
             <td>Bis du dein Konto löschst oder die Löschung verlangst</td>
           </tr>
           <tr>
-            <td>Zähler der Scans pro Tag</td>
+            <td>Zähler der Scans und der Import-Pakete pro Tag</td>
             <td>Supabase</td>
             <td>Schutz vor Missbrauch und Kosten (Wochenlimit)</td>
             <td>Art. 6 Abs. 1 lit. f DSGVO</td>
@@ -294,7 +302,7 @@
         Hostinger, zum Beispiel für den Spam-Schutz, können außerhalb der EU sitzen; dafür gelten
         EU-Standardvertragsklauseln.</li>
       <li><strong>Rechtsgrundlage:</strong> Geht es um dein Abo oder die App, Art. 6 Abs. 1 lit. b DSGVO. Machst du
-        deine Rechte aus <a href="#rechte">Abschnitt 12</a> geltend, Art. 6 Abs. 1 lit. c DSGVO. Sonst unser
+        deine Rechte aus <a href="#rechte">Abschnitt 13</a> geltend, Art. 6 Abs. 1 lit. c DSGVO. Sonst unser
         berechtigtes Interesse, Anfragen zu beantworten (Art. 6 Abs. 1 lit. f DSGVO).</li>
       <li><strong>Wie lange:</strong> Wir löschen deine E-Mail, wenn deine Anfrage erledigt ist und wir sie nicht mehr
         brauchen. Länger bewahren wir sie nur auf, wenn ein Gesetz das verlangt.</li>
@@ -325,7 +333,7 @@
       Nach deinem ersten Foto fragt dich die App um Erlaubnis, bevor sie den erkannten Text sendet. Erst dann geht
       der erkannte Text einer Seite an unseren Server und von dort an Google Gemini. Sagst du „Nicht jetzt“, wird
       nichts gesendet, und der Text bleibt nur so lange auf deinem Handy, bis du den Screen verlässt. Google Gemini erstellt daraus Kernidee, Quiz und Karteikarten.
-      Unser Server speichert den Seitentext nicht und schreibt ihn in keine Protokolle.
+      Unser Server speichert den Seitentext nicht und schreibt ihn in keine Protokolle. Für importierte Kindle-Markierungen gilt dasselbe (siehe <a href="#kindle">Abschnitt 6</a>).
     </p>
     <p>
       Mit dem Seitentext gehen die Buchart (Sachbuch oder Roman) und die Figuren oder Begriffe, die PageBite aus
@@ -356,7 +364,32 @@
       </li>
     </ul>
 
-    <h2 id="statistik">6. Nutzungsstatistik (nur mit Einwilligung)</h2>
+    <h2 id="kindle">6. Markierungen aus dem Kindle importieren</h2>
+    <ul>
+      <li>Startest du den Import, öffnet die App Amazons eigene Notizbuch-Seite (lesen.amazon.de oder
+        read.amazon.com) in einem Browser-Fenster in der App. Du meldest dich dort selbst bei Amazon an. Dein Passwort
+        tippst du nur in Amazons Seite. PageBite liest es nicht und speichert es nicht.</li>
+      <li>Das Fenster ist privat: Deine Anmeldung bei Amazon bleibt nicht in der App gespeichert und endet, wenn du das
+        Fenster schließt.</li>
+      <li>Auf der Notizbuch-Seite liest die App die Liste deiner Kindle-Bücher (Titel, Autor, Amazons Kennung des
+        Buchs, Datum der letzten Markierung). Von den Büchern, die du auswählst, liest sie die Markierungen (Text, Seite
+        oder Position, Farbe, deine Notiz, Amazons Kennung der Markierung). Deine Amazon-Kundennummer speichert die App
+        nicht.</li>
+      <li>Markierungen und Notizen bleiben nur auf deinem Handy. Wir speichern sie nicht auf unserem Server und
+        gleichen sie nicht mit anderen Geräten ab. Auf einem neuen Handy kannst du sie neu importieren.</li>
+      <li>Den Text der Markierungen schickt die App in Paketen an Google Gemini, damit die KI zu jeder Markierung eine
+        Karteikarte schreibt (siehe <a href="#ki">Abschnitt 5</a>). Deine Notizen gehen nicht mit. Auf unserem Server
+        liegen danach nur die Karten in eigenen Worten der KI, wie bei gescannten Seiten, und Titel und Autor des Buchs,
+        wie bei jedem Buch.</li>
+      <li>Amazon verarbeitet deine Anmeldung und die Nutzung seiner Seite in eigener Verantwortung. Dafür gilt Amazons
+        Datenschutzerklärung. PageBite schickt Amazon nichts, außer dem, was das Browser-Fenster beim Aufruf von
+        Amazons Seite sendet.</li>
+      <li>Damit die KI-Kosten begrenzt bleiben, zählen wir auf unserem Server, wie viele Pakete du in den letzten 7
+        Tagen importiert hast, so wie beim Scan-Limit (Art. 6 Abs. 1 lit. f DSGVO).</li>
+      <li><strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. b DSGVO. Den Import startest du selbst.</li>
+    </ul>
+
+    <h2 id="statistik">7. Nutzungsstatistik (nur mit Einwilligung)</h2>
     <p>
       Beim ersten Start fragen wir, ob wir Nutzungsstatistiken erfassen dürfen. Beide Antworten sind gleich leicht
       wählbar. Sagst du nein, startet die App den Statistik-Dienst gar nicht erst.
@@ -378,7 +411,7 @@
       <li><strong>Rechtsgrundlage:</strong> deine Einwilligung (Art. 6 Abs. 1 lit. a DSGVO, § 25 Abs. 1 TDDDG).</li>
     </ul>
 
-    <h2 id="abo">7. Abo und Käufe</h2>
+    <h2 id="abo">8. Abo und Käufe</h2>
     <p>
       Du kaufst das Abo über den App Store von Apple oder über Google Play. Apple und Google verarbeiten deine
       Zahlungsdaten in eigener Verantwortung. Wir sehen keine Zahlungsdaten. RevenueCat verwaltet für uns, ob dein Abo
@@ -391,7 +424,7 @@
       und der Code bleiben auf deinem Handy und gehen weder an uns noch an andere.
     </p>
 
-    <h2 id="backup">8. Backup, Sync und Login per E-Mail-Code</h2>
+    <h2 id="backup">9. Backup, Sync und Login per E-Mail-Code</h2>
     <ul>
       <li>Deine Bücher, Karten, dein Lernverlauf und deine Lernserie werden mit deinem Konto auf den Servern von Supabase in Frankfurt am
         Main gesichert. So bleiben sie erhalten und sind auf deinen anderen Geräten verfügbar.</li>
@@ -401,7 +434,7 @@
         gibt es nicht. Die E-Mail-Adresse nutzen wir nur für die Anmeldung.</li>
     </ul>
 
-    <h2 id="empfaenger">9. Empfänger und Auftragsverarbeiter</h2>
+    <h2 id="empfaenger">10. Empfänger und Auftragsverarbeiter</h2>
     <p>Diese Dienstleister verarbeiten Daten in unserem Auftrag. Mit allen haben wir Verträge zur Auftragsverarbeitung
       geschlossen.</p>
     <div class="table-wrap">
@@ -450,7 +483,7 @@
       </table>
     </div>
     <p>
-      Apple (App Store) und Google (Google Play, auf Android auch Google ML Kit) handeln in eigener Verantwortung. Für
+      Apple (App Store), Google (Google Play, auf Android auch Google ML Kit) und beim Kindle-Import Amazon handeln in eigener Verantwortung. Für
       sie gelten ihre eigenen Datenschutzerklärungen.
     </p>
 
@@ -463,7 +496,7 @@
       E-Mails liegt bei einem Anbieter aus der EU.
     </p>
 
-    <h2 id="speicherdauer">10. Speicherdauer und Löschung</h2>
+    <h2 id="speicherdauer">11. Speicherdauer und Löschung</h2>
     <ul>
       <li>Daten auf deinem Handy bleiben, bis du sie in der App löschst, dein Konto löschst oder die App deinstallierst.
       </li>
@@ -479,7 +512,7 @@
         überschrieben werden.</li>
     </ul>
 
-    <h2 id="sicherheit">11. Sicherheit</h2>
+    <h2 id="sicherheit">12. Sicherheit</h2>
     <ul>
       <li>Alle Verbindungen sind verschlüsselt (HTTPS).</li>
       <li>Jedes Konto sieht auf dem Server nur seine eigenen Daten.</li>
@@ -487,7 +520,7 @@
       <li>Server-Protokolle enthalten keine Seitentexte und keine Karteninhalte.</li>
     </ul>
 
-    <h2 id="rechte">12. Deine Rechte</h2>
+    <h2 id="rechte">13. Deine Rechte</h2>
     <p>Du hast diese Rechte nach der DSGVO:</p>
     <ul>
       <li>Auskunft über deine Daten (Art. 15)</li>
@@ -508,12 +541,12 @@
         rel="noopener">datenschutz.hessen.de</a>).
     </p>
 
-    <h2 id="alter">13. Mindestalter</h2>
+    <h2 id="alter">14. Mindestalter</h2>
     <p>
       PageBite richtet sich an Menschen ab 16 Jahren. Wir erheben nicht bewusst Daten von jüngeren Kindern.
     </p>
 
-    <h2 id="aenderungen">14. Änderungen</h2>
+    <h2 id="aenderungen">15. Änderungen</h2>
     <p>
       Wenn sich die App oder die Rechtslage ändert, passen wir diese Erklärung an. Das Datum oben zeigt den aktuellen
       Stand. Ändert sich etwas an der KI-Verarbeitung, fragt dich die App vor dem nächsten Scan erneut um Erlaubnis.

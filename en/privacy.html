@@ -92,6 +92,14 @@
               <a href="#ai">section 5</a></td>
           </tr>
           <tr>
+            <td>Imported Kindle highlights (text, page or location, colour, Amazon's ids of the book and the highlight) and your notes on them</td>
+            <td>Only on your phone; the text of the highlights (not your notes) sent briefly to Google Gemini</td>
+            <td>Create one flashcard per highlight, show the highlight with its card</td>
+            <td>Art. 6(1)(b) GDPR</td>
+            <td>On the phone until you delete the highlight, its book, your account or the app. See
+              <a href="#kindle">section 6</a></td>
+          </tr>
+          <tr>
             <td>AI output (key ideas or what happens, quizzes, flashcards)</td>
             <td>Phone and Supabase (Frankfurt am Main)</td>
             <td>Learning, backup, sync</td>
@@ -154,7 +162,7 @@
             <td>Phone; at PostHog only with consent</td>
             <td>Default settings, for example new cards per day; the calculation in onboarding, for example your reading hours a year; statistics</td>
             <td>Art. 6(1)(b) GDPR; PostHog: Art. 6(1)(a) GDPR</td>
-            <td>Until you delete the app. PostHog see <a href="#statistics">section 6</a></td>
+            <td>Until you delete the app. PostHog see <a href="#statistics">section 7</a></td>
           </tr>
           <tr>
             <td>Usage statistics</td>
@@ -164,7 +172,7 @@
             <td>Until you delete your account or ask us to delete them</td>
           </tr>
           <tr>
-            <td>Counter of scans per day</td>
+            <td>Counter of scans and import batches per day</td>
             <td>Supabase</td>
             <td>Protection against abuse and costs (weekly limit)</td>
             <td>Art. 6(1)(f) GDPR</td>
@@ -292,7 +300,7 @@
         stores data in the EU and the United Kingdom. Some of Hostinger's own service providers, for example for
         spam protection, can sit outside the EU; EU Standard Contractual Clauses apply to them.</li>
       <li><strong>Legal basis:</strong> If it is about your subscription or the app, Art. 6(1)(b) GDPR. If you exercise
-        your rights from <a href="#rights">section 12</a>, Art. 6(1)(c) GDPR. Otherwise our legitimate interest in
+        your rights from <a href="#rights">section 13</a>, Art. 6(1)(c) GDPR. Otherwise our legitimate interest in
         answering requests (Art. 6(1)(f) GDPR).</li>
       <li><strong>How long:</strong> We delete your email when your request is done and we no longer need it. We keep
         it longer only if the law requires that.</li>
@@ -322,7 +330,7 @@
       After your first photo, the app asks for your permission before it sends the recognized text. Only then is the
       recognized text of a page sent to our server and from there to Google Gemini. If you choose "Not now", nothing
       is sent, and the text stays on your phone only until you leave the screen. Google Gemini creates the key idea, quiz and flashcards from it. Our
-      server does not store the page text and does not write it into any logs.
+      server does not store the page text and does not write it into any logs. The same applies to imported Kindle highlights (see <a href="#kindle">section 6</a>).
     </p>
     <p>
       Together with the page text go the kind of book (non-fiction or fiction) and the characters or terms PageBite
@@ -351,7 +359,28 @@
       <li><strong>Legal basis:</strong> Art. 6(1)(b) GDPR. Creating the cards is the core of the app.</li>
     </ul>
 
-    <h2 id="statistics">6. Usage statistics (only with consent)</h2>
+    <h2 id="kindle">6. Importing highlights from the Kindle</h2>
+    <ul>
+      <li>When you start the import, the app opens Amazon's own notebook page (read.amazon.com or lesen.amazon.de) in a
+        browser window inside the app. You log in to Amazon there yourself. You type your password only into Amazon's
+        page. PageBite does not read it and does not store it.</li>
+      <li>The window is private: your Amazon login is not kept in the app and ends when you close the window.</li>
+      <li>On the notebook page, the app reads the list of your Kindle books (title, author, Amazon's id of the book,
+        date of the last highlight). For the books you pick, it reads the highlights (text, page or location, colour,
+        your note, Amazon's id of the highlight). The app does not store your Amazon customer number.</li>
+      <li>Highlights and notes stay only on your phone. We do not store them on our server and do not sync them to
+        other devices. On a new phone you can import them again.</li>
+      <li>The app sends the text of the highlights in batches to Google Gemini so the AI writes one flashcard per
+        highlight (see <a href="#ai">section 5</a>). Your notes are not sent. Afterwards our server holds only the cards,
+        in the AI's own words, as for scanned pages, and the title and author of the book, as for every book.</li>
+      <li>Amazon processes your login and your use of its page under its own responsibility. Amazon's privacy notice
+        applies. PageBite sends nothing to Amazon beyond what the browser window sends when it opens Amazon's page.</li>
+      <li>To keep AI costs in check, our server counts how many batches you imported in the last 7 days, as for the
+        scan limit (Art. 6(1)(f) GDPR).</li>
+      <li><strong>Legal basis:</strong> Art. 6(1)(b) GDPR. You start the import yourself.</li>
+    </ul>
+
+    <h2 id="statistics">7. Usage statistics (only with consent)</h2>
     <p>
       On first launch, we ask whether we may collect usage statistics. Both answers are equally easy to choose. If you
       say no, the app does not even start the statistics service.
@@ -372,7 +401,7 @@
       <li><strong>Legal basis:</strong> your consent (Art. 6(1)(a) GDPR, § 25(1) TDDDG).</li>
     </ul>
 
-    <h2 id="subscription">7. Subscription and purchases</h2>
+    <h2 id="subscription">8. Subscription and purchases</h2>
     <p>
       You buy the subscription through Apple's App Store or Google Play. Apple and Google process your payment data
       under their own responsibility. We never see payment data. RevenueCat manages for us whether your subscription is
@@ -385,7 +414,7 @@
       phone and are not sent to us or anyone else.
     </p>
 
-    <h2 id="backup">8. Backup, sync and sign-in with an email code</h2>
+    <h2 id="backup">9. Backup, sync and sign-in with an email code</h2>
     <ul>
       <li>Your books, cards, review history and learning streak are backed up with your account on Supabase's servers in Frankfurt am
         Main. This keeps them safe and available on your other devices.</li>
@@ -394,7 +423,7 @@
         the email address for signing in.</li>
     </ul>
 
-    <h2 id="recipients">9. Recipients and processors</h2>
+    <h2 id="recipients">10. Recipients and processors</h2>
     <p>These service providers process data on our behalf. We have data processing agreements with all of them.</p>
     <div class="table-wrap">
       <table>
@@ -442,7 +471,7 @@
       </table>
     </div>
     <p>
-      Apple (App Store) and Google (Google Play, and Google ML Kit on Android) act under their own responsibility. Their
+      Apple (App Store), Google (Google Play, and Google ML Kit on Android) and, for the Kindle import, Amazon act under their own responsibility. Their
       own privacy policies apply.
     </p>
 
@@ -455,7 +484,7 @@
       from the EU.
     </p>
 
-    <h2 id="retention">10. Retention and deletion</h2>
+    <h2 id="retention">11. Retention and deletion</h2>
     <ul>
       <li>Data on your phone stays until you delete it in the app, delete your account or uninstall the app.</li>
       <li>Data on our servers stays as long as your account exists. If your subscription ends, it stays stored until
@@ -469,7 +498,7 @@
       <li>Deleted data can remain in Supabase's backups until they are overwritten in the regular cycle.</li>
     </ul>
 
-    <h2 id="security">11. Security</h2>
+    <h2 id="security">12. Security</h2>
     <ul>
       <li>All connections are encrypted (HTTPS).</li>
       <li>On the server, every account can only see its own data.</li>
@@ -477,7 +506,7 @@
       <li>Server logs contain no page texts and no card content.</li>
     </ul>
 
-    <h2 id="rights">12. Your rights</h2>
+    <h2 id="rights">13. Your rights</h2>
     <p>Under the GDPR you have these rights:</p>
     <ul>
       <li>Access to your data (Art. 15)</li>
@@ -498,12 +527,12 @@
         href="https://datenschutz.hessen.de" rel="noopener">datenschutz.hessen.de</a>).
     </p>
 
-    <h2 id="age">13. Minimum age</h2>
+    <h2 id="age">14. Minimum age</h2>
     <p>
       PageBite is intended for people aged 16 and over. We do not knowingly collect data from younger children.
     </p>
 
-    <h2 id="changes">14. Changes</h2>
+    <h2 id="changes">15. Changes</h2>
     <p>
       If the app or the law changes, we update this policy. The date at the top shows the current version. If anything
       about the AI processing changes, the app asks for your permission again before your next scan.
