@@ -93,7 +93,7 @@
           </tr>
           <tr>
             <td>Imported Kindle highlights (text, page or location, colour, Amazon's ids of the book and the highlight) and your notes on them</td>
-            <td>Only on your phone; the text of the highlights (not your notes) sent briefly to Google Gemini</td>
+            <td>Only on your phone; the text of the highlights (not your notes) sent briefly to Google Gemini; Amazon's id of the highlight also on our server, with its card</td>
             <td>Create one flashcard per highlight, show the highlight with its card</td>
             <td>Art. 6(1)(b) GDPR</td>
             <td>On the phone until you delete the highlight, its book, your account or the app. See
@@ -369,7 +369,9 @@
         date of the last highlight). For the books you pick, it reads the highlights (text, page or location, colour,
         your note, Amazon's id of the highlight). The app does not store your Amazon customer number.</li>
       <li>Highlights and notes stay only on your phone. We do not store them on our server and do not sync them to
-        other devices. On a new phone you can import them again.</li>
+        other devices. With each card we store only Amazon's id of its highlight, a string of letters and digits without
+        any text. When you import again on a new phone, the app uses it to put each highlight back on its card, without
+        the AI and without duplicate cards.</li>
       <li>The app sends the text of the highlights in batches to Google Gemini so the AI writes one flashcard per
         highlight (see <a href="#ai">section 5</a>). Your notes are not sent. Afterwards our server holds only the cards,
         in the AI's own words, as for scanned pages, and the title and author of the book, as for every book.</li>
