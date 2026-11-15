@@ -12,6 +12,7 @@ This folder lives inside the app project (`readbyte/legal/`) but is its own Git 
 | Privacy policy | `privacy.html` | `en/privacy.html` |
 | AI processing section (app "Details" link) | `privacy.html#ki` | `en/privacy.html#ai` |
 | Terms of use | `terms.html` | `en/terms.html` |
+| Withdrawal and refunds (web purchases through Paddle, store purchases) | `refund.html` | `en/refund.html` |
 | Delete account (Google Play "Delete account URL") | `delete-account.html` | `en/delete-account.html` |
 | Imprint | `imprint.html` | `en/imprint.html` |
 | Download (QR codes, phones go straight to their store) | `download.html` | `en/download.html` |
@@ -88,6 +89,10 @@ They check the platform detection, the redirects, the creator codes, the short l
 - Every text exists in German and English with the same structure. The German version is binding.
 - Update the date ("Stand" / "Last updated") on every page you change.
 - The texts must match what the app really does (readbyte: `docs/readbyte-ai-spec-v3.md` §14, `docs/google-play-data-safety.md`). Change the app or a service, change these pages in the same week.
+
+## Web purchase (Paddle)
+
+`start.pagebite.eu` (readbyte `web/start/`, hosted at Hostinger) links the terms, the refund page, the privacy policy and the imprint here for Paddle's domain review. Terms section 9.2 and `refund.html` are drafts of 2026-11-15: Paddle.com is the merchant of record, 14 days money back after the first payment of a subscription (operator's decision 2026-11-15; Paddle accepts 14 to 90 days and refuses "no refunds"). HTML comments marked `ANWALT` / `LAWYER` list what the lawyer checks. Publish only with the operator's OK.
 
 ## Check before publishing
 

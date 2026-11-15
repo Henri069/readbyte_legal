@@ -534,7 +534,7 @@ describe('pages', () => {
   });
 
   test('every new page exists in German and English', () => {
-    for (const page of ['download.html', 'code/index.html', 'friends.html']) {
+    for (const page of ['download.html', 'code/index.html', 'friends.html', 'refund.html']) {
       assert.ok(existsSync(join(ROOT, page)), page);
       assert.ok(existsSync(join(ROOT, 'en', page)), `en/${page}`);
     }
@@ -743,6 +743,91 @@ describe('start pages (index.html, en/index.html)', () => {
     assert.match(reduced, /animation: none !important;/);
     assert.match(reduced, /transition: none !important;/);
     assert.match(reduced, /\.js \.reveal \{\s*opacity: 1;/);
+  });
+});
+
+describe('web purchase through Paddle (terms.html, refund.html)', () => {
+  // start.pagebite.eu links these pages for Paddle's domain review (readbyte docs/plan-web-funnel.md).
+  const LANGS = [
+    {
+      lang: 'de',
+      terms: 'terms.html',
+      refund: 'refund.html',
+      mor: 'Paddle.com ist der Verkäufer (Merchant of Record) für alle Bestellungen im Web',
+      window: 'Verlangst du innerhalb von 14 Tagen nach der ersten Zahlung eines Abos dein Geld zurück, bekommst du den vollen\n        Betrag dieser Zahlung erstattet.',
+      trial: 'kostenlosen Testzeitraum von 14 Tagen',
+      afterTrial: 'wird danach der Jahrespreis abgebucht',
+      store: ['Im App Store muss die Kündigung spätestens 24 Stunden vor Ablauf des Zeitraums erfolgen.', 'Für dein Widerrufsrecht und für Erstattungen gelten deshalb die\n        Bedingungen des jeweiligen Stores.'],
+      sectionWeb: 'id="abo-web"',
+    },
+    {
+      lang: 'en',
+      terms: 'en/terms.html',
+      refund: 'en/refund.html',
+      mor: 'Paddle.com is the Merchant of\n        Record for all our web orders',
+      window: 'If you ask for your money back within 14 days of the first payment of a subscription, you get the full amount\n        of that payment back.',
+      trial: 'free trial of 14 days',
+      afterTrial: 'the yearly price is charged after it',
+      store: ['In the App Store, you must cancel at least 24 hours before the end of the period.', 'Their terms therefore apply to your right of withdrawal and to\n        refunds.'],
+      sectionWeb: 'id="subscription-web"',
+    },
+  ];
+  const flat = (text) => text.replace(/\s+/g, ' ');
+
+  test('the terms name Paddle.com as the merchant of record and link its buyer terms', () => {
+    for (const { terms, mor, sectionWeb } of LANGS) {
+      const page = flat(read(terms));
+      assert.ok(page.includes(sectionWeb), terms);
+      assert.ok(flat(page).includes(flat(mor)), terms);
+      assert.ok(page.includes('Paddle.com Market Limited'), terms);
+      assert.ok(page.includes('href="https://www.paddle.com/legal/buyer-terms"'), terms);
+      assert.ok(page.includes('href="./refund.html"'), terms);
+    }
+  });
+
+  test('the terms state the web trial length and what is charged after it (R11)', () => {
+    for (const { terms, trial, afterTrial } of LANGS) {
+      const page = flat(read(terms));
+      assert.ok(page.includes(trial), terms);
+      assert.ok(page.includes(afterTrial), terms);
+    }
+  });
+
+  test('the App Store and Google Play rules of the terms stay as they were', () => {
+    for (const { terms, store } of LANGS) {
+      const page = flat(read(terms));
+      for (const line of store) assert.ok(page.includes(flat(line)), `${terms}: ${line}`);
+    }
+  });
+
+  test('the refund page gives 14 days after the first payment, names Paddle and keeps the store part', () => {
+    for (const { refund, window, lang } of LANGS) {
+      const page = flat(read(refund));
+      assert.ok(page.includes(flat(window)), refund);
+      assert.ok(page.includes('Merchant of Record'), refund);
+      assert.ok(page.includes('href="https://paddle.net"'), refund);
+      assert.ok(page.includes('href="https://www.paddle.com/legal/buyer-terms"'), refund);
+      assert.ok(page.includes('id="store"'), refund);
+      assert.ok(page.includes(`<html lang="${lang}">`), refund);
+    }
+  });
+
+  test('Paddle refuses "no refunds", and the rules forbid "risk free"', () => {
+    for (const { terms, refund } of LANGS) {
+      for (const file of [terms, refund]) {
+        const page = read(file).toLowerCase();
+        for (const word of ['risk free', 'risk-free', 'risikofrei', 'no refunds', 'keine erstattung', 'non-refundable', 'nicht erstattungsfähig', 'zero data retention']) {
+          assert.ok(!page.includes(word), `${file}: ${word}`);
+        }
+      }
+    }
+  });
+
+  test('both refund pages have the same sections and link each other', () => {
+    const ids = (file) => [...read(file).matchAll(/<h[23] id="([^"]+)"/g)].length;
+    assert.equal(ids('en/refund.html'), ids('refund.html'));
+    assert.ok(read('refund.html').includes('href="./en/refund.html"'));
+    assert.ok(read('en/refund.html').includes('href="../refund.html"'));
   });
 });
 
