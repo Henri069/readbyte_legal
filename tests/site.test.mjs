@@ -831,6 +831,41 @@ describe('web purchase through Paddle (terms.html, refund.html)', () => {
   });
 });
 
+describe('privacy policy covers the websites and the web purchase (privacy.html)', () => {
+  // Paddle's domain review reads the privacy policy linked from start.pagebite.eu (readbyte docs/plan-web-funnel.md).
+  const flat = (text) => text.replace(/\s+/g, ' ');
+  const LANGS = [
+    { file: 'privacy.html', scope: 'für die Websites pagebite.eu und start.pagebite.eu', seller: 'ist Paddle (Paddle.com Market Limited, London) der Verkäufer', noCookies: 'Beide Websites setzen keine Cookies' },
+    { file: 'en/privacy.html', scope: 'the websites pagebite.eu and start.pagebite.eu', seller: 'Paddle (Paddle.com Market Limited, London) is the seller', noCookies: 'Neither website sets cookies' },
+  ];
+
+  test('both languages name both websites, their hosts and Paddle as the seller on the web', () => {
+    for (const { file, scope, seller, noCookies } of LANGS) {
+      const page = flat(read(file));
+      for (const text of [scope, seller, noCookies, 'id="websites"', 'GitHub Pages', 'href="https://www.paddle.com/legal/privacy"']) {
+        assert.ok(page.includes(text), `${file}: ${text}`);
+      }
+    }
+  });
+
+  test('both languages have the same sections', () => {
+    const ids = (file) => [...read(file).matchAll(/<h[23] id="([^"]+)"/g)].length;
+    assert.equal(ids('en/privacy.html'), ids('privacy.html'));
+  });
+
+  test('no page loads anything from another server, as the policy says', () => {
+    const files = readdirSync(ROOT, { recursive: true })
+      .map(String)
+      .filter((path) => /\.(html|css)$/.test(path) && !path.startsWith('node_modules') && !path.startsWith('.git'));
+    for (const file of files) {
+      const text = read(file);
+      const external = [...text.matchAll(/(?:\bsrc|srcset)="(https?:)?\/\/[^"]+"|url\((['"]?)(https?:)?\/\/[^)]+\)|@import\s/g)];
+      assert.deepEqual(external.map((m) => m[0]), [], file);
+      assert.ok(!/<link[^>]+rel="stylesheet"[^>]+href="(https?:)?\/\//.test(text), `${file}: external stylesheet`);
+    }
+  });
+});
+
 describe('local preview (tools/preview-server.mjs) answers like GitHub Pages', () => {
   const answer = (pathname) => {
     const result = resolveRequest(ROOT, pathname);
