@@ -848,6 +848,17 @@ describe('privacy policy covers the websites and the web purchase (privacy.html)
     }
   });
 
+  test('both languages say what the web funnel counts, where it goes and for how long (readbyte spec section 13)', () => {
+    const FUNNEL = [
+      { file: 'privacy.html', id: 'id="web-schritte"', texts: ['welche von zwei Versionen der Seite du siehst', 'Die Antworten speichern wir nicht in unserer Datenbank. Sie gehen nur an PostHog.', 'PostHog bekommt dabei keine IP-Adresse', 'keine Cookies, nichts auf deinem Gerät gespeichert', 'nach 12 Monaten automatisch', 'nach einem Tag', 'Art. 6 Abs. 1 lit. f DSGVO'] },
+      { file: 'en/privacy.html', id: 'id="web-steps"', texts: ['which of two versions of the page you see', 'We do not store the answers in our database. They only go to PostHog.', 'PostHog gets no IP address', 'no cookies, nothing stored on your device', 'after 12 months', 'after one day', 'Art. 6(1)(f) GDPR'] },
+    ];
+    for (const { file, id, texts } of FUNNEL) {
+      const page = flat(read(file));
+      for (const text of [id, ...texts]) assert.ok(page.includes(text), `${file}: ${text}`);
+    }
+  });
+
   test('both languages have the same sections', () => {
     const ids = (file) => [...read(file).matchAll(/<h[23] id="([^"]+)"/g)].length;
     assert.equal(ids('en/privacy.html'), ids('privacy.html'));

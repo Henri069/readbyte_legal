@@ -23,7 +23,7 @@
 
   <main>
     <h1>Privacy policy</h1>
-    <p class="meta">PageBite · Last updated: 18 November 2026</p>
+    <p class="meta">PageBite · Last updated: 19 November 2026</p>
 
     <div class="note">
       <p><strong>The short version</strong></p>
@@ -34,7 +34,7 @@
           The original text stays on your phone.</li>
         <li>You don't have to register. The app creates an anonymous account. Signing in with an email code is
           optional.</li>
-        <li>We only collect usage statistics if you agree. Never page texts, card texts or book titles.</li>
+        <li>In the app we only collect usage statistics if you agree. On start.pagebite.eu we only count which steps visitors reach, without cookies. Never page texts, card texts or book titles.</li>
         <li>Your cards are stored on servers in the EU (Frankfurt am Main, Germany).</li>
       </ul>
     </div>
@@ -224,6 +224,14 @@
             <td>Until you delete your account, at most 12 months</td>
           </tr>
           <tr>
+            <td>Steps on start.pagebite.eu (step, day, random visit identifier, language, version of the page, campaign
+              and ad from the link; the answers you tapped only at PostHog)</td>
+            <td>Supabase (Frankfurt am Main); PostHog (EU servers) without IP address and without a profile</td>
+            <td>Seeing where visitors stop and which version works better</td>
+            <td>Art. 6(1)(f) GDPR, see <a href="#web-steps">below</a></td>
+            <td>12 months</td>
+          </tr>
+          <tr>
             <td>Technical logs (IP address, time, request data)</td>
             <td>Supabase, Google Cloud, PostHog, RevenueCat</td>
             <td>Security and operations</td>
@@ -317,7 +325,7 @@
     <h3 id="websites">If you visit our websites</h3>
     <p>
       Our websites are <strong>pagebite.eu</strong> (about the app, this policy, the terms, the imprint) and
-      <strong>start.pagebite.eu</strong> (our prices and buying on the web).
+      <strong>start.pagebite.eu</strong> (a short introduction to PageBite, our prices and buying on the web).
     </p>
     <ul>
       <li><strong>Who serves them:</strong> pagebite.eu is served by GitHub (GitHub Pages, GitHub Inc., USA).
@@ -330,11 +338,44 @@
           rel="noopener">GitHub privacy statement</a> applies; GitHub is certified under the EU-US Data Privacy
         Framework.</li>
       <li><strong>No cookies, no trackers:</strong> Neither website sets cookies, stores anything on your device or
-        loads content from other servers. Fonts and images come from our own pages.</li>
+        loads content from other servers. Fonts and images come from our own pages. What the introduction to PageBite on
+        start.pagebite.eu counts is in the next section.</li>
       <li><strong>Legal basis:</strong> our legitimate interest in a secure, reachable website (Art. 6(1)(f)
         GDPR).</li>
       <li><strong>How long:</strong> according to the retention periods of GitHub and Hostinger.</li>
       <!-- LAWYER (2026-11-16): see the German version. -->
+    </ul>
+
+    <h3 id="web-steps">If you click through PageBite on start.pagebite.eu</h3>
+    <p>
+      On start.pagebite.eu we show you PageBite in a few steps: a few questions, a sample page with a quiz and a
+      flashcard, and how PageBite helps you remember. To see where visitors stop and which version of the page works
+      better, we count these steps.
+    </p>
+    <ul>
+      <li><strong>What we count:</strong> which step you reach (each one only once per visit), the language of the page
+        and which of two versions of the page you see. The page picks the version at random, half and half. If you come
+        from an ad, we also count the name of the campaign and the ad from the link. On top of that, a random visit
+        identifier. It only lasts while the page is open. If you reload the page, you get a new one.</li>
+      <li><strong>Your answers:</strong> Each step carries the answers you have tapped so far: what you wish for, your
+        goal and, in one of the two versions, how many books you read a year and how much you still know from your last
+        book. These are always fixed answers to tap, never free text. We do not store the answers in our database. They
+        only go to PostHog.</li>
+      <li><strong>Where to:</strong> The page sends each step to our server at Supabase (EU, Frankfurt am Main). It
+        stores the step with the day, visit identifier, language, version, campaign and ad. Then it passes the step with
+        your answers on to PostHog (EU servers). PostHog gets no IP address and no location, and creates no profile of
+        you.</li>
+      <li><strong>What not:</strong> no cookies, nothing stored on your device, no analytics service in your browser, no
+        email address, no IP address.</li>
+      <li><strong>Protection against abuse:</strong> So that nobody can skew the counts with masses of requests, our
+        server limits the requests per IP address and hour. For this it does not store the IP address, only a check value
+        (hash) that it forms from it with a secret key. It deletes this check value after one day.</li>
+      <li><strong>Legal basis:</strong> our legitimate interest in improving our website and our ads and in seeing which
+        version works better (Art. 6(1)(f) GDPR). You can object at any time (see <a href="#rights">section 13</a>).
+        Because the visit identifier only lives in the open tab, we cannot link counted steps to you later.</li>
+      <li><strong>How long:</strong> We automatically delete the counted steps after 12 months, the check value for the
+        limit after one day. At PostHog, the shortest retention period our plan there allows applies.</li>
+      <!-- LAWYER (2026-11-19): see the German version. -->
     </ul>
 
     <h2 id="scanning">4. Scanning: photos stay on your phone</h2>
@@ -490,7 +531,7 @@
         <tbody>
           <tr>
             <td>Supabase Inc.</td>
-            <td>Database, accounts, server functions, sign-in codes</td>
+            <td>Database, accounts, server functions, sign-in codes, counting the steps on start.pagebite.eu</td>
             <td>EU (Frankfurt am Main)</td>
             <td>Data processing agreement; US company: EU Standard Contractual Clauses and EU-US Data Privacy
               Framework</td>
@@ -503,7 +544,7 @@
           </tr>
           <tr>
             <td>PostHog Inc.</td>
-            <td>Usage statistics, only with consent</td>
+            <td>Usage statistics: in the app only with consent; the steps on start.pagebite.eu without IP address and without a profile</td>
             <td>EU cloud</td>
             <td>Data processing agreement; EU Standard Contractual Clauses and EU-US Data Privacy Framework</td>
           </tr>
@@ -550,6 +591,7 @@
       <li>We automatically delete anonymous accounts without a subscription after 30 days.</li>
       <li>We automatically delete feedback from the app and answers to the question after a cancellation after 12
         months at the latest.</li>
+      <li>We automatically delete the counted steps on start.pagebite.eu after 12 months.</li>
       <li>When you delete your account, we delete your data at Supabase, your customer record at RevenueCat and, if you
         had agreed to statistics, your data at PostHog. Here's how: <a href="./delete-account.html">Delete account</a>.
       </li>

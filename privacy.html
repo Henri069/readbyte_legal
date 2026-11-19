@@ -23,7 +23,7 @@
 
   <main>
     <h1>Datenschutzerklärung</h1>
-    <p class="meta">PageBite · Stand: 18. November 2026</p>
+    <p class="meta">PageBite · Stand: 19. November 2026</p>
 
     <div class="note">
       <p><strong>Das Wichtigste in Kürze</strong></p>
@@ -34,7 +34,7 @@
           Der Original-Text bleibt auf deinem Handy.</li>
         <li>Du musst dich nicht registrieren. Die App legt ein anonymes Konto an. Ein Login per E-Mail-Code ist
           freiwillig.</li>
-        <li>Nutzungsstatistiken erfassen wir nur, wenn du zustimmst. Niemals Seitentexte, Kartentexte oder Buchtitel.
+        <li>In der App erfassen wir Nutzungsstatistiken nur, wenn du zustimmst. Auf start.pagebite.eu zählen wir nur, welche Schritte Besucher erreichen, ohne Cookies. Niemals Seitentexte, Kartentexte oder Buchtitel.
         </li>
         <li>Deine Karten liegen auf Servern in der EU (Frankfurt am Main).</li>
       </ul>
@@ -223,6 +223,14 @@
             <td>Bis du dein Konto löschst, höchstens 12 Monate</td>
           </tr>
           <tr>
+            <td>Schritte auf start.pagebite.eu (Schritt, Tag, zufällige Besuchs-Kennung, Sprache, Version der Seite,
+              Kampagne und Anzeige aus dem Link; deine angetippten Antworten nur bei PostHog)</td>
+            <td>Supabase (Frankfurt am Main); PostHog (EU-Server) ohne IP-Adresse und ohne Profil</td>
+            <td>Sehen, wo Besucher aufhören und welche Version besser ankommt</td>
+            <td>Art. 6 Abs. 1 lit. f DSGVO, siehe <a href="#web-schritte">unten</a></td>
+            <td>12 Monate</td>
+          </tr>
+          <tr>
             <td>Technische Protokolle (IP-Adresse, Zeitpunkt, Anfrage-Daten)</td>
             <td>Supabase, Google Cloud, PostHog, RevenueCat</td>
             <td>Sicherheit und Betrieb</td>
@@ -319,7 +327,7 @@
     <h3 id="websites">Wenn du unsere Websites besuchst</h3>
     <p>
       Unsere Websites sind <strong>pagebite.eu</strong> (Infos zur App, diese Erklärung, Nutzungsbedingungen,
-      Impressum) und <strong>start.pagebite.eu</strong> (unsere Preise und der Kauf im Web).
+      Impressum) und <strong>start.pagebite.eu</strong> (eine kurze Vorstellung von PageBite, unsere Preise und der Kauf im Web).
     </p>
     <ul>
       <li><strong>Wer sie ausliefert:</strong> pagebite.eu liefert GitHub aus (GitHub Pages, GitHub Inc., USA).
@@ -333,7 +341,7 @@
         zertifiziert.</li>
       <li><strong>Keine Cookies, keine Tracker:</strong> Beide Websites setzen keine Cookies, speichern nichts auf
         deinem Gerät und laden keine Inhalte von anderen Servern. Schriften und Bilder kommen von unseren eigenen
-        Seiten.</li>
+        Seiten. Was die Vorstellung von PageBite auf start.pagebite.eu zählt, steht im nächsten Abschnitt.</li>
       <li><strong>Rechtsgrundlage:</strong> unser berechtigtes Interesse an einer sicheren, erreichbaren Website
         (Art. 6 Abs. 1 lit. f DSGVO).</li>
       <li><strong>Wie lange:</strong> nach den Löschfristen von GitHub und Hostinger.</li>
@@ -341,6 +349,45 @@
            nennt die Protokolle in seiner eigenen Datenschutzerklärung. Reicht das, oder brauchen wir einen
            anderen Anbieter für pagebite.eu? Wie lange Hostinger und GitHub die Zugriffsprotokolle speichern, steht
            nicht in ihren Unterlagen; ist „nach den Löschfristen“ ausreichend? -->
+    </ul>
+
+    <h3 id="web-schritte">Wenn du dich auf start.pagebite.eu durch PageBite klickst</h3>
+    <p>
+      Auf start.pagebite.eu zeigen wir dir PageBite in ein paar Schritten: ein paar Fragen, eine Beispielseite mit Quiz
+      und Karteikarte und wie PageBite dir beim Behalten hilft. Damit wir sehen, an welcher Stelle Besucher aufhören und
+      welche Version der Seite besser ankommt, zählen wir diese Schritte.
+    </p>
+    <ul>
+      <li><strong>Was wir zählen:</strong> welchen Schritt du erreichst (jeden nur einmal pro Besuch), die Sprache der
+        Seite und welche von zwei Versionen der Seite du siehst. Die Version wählt die Seite zufällig, je zur Hälfte.
+        Kommst du über eine Anzeige, zählen wir auch den Namen der Kampagne und der Anzeige aus dem Link. Dazu kommt eine
+        zufällige Besuchs-Kennung. Sie gilt nur, solange die Seite offen ist. Lädst du die Seite neu, gibt es eine neue.
+      </li>
+      <li><strong>Deine Antworten:</strong> Mit jedem Schritt gehen die Antworten mit, die du bis dahin angetippt hast:
+        was du dir wünschst, dein Ziel und in einer der beiden Versionen, wie viele Bücher du im Jahr liest und wie viel
+        du von deinem letzten Buch noch weißt. Das sind immer feste Antworten zum Antippen, nie freier Text. Die Antworten
+        speichern wir nicht in unserer Datenbank. Sie gehen nur an PostHog.</li>
+      <li><strong>Wohin:</strong> Die Seite schickt jeden Schritt an unseren Server bei Supabase (EU, Frankfurt am Main).
+        Er speichert den Schritt mit Tag, Besuchs-Kennung, Sprache, Version, Kampagne und Anzeige. Dann gibt er den
+        Schritt mit deinen Antworten an PostHog (EU-Server) weiter. PostHog bekommt dabei keine IP-Adresse, keinen
+        Standort und legt kein Profil von dir an.</li>
+      <li><strong>Was nicht:</strong> keine Cookies, nichts auf deinem Gerät gespeichert, kein Statistik-Dienst in
+        deinem Browser, keine E-Mail-Adresse, keine IP-Adresse.</li>
+      <li><strong>Schutz vor Missbrauch:</strong> Damit niemand die Zählung mit massenhaften Anfragen verfälscht,
+        begrenzt unser Server die Anfragen pro IP-Adresse und Stunde. Dafür speichert er nicht die IP-Adresse, sondern
+        nur einen Prüfwert (Hash), den er mit einem geheimen Schlüssel aus ihr bildet. Diesen Prüfwert löscht er nach
+        einem Tag.</li>
+      <li><strong>Rechtsgrundlage:</strong> unser berechtigtes Interesse, unsere Website und unsere Werbung zu
+        verbessern und zu sehen, welche Version besser ankommt (Art. 6 Abs. 1 lit. f DSGVO). Du kannst jederzeit
+        widersprechen (siehe <a href="#rechte">Abschnitt 13</a>). Da die Besuchs-Kennung nur im offenen Tab lebt,
+        können wir gezählte Schritte dir später nicht mehr zuordnen.</li>
+      <li><strong>Wie lange:</strong> Die gezählten Schritte löschen wir nach 12 Monaten automatisch, den Prüfwert für
+        die Begrenzung nach einem Tag. Bei PostHog gilt die kürzeste Aufbewahrungsfrist, die unser Tarif dort erlaubt.
+      </li>
+      <!-- ANWALT (2026-11-19): Reicht hier das berechtigte Interesse ohne Einwilligung und ohne Banner? Die Seite
+           speichert nichts auf dem Gerät und liest nichts aus, sie schickt per Skript die Schritte samt Antworten an
+           unseren Server, der sie ohne IP-Adresse und ohne Profil an PostHog weitergibt (§ 25 TDDDG nicht berührt?).
+           Ist der Satz zur Aufbewahrung bei PostHog konkret genug? -->
     </ul>
 
     <h2 id="scannen">4. Scannen: Fotos bleiben auf deinem Handy</h2>
@@ -508,7 +555,7 @@
         <tbody>
           <tr>
             <td>Supabase Inc.</td>
-            <td>Datenbank, Konten, Server-Funktionen, Login-Codes</td>
+            <td>Datenbank, Konten, Server-Funktionen, Login-Codes, Zählung der Schritte auf start.pagebite.eu</td>
             <td>EU (Frankfurt am Main)</td>
             <td>Auftragsverarbeitungsvertrag; US-Unternehmen: EU-Standardvertragsklauseln und EU-US Data Privacy
               Framework</td>
@@ -521,7 +568,7 @@
           </tr>
           <tr>
             <td>PostHog Inc.</td>
-            <td>Nutzungsstatistik, nur mit Einwilligung</td>
+            <td>Nutzungsstatistik: in der App nur mit Einwilligung; die Schritte auf start.pagebite.eu ohne IP-Adresse und ohne Profil</td>
             <td>EU-Cloud</td>
             <td>Auftragsverarbeitungsvertrag; EU-Standardvertragsklauseln und EU-US Data Privacy Framework</td>
           </tr>
@@ -569,6 +616,7 @@
       <li>Anonyme Konten ohne Abo löschen wir nach 30 Tagen automatisch.</li>
       <li>Feedback aus der App und Antworten auf die Frage nach einer Kündigung löschen wir spätestens nach 12 Monaten
         automatisch.</li>
+      <li>Die gezählten Schritte auf start.pagebite.eu löschen wir nach 12 Monaten automatisch.</li>
       <li>Wenn du dein Konto löschst, löschen wir deine Daten bei Supabase, deinen Kundeneintrag bei RevenueCat und,
         falls du der Statistik zugestimmt hattest, deine Daten bei PostHog. So geht's: <a
           href="./delete-account.html">Konto löschen</a>.</li>
