@@ -34,7 +34,7 @@
           The original text stays on your phone.</li>
         <li>You don't have to register. The app creates an anonymous account. Signing in with an email code is
           optional.</li>
-        <li>In the app we only collect usage statistics if you agree. On start.pagebite.eu we only count which steps visitors reach, without cookies. Never page texts, card texts or book titles.</li>
+        <li>In the app we only collect usage statistics if you agree. On start.pagebite.eu we count which steps visitors reach and measure our ads with Meta, both only if you agree. Never page texts, card texts or book titles.</li>
         <li>Your cards are stored on servers in the EU (Frankfurt am Main, Germany).</li>
       </ul>
     </div>
@@ -235,8 +235,31 @@
               and ad from the link; the answers you tapped only at PostHog)</td>
             <td>Supabase (Frankfurt am Main); PostHog (EU servers) without IP address and without a profile</td>
             <td>Seeing where visitors stop and which version works better</td>
-            <td>Art. 6(1)(f) GDPR, see <a href="#web-steps">below</a></td>
+            <td>Consent, Art. 6(1)(a) GDPR and Section 25(1) TDDDG, see <a href="#web-steps">below</a></td>
             <td>12 months</td>
+          </tr>
+          <tr>
+            <td>Your choice in the privacy banner on start.pagebite.eu (version, the two switches, day)</td>
+            <td>Only in your browser (local storage)</td>
+            <td>Remembering your choice, so we don't ask on every visit</td>
+            <td>Art. 6(1)(c) GDPR with Art. 7(1) GDPR; Section 25(2) No. 2 TDDDG, see <a href="#web-consent">below</a></td>
+            <td>Until you change it or delete your browser data; we ask again after 12 months</td>
+          </tr>
+          <tr>
+            <td>Meta Pixel on start.pagebite.eu (cookies <code>_fbp</code> and <code>_fbc</code>, the page opened, events
+              such as "email entered" or "purchase", IP address, browser data)</td>
+            <td>Meta (jointly responsible with us for collecting and sending)</td>
+            <td>Measuring and improving which ads work</td>
+            <td>Consent, Art. 6(1)(a) GDPR and Section 25(1) TDDDG, see <a href="#meta">below</a></td>
+            <td>Cookies 90 days; at Meta under Meta's own rules</td>
+          </tr>
+          <tr>
+            <td>Meta's browser identifiers for a purchase on start.pagebite.eu (<code>_fbp</code>, <code>_fbc</code>,
+              browser identifier, language of the page)</td>
+            <td>Supabase (Frankfurt am Main); after the purchase sent to Meta with price and currency</td>
+            <td>Telling Meta which ad led to a purchase</td>
+            <td>Consent, Art. 6(1)(a) GDPR, see <a href="#meta">below</a></td>
+            <td>Deleted once reported to Meta, after 7 days at the latest</td>
           </tr>
           <tr>
             <td>Technical logs (IP address, time, request data)</td>
@@ -343,21 +366,42 @@
         the address you opened, the time, your browser and your operating system. The provider logs this to serve the
         page securely and to fend off attacks. We do not analyse these logs. Hostinger does this on our behalf (see
         <a href="#recipients">section 10</a>).</li>
-      <li><strong>No cookies, no trackers:</strong> Neither website sets cookies, stores anything on your device or
-        loads content from other servers. Fonts and images come from our own pages. The only exception is Paddle's
-        payment part from the price page on start.pagebite.eu. What the introduction to PageBite counts there and what
-        happens when you buy is in the next two sections.</li>
+      <li><strong>No cookies without your consent:</strong> pagebite.eu sets no cookies, stores nothing on your device
+        and loads no content from other servers. Fonts and images come from our own pages. The same goes for
+        start.pagebite.eu, with three exceptions: the page remembers your choice in the privacy banner, it loads the Meta
+        Pixel if you agree to advertising, and from the price page on it loads Paddle's payment part. What happens there
+        is in the next sections.</li>
       <li><strong>Legal basis:</strong> our legitimate interest in a secure, reachable website (Art. 6(1)(f)
         GDPR).</li>
       <li><strong>How long:</strong> Hostinger deletes the logs after 7 days at most.</li>
       <!-- LAWYER (2026-11-16): see the German version. -->
     </ul>
 
+    <h3 id="web-consent">Your choice in the privacy banner on start.pagebite.eu</h3>
+    <p>
+      When you open start.pagebite.eu, a banner asks whether we may count which steps you see (statistics) and whether
+      Meta may measure whether our ads work (advertising). Before you choose, we count nothing and load nothing from Meta.
+      "Decline all" and "Accept all" are the same size. Under "Settings" you can switch the two purposes on one by one;
+      both stay off until you switch them on.
+    </p>
+    <ul>
+      <li><strong>What we store:</strong> The page stores your choice (the two switches, the day and the version of the
+        banner) in your browser's local storage under <code>pagebite.consent</code>. It does not go to our server. That
+        way we don't have to ask on every visit. This is necessary to respect your choice (Section 25(2) No. 2 TDDDG;
+        Art. 6(1)(c) with Art. 7(1) GDPR).</li>
+      <li><strong>Changing and withdrawing:</strong> At the bottom of every page on start.pagebite.eu, the link "Privacy
+        settings" opens your choice again. A withdrawal applies from then on; what happened before stays lawful
+        (Art. 7(3) GDPR).</li>
+      <li><strong>How long:</strong> until you change your choice or delete your browser's data. After 12 months we ask
+        again.</li>
+    </ul>
+
     <h3 id="web-steps">If you click through PageBite on start.pagebite.eu</h3>
     <p>
       On start.pagebite.eu we show you PageBite in a few steps: a few questions, a sample page with a quiz and a
       flashcard, and how PageBite helps you remember. To see where visitors stop and which version of the page works
-      better, we count these steps.
+      better, we count these steps, but only if you agree to statistics in the banner. Steps you reach before you
+      choose stay only in the memory of the open tab. If you agree, the page sends them; if you decline, it drops them.
     </p>
     <ul>
       <li><strong>What we count:</strong> which step you reach (each one only once per visit), the language of the page
@@ -372,17 +416,17 @@
         stores the step with the day, visit identifier, language, version, campaign and ad. Then it passes the step with
         your answers on to PostHog (EU servers). PostHog gets no IP address and no location, and creates no profile of
         you.</li>
-      <li><strong>What not:</strong> no cookies, nothing stored on your device, no analytics service in your browser, no
-        email address, no IP address.</li>
+      <li><strong>What not:</strong> no cookies, no analytics service in your browser, no email address, no IP
+        address.</li>
       <li><strong>Protection against abuse:</strong> So that nobody can skew the counts with masses of requests, our
         server limits the requests per IP address and hour. For this it does not store the IP address, only a check value
         (hash) that it forms from it with a secret key. It deletes this check value after one day.</li>
-      <li><strong>Legal basis:</strong> our legitimate interest in improving our website and our ads and in seeing which
-        version works better (Art. 6(1)(f) GDPR). You can object at any time (see <a href="#rights">section 13</a>).
-        Because the visit identifier only lives in the open tab, we cannot link counted steps to you later.</li>
+      <li><strong>Legal basis:</strong> your consent (Art. 6(1)(a) GDPR and Section 25(1) TDDDG). You can withdraw it at
+        any time through "Privacy settings" at the bottom of the page. Because the visit identifier only lives in the open
+        tab, we cannot link counted steps to you later. Limiting the requests rests on our legitimate interest in
+        protection against abuse (Art. 6(1)(f) GDPR).</li>
       <li><strong>How long:</strong> We automatically delete the counted steps after 12 months, the check value for the
         limit after one day. At PostHog, the shortest retention period our plan there allows applies.</li>
-      <!-- LAWYER (2026-11-19): see the German version. -->
     </ul>
 
     <h3 id="web-purchase">If you buy a subscription on start.pagebite.eu</h3>
@@ -414,8 +458,8 @@
       <li><strong>Protection against abuse:</strong> Our server limits the requests per IP address, per email address
         and hour. For this it only stores check values (hashes) that it forms with a secret key, never the addresses
         themselves. It deletes the check values after one day.</li>
-      <li><strong>What not:</strong> Your email address never goes to PostHog and never into the counted steps. The page
-        does not store it on your device.</li>
+      <li><strong>What not:</strong> Your email address never goes to PostHog, never to Meta and never into the counted
+        steps. The page does not store it on your device.</li>
       <li><strong>Legal basis:</strong> We need the account, the answers and the payment to offer you the subscription
         and to fulfil the contract (Art. 6(1)(b) GDPR). The page asks for the prices before you enter anything, so you see
         the right price for your country with tax straight away. That and protection against abuse are our legitimate
@@ -423,6 +467,43 @@
       <li><strong>How long:</strong> If you do not buy, we automatically delete an account created this way after 30
         days, together with your answers. If you buy, the account and the answers stay until you delete your account.</li>
       <!-- LAWYER (2026-11-19): see the German version. -->
+    </ul>
+
+    <h3 id="meta">Advertising with Meta on start.pagebite.eu (only with consent)</h3>
+    <p>
+      We advertise PageBite on Facebook and Instagram. To measure which ads lead to visits and purchases, and to improve
+      the ads with that, we use the Meta Pixel and Meta's Conversions API on start.pagebite.eu. Both only if you agree to
+      advertising in the banner. The provider is Meta Platforms Ireland Ltd., Merrion Road, Dublin 4, Ireland.
+    </p>
+    <ul>
+      <li><strong>The Meta Pixel:</strong> Only after you agree does the page load a script from Meta
+        (connect.facebook.net). It sets the cookies <code>_fbp</code> (a random identifier of your browser) and, if you
+        come from an ad, <code>_fbc</code> (the identifier of the click on the ad). It sends Meta the page you opened, your
+        IP address, details about your browser, these identifiers and these events: page opened, email entered (never the
+        address itself), payment form opened and purchase or trial started, with price and currency. If you are signed in
+        to Facebook or Instagram, Meta can link this to your account there. We have switched off the pixel's automatic
+        extra data (for example reading form fields).</li>
+      <li><strong>The report from our server:</strong> Ad blockers often stop the pixel. That is why our server also
+        reports a purchase to Meta. For this, at the email step the page sends the values of <code>_fbp</code> and
+        <code>_fbc</code> to our server at Supabase (EU, Frankfurt am Main). It stores them with your browser's identifier
+        (user agent) and the language of the page with your account. If you buy, it reports the purchase or the trial to
+        Meta with price, currency, time, these values and an event number, so Meta does not count the purchase twice.
+        Never your email address, your IP address or your answers. We never report purchases in the app to Meta.</li>
+      <li><strong>Joint responsibility:</strong> We and Meta are jointly responsible for collecting the data on our page
+        and sending it to Meta (Art. 26 GDPR). We have concluded Meta's agreement for joint controllers for this (<a
+        href="https://www.facebook.com/legal/controller_addendum" rel="noopener">Controller Addendum</a>). In it, Meta
+        takes on the duty to inform you about the processing at Meta and to fulfil your rights for it; you can still turn
+        to us or to Meta with your rights. What Meta does with the data afterwards is Meta's sole responsibility. More in
+        <a href="https://www.facebook.com/privacy/policy/" rel="noopener">Meta's privacy policy</a>.</li>
+      <li><strong>Transfer to the USA:</strong> Meta may transfer the data to Meta Platforms Inc. in the USA. Meta is
+        certified under the EU-US Data Privacy Framework (Art. 45 GDPR); Meta also uses EU Standard Contractual
+        Clauses.</li>
+      <li><strong>Legal basis:</strong> your consent (Art. 6(1)(a) GDPR and Section 25(1) TDDDG).</li>
+      <li><strong>Withdrawing:</strong> If you switch advertising off under "Privacy settings", the pixel sends nothing
+        more, the page deletes the cookies <code>_fbp</code> and <code>_fbc</code>, and if you have already entered your
+        email address, our server deletes the stored values.</li>
+      <li><strong>How long:</strong> The cookies expire after 90 days. Our server deletes the values as soon as it has
+        reported the purchase, after 7 days at the latest. At Meta, Meta's own rules apply.</li>
     </ul>
 
     <h2 id="scanning">4. Scanning: photos stay on your phone</h2>
@@ -618,12 +699,12 @@
     </div>
     <p>
       Apple (App Store), Google (Google Play, and Google ML Kit on Android), Paddle for purchases on the web and, for the Kindle import, Amazon act under their own responsibility. Their
-      own privacy policies apply.
+      own privacy policies apply. For advertising on start.pagebite.eu we are jointly responsible with Meta (see <a href="#meta">above</a>).
     </p>
 
     <h3>Transfers to the USA</h3>
     <p>
-      RevenueCat processes data in the USA. Supabase, Google and PostHog are US companies, even though your data is
+      RevenueCat processes data in the USA, and so does Meta with your consent (see <a href="#meta">above</a>). Supabase, Google and PostHog are US companies, even though your data is
       stored in the EU. For the USA, the European Commission's adequacy decision for the EU-US Data Privacy Framework
       applies (Art. 45 GDPR). In addition, the agreements include EU Standard Contractual Clauses (Art. 46(2)(c) GDPR).
       Your content such as cards and page texts stays in the EU, and our mailbox for your emails is with a provider
@@ -640,6 +721,8 @@
       <li>We automatically delete feedback from the app and answers to the question after a cancellation after 12
         months at the latest.</li>
       <li>We automatically delete the counted steps on start.pagebite.eu after 12 months.</li>
+      <li>We delete Meta's browser identifiers for reporting a purchase as soon as the purchase is reported, after 7
+        days at the latest.</li>
       <li>When you delete your account, we delete your data at Supabase, your customer record at RevenueCat and, if you
         had agreed to statistics, your data at PostHog. Here's how: <a href="./delete-account.html">Delete account</a>.
       </li>

@@ -34,7 +34,7 @@
           Der Original-Text bleibt auf deinem Handy.</li>
         <li>Du musst dich nicht registrieren. Die App legt ein anonymes Konto an. Ein Login per E-Mail-Code ist
           freiwillig.</li>
-        <li>In der App erfassen wir Nutzungsstatistiken nur, wenn du zustimmst. Auf start.pagebite.eu zählen wir nur, welche Schritte Besucher erreichen, ohne Cookies. Niemals Seitentexte, Kartentexte oder Buchtitel.
+        <li>In der App erfassen wir Nutzungsstatistiken nur, wenn du zustimmst. Auf start.pagebite.eu zählen wir, welche Schritte Besucher erreichen, und messen mit Meta unsere Werbung, beides nur, wenn du zustimmst. Niemals Seitentexte, Kartentexte oder Buchtitel.
         </li>
         <li>Deine Karten liegen auf Servern in der EU (Frankfurt am Main).</li>
       </ul>
@@ -234,8 +234,31 @@
               Kampagne und Anzeige aus dem Link; deine angetippten Antworten nur bei PostHog)</td>
             <td>Supabase (Frankfurt am Main); PostHog (EU-Server) ohne IP-Adresse und ohne Profil</td>
             <td>Sehen, wo Besucher aufhören und welche Version besser ankommt</td>
-            <td>Art. 6 Abs. 1 lit. f DSGVO, siehe <a href="#web-schritte">unten</a></td>
+            <td>Einwilligung, Art. 6 Abs. 1 lit. a DSGVO und § 25 Abs. 1 TDDDG, siehe <a href="#web-schritte">unten</a></td>
             <td>12 Monate</td>
+          </tr>
+          <tr>
+            <td>Deine Wahl im Datenschutz-Banner auf start.pagebite.eu (Version, die beiden Schalter, Tag)</td>
+            <td>Nur in deinem Browser (lokaler Speicher)</td>
+            <td>Deine Wahl merken, damit wir nicht bei jedem Besuch fragen</td>
+            <td>Art. 6 Abs. 1 lit. c DSGVO mit Art. 7 Abs. 1 DSGVO; § 25 Abs. 2 Nr. 2 TDDDG, siehe <a href="#web-einwilligung">unten</a></td>
+            <td>Bis du sie änderst oder deine Browserdaten löschst; nach 12 Monaten fragen wir neu</td>
+          </tr>
+          <tr>
+            <td>Meta Pixel auf start.pagebite.eu (Cookies <code>_fbp</code> und <code>_fbc</code>, aufgerufene Seite,
+              Ereignisse wie „E-Mail eingegeben“ oder „Kauf“, IP-Adresse, Browser-Daten)</td>
+            <td>Meta (gemeinsam mit uns verantwortlich für das Erheben und Übermitteln)</td>
+            <td>Messen und verbessern, welche Werbung wirkt</td>
+            <td>Einwilligung, Art. 6 Abs. 1 lit. a DSGVO und § 25 Abs. 1 TDDDG, siehe <a href="#meta">unten</a></td>
+            <td>Cookies 90 Tage; bei Meta nach Metas eigenen Regeln</td>
+          </tr>
+          <tr>
+            <td>Metas Browser-Kennungen bei einem Kauf auf start.pagebite.eu (<code>_fbp</code>, <code>_fbc</code>,
+              Browser-Kennung, Sprache der Seite)</td>
+            <td>Supabase (Frankfurt am Main); nach dem Kauf mit Preis und Währung an Meta</td>
+            <td>Meta sagen, welche Werbung zu einem Kauf geführt hat</td>
+            <td>Einwilligung, Art. 6 Abs. 1 lit. a DSGVO, siehe <a href="#meta">unten</a></td>
+            <td>Gelöscht, sobald an Meta gemeldet, spätestens nach 7 Tagen</td>
           </tr>
           <tr>
             <td>Technische Protokolle (IP-Adresse, Zeitpunkt, Anfrage-Daten)</td>
@@ -345,20 +368,42 @@
         IP-Adresse, die aufgerufene Adresse, Zeitpunkt, Browser und Betriebssystem. Der Anbieter protokolliert das,
         um die Seite sicher auszuliefern und Angriffe abzuwehren. Wir werten diese Protokolle nicht aus. Hostinger
         handelt dabei in unserem Auftrag (siehe <a href="#empfaenger">Abschnitt 10</a>).</li>
-      <li><strong>Keine Cookies, keine Tracker:</strong> Beide Websites setzen keine Cookies, speichern nichts auf
-        deinem Gerät und laden keine Inhalte von anderen Servern. Schriften und Bilder kommen von unseren eigenen
-        Seiten. Einzige Ausnahme ist der Bezahlteil von Paddle ab der Preisseite auf start.pagebite.eu. Was die
-        Vorstellung von PageBite dort zählt und was beim Kauf passiert, steht in den nächsten beiden Abschnitten.</li>
+      <li><strong>Keine Cookies ohne deine Zustimmung:</strong> pagebite.eu setzt keine Cookies, speichert nichts auf
+        deinem Gerät und lädt keine Inhalte von anderen Servern. Schriften und Bilder kommen von unseren eigenen
+        Seiten. Auf start.pagebite.eu gilt dasselbe, mit drei Ausnahmen: Die Seite merkt sich deine Wahl im
+        Datenschutz-Banner, sie lädt den Meta Pixel, wenn du der Werbung zustimmst, und ab der Preisseite den Bezahlteil
+        von Paddle. Was dort passiert, steht in den nächsten Abschnitten.</li>
       <li><strong>Rechtsgrundlage:</strong> unser berechtigtes Interesse an einer sicheren, erreichbaren Website
         (Art. 6 Abs. 1 lit. f DSGVO).</li>
       <li><strong>Wie lange:</strong> Hostinger löscht die Protokolle nach höchstens 7 Tagen.</li>
+    </ul>
+
+    <h3 id="web-einwilligung">Deine Wahl im Datenschutz-Banner auf start.pagebite.eu</h3>
+    <p>
+      Wenn du start.pagebite.eu öffnest, fragt dich ein Banner, ob wir zählen dürfen, welche Schritte du siehst
+      (Statistik), und ob Meta messen darf, ob unsere Werbung wirkt (Werbung). Bevor du wählst, zählen wir nichts und
+      laden nichts von Meta. „Alle ablehnen“ und „Alle annehmen“ sind gleich groß. Unter „Einstellungen“ kannst du die
+      beiden Zwecke einzeln einschalten; beide sind aus, bis du sie einschaltest.
+    </p>
+    <ul>
+      <li><strong>Was wir speichern:</strong> Deine Wahl (die beiden Schalter, den Tag und die Version des Banners)
+        speichert die Seite im lokalen Speicher deines Browsers unter <code>pagebite.consent</code>. Sie geht nicht an
+        unseren Server. So müssen wir nicht bei jedem Besuch neu fragen. Das ist nötig, um deine Wahl zu beachten
+        (§ 25 Abs. 2 Nr. 2 TDDDG; Art. 6 Abs. 1 lit. c mit Art. 7 Abs. 1 DSGVO).</li>
+      <li><strong>Ändern und widerrufen:</strong> Unten auf jeder Seite von start.pagebite.eu öffnet der Link
+        „Datenschutz-Einstellungen“ deine Wahl wieder. Ein Widerruf gilt ab dann; was vorher geschah, bleibt
+        rechtmäßig (Art. 7 Abs. 3 DSGVO).</li>
+      <li><strong>Wie lange:</strong> bis du deine Wahl änderst oder die Daten deines Browsers löschst. Nach 12 Monaten
+        fragen wir neu.</li>
     </ul>
 
     <h3 id="web-schritte">Wenn du dich auf start.pagebite.eu durch PageBite klickst</h3>
     <p>
       Auf start.pagebite.eu zeigen wir dir PageBite in ein paar Schritten: ein paar Fragen, eine Beispielseite mit Quiz
       und Karteikarte und wie PageBite dir beim Behalten hilft. Damit wir sehen, an welcher Stelle Besucher aufhören und
-      welche Version der Seite besser ankommt, zählen wir diese Schritte.
+      welche Version der Seite besser ankommt, zählen wir diese Schritte, aber nur, wenn du im Banner der Statistik
+      zustimmst. Schritte, die du vor deiner Wahl erreichst, hält die Seite nur im Speicher des offenen Tabs. Stimmst du
+      zu, schickt sie diese ab; lehnst du ab, verwirft sie sie.
     </p>
     <ul>
       <li><strong>Was wir zählen:</strong> welchen Schritt du erreichst (jeden nur einmal pro Besuch), die Sprache der
@@ -374,23 +419,19 @@
         Er speichert den Schritt mit Tag, Besuchs-Kennung, Sprache, Version, Kampagne und Anzeige. Dann gibt er den
         Schritt mit deinen Antworten an PostHog (EU-Server) weiter. PostHog bekommt dabei keine IP-Adresse, keinen
         Standort und legt kein Profil von dir an.</li>
-      <li><strong>Was nicht:</strong> keine Cookies, nichts auf deinem Gerät gespeichert, kein Statistik-Dienst in
-        deinem Browser, keine E-Mail-Adresse, keine IP-Adresse.</li>
+      <li><strong>Was nicht:</strong> keine Cookies, kein Statistik-Dienst in deinem Browser, keine E-Mail-Adresse,
+        keine IP-Adresse.</li>
       <li><strong>Schutz vor Missbrauch:</strong> Damit niemand die Zählung mit massenhaften Anfragen verfälscht,
         begrenzt unser Server die Anfragen pro IP-Adresse und Stunde. Dafür speichert er nicht die IP-Adresse, sondern
         nur einen Prüfwert (Hash), den er mit einem geheimen Schlüssel aus ihr bildet. Diesen Prüfwert löscht er nach
         einem Tag.</li>
-      <li><strong>Rechtsgrundlage:</strong> unser berechtigtes Interesse, unsere Website und unsere Werbung zu
-        verbessern und zu sehen, welche Version besser ankommt (Art. 6 Abs. 1 lit. f DSGVO). Du kannst jederzeit
-        widersprechen (siehe <a href="#rechte">Abschnitt 13</a>). Da die Besuchs-Kennung nur im offenen Tab lebt,
-        können wir gezählte Schritte dir später nicht mehr zuordnen.</li>
+      <li><strong>Rechtsgrundlage:</strong> deine Einwilligung (Art. 6 Abs. 1 lit. a DSGVO und § 25 Abs. 1 TDDDG). Du
+        kannst sie jederzeit über „Datenschutz-Einstellungen“ unten auf der Seite widerrufen. Da die Besuchs-Kennung nur
+        im offenen Tab lebt, können wir gezählte Schritte dir später nicht mehr zuordnen. Die Begrenzung der Anfragen
+        beruht auf unserem berechtigten Interesse am Schutz vor Missbrauch (Art. 6 Abs. 1 lit. f DSGVO).</li>
       <li><strong>Wie lange:</strong> Die gezählten Schritte löschen wir nach 12 Monaten automatisch, den Prüfwert für
         die Begrenzung nach einem Tag. Bei PostHog gilt die kürzeste Aufbewahrungsfrist, die unser Tarif dort erlaubt.
       </li>
-      <!-- ANWALT (2026-11-19): Reicht hier das berechtigte Interesse ohne Einwilligung und ohne Banner? Die Seite
-           speichert nichts auf dem Gerät und liest nichts aus, sie schickt per Skript die Schritte samt Antworten an
-           unseren Server, der sie ohne IP-Adresse und ohne Profil an PostHog weitergibt (§ 25 TDDDG nicht berührt?).
-           Ist der Satz zur Aufbewahrung bei PostHog konkret genug? -->
     </ul>
 
     <h3 id="web-kauf">Wenn du auf start.pagebite.eu ein Abo kaufst</h3>
@@ -423,8 +464,8 @@
       <li><strong>Schutz vor Missbrauch:</strong> Unser Server begrenzt die Anfragen pro IP-Adresse, pro E-Mail-Adresse
         und Stunde. Dafür speichert er nur Prüfwerte (Hashes), die er mit einem geheimen Schlüssel bildet, nie die
         Adressen selbst. Die Prüfwerte löscht er nach einem Tag.</li>
-      <li><strong>Was nicht:</strong> Deine E-Mail-Adresse geht nie an PostHog und nie in die gezählten Schritte. Die
-        Seite speichert sie nicht auf deinem Gerät.</li>
+      <li><strong>Was nicht:</strong> Deine E-Mail-Adresse geht nie an PostHog, nie an Meta und nie in die gezählten
+        Schritte. Die Seite speichert sie nicht auf deinem Gerät.</li>
       <li><strong>Rechtsgrundlage:</strong> Das Konto, die Antworten und die Zahlung brauchen wir, um dir das Abo
         anzubieten und den Vertrag zu erfüllen (Art. 6 Abs. 1 lit. b DSGVO). Die Preise fragt die Seite schon ab, bevor du
         etwas eingibst, damit du gleich den richtigen Preis für dein Land mit Steuern siehst. Das und der Schutz vor
@@ -437,6 +478,46 @@
            nach § 25 Abs. 2 Nr. 2 TDDDG unbedingt erforderlich? (2) Das Konto entsteht schon mit der E-Mail-Adresse, vor
            dem Kauf. Passt lit. b, und sind 30 Tage ohne Kauf angemessen? (3) Unter dem E-Mail-Feld steht nur ein Hinweis
            auf Nutzungsbedingungen und Datenschutz, kein Häkchen. Reicht das? -->
+    </ul>
+
+    <h3 id="meta">Werbung mit Meta auf start.pagebite.eu (nur mit Einwilligung)</h3>
+    <p>
+      Wir werben für PageBite auf Facebook und Instagram. Um zu messen, welche Anzeigen zu Besuchen und Käufen führen,
+      und die Anzeigen damit zu verbessern, nutzen wir auf start.pagebite.eu den Meta Pixel und Metas Conversions API.
+      Beides nur, wenn du im Banner der Werbung zustimmst. Anbieter ist Meta Platforms Ireland Ltd., Merrion Road,
+      Dublin 4, Irland.
+    </p>
+    <ul>
+      <li><strong>Der Meta Pixel:</strong> Erst nach deiner Zustimmung lädt die Seite ein Skript von Meta
+        (connect.facebook.net). Es setzt die Cookies <code>_fbp</code> (eine zufällige Kennung deines Browsers) und, wenn
+        du über eine Anzeige kommst, <code>_fbc</code> (die Kennung des Klicks auf die Anzeige). Es schickt Meta die
+        aufgerufene Seite, deine IP-Adresse, Angaben zu deinem Browser, diese Kennungen und diese Ereignisse: Seite
+        geöffnet, E-Mail eingegeben (nie die Adresse selbst), Bezahlfeld geöffnet und Kauf oder Probezeit gestartet, mit
+        Preis und Währung. Bist du bei Facebook oder Instagram angemeldet, kann Meta das deinem Konto dort zuordnen.
+        Automatische Zusatzdaten des Pixels (zum Beispiel ausgelesene Formularfelder) haben wir ausgeschaltet.</li>
+      <li><strong>Die Meldung vom Server:</strong> Werbeblocker halten den Pixel oft auf. Deshalb meldet zusätzlich
+        unser Server Meta einen Kauf. Dafür schickt die Seite beim E-Mail-Schritt die Werte von <code>_fbp</code> und
+        <code>_fbc</code> an unseren Server bei Supabase (EU, Frankfurt am Main). Er speichert sie mit der Kennung deines
+        Browsers (User-Agent) und der Sprache der Seite zu deinem Konto. Kaufst du, meldet er Meta den Kauf oder die
+        Probezeit mit Preis, Währung, Zeitpunkt, diesen Werten und einer Ereignis-Nummer, damit Meta den Kauf nicht
+        doppelt zählt. Nie deine E-Mail-Adresse, deine IP-Adresse oder deine Antworten. Käufe in der App melden wir Meta
+        nie.</li>
+      <li><strong>Gemeinsame Verantwortung:</strong> Für das Erheben der Daten auf unserer Seite und ihre Übermittlung an
+        Meta sind wir und Meta gemeinsam verantwortlich (Art. 26 DSGVO). Wir haben dazu Metas Vereinbarung für gemeinsam
+        Verantwortliche geschlossen (<a href="https://www.facebook.com/legal/controller_addendum" rel="noopener">Controller
+        Addendum</a>). Darin übernimmt Meta die Pflicht, dich über die Verarbeitung bei Meta zu informieren und deine
+        Rechte dafür zu erfüllen; du kannst dich mit deinen Rechten aber an uns oder an Meta wenden. Was Meta danach mit
+        den Daten macht, verantwortet Meta allein. Mehr dazu in der <a href="https://www.facebook.com/privacy/policy/"
+        rel="noopener">Datenschutzrichtlinie von Meta</a>.</li>
+      <li><strong>Übermittlung in die USA:</strong> Meta kann die Daten an Meta Platforms Inc. in den USA übermitteln.
+        Meta ist nach dem EU-US Data Privacy Framework zertifiziert (Art. 45 DSGVO); zusätzlich nutzt Meta
+        EU-Standardvertragsklauseln.</li>
+      <li><strong>Rechtsgrundlage:</strong> deine Einwilligung (Art. 6 Abs. 1 lit. a DSGVO und § 25 Abs. 1 TDDDG).</li>
+      <li><strong>Widerrufen:</strong> Schaltest du die Werbung unter „Datenschutz-Einstellungen“ aus, schickt der Pixel
+        nichts mehr, die Seite löscht die Cookies <code>_fbp</code> und <code>_fbc</code>, und hast du deine E-Mail-Adresse
+        schon eingegeben, löscht unser Server die gespeicherten Werte.</li>
+      <li><strong>Wie lange:</strong> Die Cookies laufen nach 90 Tagen ab. Unser Server löscht die Werte, sobald er den
+        Kauf gemeldet hat, spätestens nach 7 Tagen. Bei Meta gelten Metas eigene Regeln.</li>
     </ul>
 
     <h2 id="scannen">4. Scannen: Fotos bleiben auf deinem Handy</h2>
@@ -643,13 +724,13 @@
       </table>
     </div>
     <p>
-      Apple (App Store), Google (Google Play, auf Android auch Google ML Kit), beim Kauf im Web Paddle und beim Kindle-Import Amazon handeln in eigener Verantwortung. Für
+      Apple (App Store), Google (Google Play, auf Android auch Google ML Kit), beim Kauf im Web Paddle und beim Kindle-Import Amazon handeln in eigener Verantwortung. Mit Meta sind wir für die Werbung auf start.pagebite.eu gemeinsam verantwortlich (siehe <a href="#meta">oben</a>). Für
       sie gelten ihre eigenen Datenschutzerklärungen.
     </p>
 
     <h3>Übermittlung in die USA</h3>
     <p>
-      RevenueCat verarbeitet Daten in den USA. Supabase, Google und PostHog sind US-Unternehmen, auch wenn deine Daten
+      RevenueCat verarbeitet Daten in den USA, Meta mit deiner Einwilligung auch (siehe <a href="#meta">oben</a>). Supabase, Google und PostHog sind US-Unternehmen, auch wenn deine Daten
       in der EU gespeichert werden. Für die USA gilt der Angemessenheitsbeschluss der EU-Kommission zum EU-US Data
       Privacy Framework (Art. 45 DSGVO). Zusätzlich sind in den Verträgen EU-Standardvertragsklauseln vereinbart
       (Art. 46 Abs. 2 lit. c DSGVO). Deine Inhalte wie Karten und Seitentexte bleiben in der EU, und unser Postfach für deine
@@ -667,6 +748,8 @@
       <li>Feedback aus der App und Antworten auf die Frage nach einer Kündigung löschen wir spätestens nach 12 Monaten
         automatisch.</li>
       <li>Die gezählten Schritte auf start.pagebite.eu löschen wir nach 12 Monaten automatisch.</li>
+      <li>Metas Browser-Kennungen für die Meldung eines Kaufs löschen wir, sobald der Kauf gemeldet ist, spätestens
+        nach 7 Tagen.</li>
       <li>Wenn du dein Konto löschst, löschen wir deine Daten bei Supabase, deinen Kundeneintrag bei RevenueCat und,
         falls du der Statistik zugestimmt hattest, deine Daten bei PostHog. So geht's: <a
           href="./delete-account.html">Konto löschen</a>.</li>

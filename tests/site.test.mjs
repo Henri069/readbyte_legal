@@ -835,8 +835,8 @@ describe('privacy policy covers the websites and the web purchase (privacy.html)
   // Paddle's domain review reads the privacy policy linked from start.pagebite.eu (readbyte docs/plan-web-funnel.md).
   const flat = (text) => text.replace(/\s+/g, ' ');
   const LANGS = [
-    { file: 'privacy.html', scope: 'für die Websites pagebite.eu und start.pagebite.eu', seller: 'ist Paddle (Paddle.com Market Limited, London) der Verkäufer', noCookies: 'Beide Websites setzen keine Cookies' },
-    { file: 'en/privacy.html', scope: 'the websites pagebite.eu and start.pagebite.eu', seller: 'Paddle (Paddle.com Market Limited, London) is the seller', noCookies: 'Neither website sets cookies' },
+    { file: 'privacy.html', scope: 'für die Websites pagebite.eu und start.pagebite.eu', seller: 'ist Paddle (Paddle.com Market Limited, London) der Verkäufer', noCookies: 'pagebite.eu setzt keine Cookies, speichert nichts auf deinem Gerät' },
+    { file: 'en/privacy.html', scope: 'the websites pagebite.eu and start.pagebite.eu', seller: 'Paddle (Paddle.com Market Limited, London) is the seller', noCookies: 'pagebite.eu sets no cookies, stores nothing on your device' },
   ];
 
   test('both languages name both websites, their hosts and Paddle as the seller on the web', () => {
@@ -857,12 +857,23 @@ describe('privacy policy covers the websites and the web purchase (privacy.html)
 
   test('both languages say what the web funnel counts, where it goes and for how long (readbyte spec section 13)', () => {
     const FUNNEL = [
-      { file: 'privacy.html', id: 'id="web-schritte"', texts: ['welche von zwei Versionen der Seite du siehst', 'Die Antworten speichern wir nicht in unserer Datenbank. Sie gehen nur an PostHog.', 'PostHog bekommt dabei keine IP-Adresse', 'keine Cookies, nichts auf deinem Gerät gespeichert', 'nach 12 Monaten automatisch', 'nach einem Tag', 'Art. 6 Abs. 1 lit. f DSGVO'] },
-      { file: 'en/privacy.html', id: 'id="web-steps"', texts: ['which of two versions of the page you see', 'We do not store the answers in our database. They only go to PostHog.', 'PostHog gets no IP address', 'no cookies, nothing stored on your device', 'after 12 months', 'after one day', 'Art. 6(1)(f) GDPR'] },
+      { file: 'privacy.html', id: 'id="web-schritte"', texts: ['welche von zwei Versionen der Seite du siehst', 'Die Antworten speichern wir nicht in unserer Datenbank. Sie gehen nur an PostHog.', 'PostHog bekommt dabei keine IP-Adresse', 'nur, wenn du im Banner der Statistik', 'lehnst du ab, verwirft sie sie', 'keine Cookies, kein Statistik-Dienst', 'nach 12 Monaten automatisch', 'nach einem Tag', 'deine Einwilligung (Art. 6 Abs. 1 lit. a DSGVO und § 25 Abs. 1 TDDDG)'] },
+      { file: 'en/privacy.html', id: 'id="web-steps"', texts: ['which of two versions of the page you see', 'We do not store the answers in our database. They only go to PostHog.', 'PostHog gets no IP address', 'only if you agree to statistics in the banner', 'if you decline, it drops them', 'no cookies, no analytics service', 'after 12 months', 'after one day', 'your consent (Art. 6(1)(a) GDPR and Section 25(1) TDDDG)'] },
     ];
     for (const { file, id, texts } of FUNNEL) {
       const page = flat(read(file));
       for (const text of [id, ...texts]) assert.ok(page.includes(text), `${file}: ${text}`);
+    }
+  });
+
+  test('both languages describe the consent banner and Meta, only with consent (readbyte spec section 13)', () => {
+    const META = [
+      { file: 'privacy.html', texts: ['id="web-einwilligung"', 'id="meta"', '<code>pagebite.consent</code>', '„Datenschutz-Einstellungen“', 'Bevor du wählst, zählen wir nichts und laden nichts von Meta.', '„Alle ablehnen“ und „Alle annehmen“ sind gleich groß', 'Meta Platforms Ireland Ltd.', 'gemeinsam verantwortlich (Art. 26 DSGVO)', 'href="https://www.facebook.com/legal/controller_addendum"', 'Nie deine E-Mail-Adresse, deine IP-Adresse oder deine Antworten.', 'Käufe in der App melden wir Meta nie.', 'spätestens nach 7 Tagen', 'nie an Meta'] },
+      { file: 'en/privacy.html', texts: ['id="web-consent"', 'id="meta"', '<code>pagebite.consent</code>', '"Privacy settings"', 'Before you choose, we count nothing and load nothing from Meta.', '"Decline all" and "Accept all" are the same size', 'Meta Platforms Ireland Ltd.', 'jointly responsible for collecting the data on our page', 'href="https://www.facebook.com/legal/controller_addendum"', 'Never your email address, your IP address or your answers.', 'We never report purchases in the app to Meta.', 'after 7 days at the latest', 'never to Meta'] },
+    ];
+    for (const { file, texts } of META) {
+      const page = flat(read(file));
+      for (const text of texts) assert.ok(page.includes(text), `${file}: ${text}`);
     }
   });
 
