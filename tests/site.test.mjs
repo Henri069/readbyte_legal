@@ -842,9 +842,16 @@ describe('privacy policy covers the websites and the web purchase (privacy.html)
   test('both languages name both websites, their hosts and Paddle as the seller on the web', () => {
     for (const { file, scope, seller, noCookies } of LANGS) {
       const page = flat(read(file));
-      for (const text of [scope, seller, noCookies, 'id="websites"', 'GitHub Pages', 'href="https://www.paddle.com/legal/privacy"']) {
+      for (const text of [scope, seller, noCookies, 'id="websites"', 'href="https://www.paddle.com/legal/privacy"']) {
         assert.ok(page.includes(text), `${file}: ${text}`);
       }
+      // Both websites are on Hostinger since the move off GitHub Pages (privacy check 2026-11-20): no GitHub any more.
+      assert.ok(page.includes(file === 'privacy.html' ? 'Beide liefert Hostinger aus' : 'Both are served by Hostinger'), file);
+      // GitHub only forwards old links on henri069.github.io.
+      const hosts = file === 'privacy.html' ? '<strong>Wer sie ausliefert:</strong>' : '<strong>Who serves them:</strong>';
+      const bullet = page.slice(page.indexOf(hosts), page.indexOf('</li>', page.indexOf(hosts)));
+      assert.ok(!page.replace(bullet, '').includes('GitHub'), `${file}: GitHub only for the old links`);
+      assert.ok(page.includes(file === 'privacy.html' ? 'Links auf henri069.github.io leitet GitHub' : 'GitHub (GitHub Inc., USA) forwards old links on henri069.github.io'), file);
     }
   });
 
@@ -903,5 +910,49 @@ describe('local preview (tools/preview-server.mjs) answers like GitHub Pages', (
     for (const path of ['/../../etc/passwd', '/%2e%2e/%2e%2e/etc/passwd', '/..%2f..%2fetc%2fpasswd', '/%00', '/%E0%A4%A']) {
       assert.deepEqual(answer(path), { status: 404, file: '404.html' }, path);
     }
+  });
+});
+
+describe('pagebite.eu on Hostinger (.htaccess, tools/deploy.sh, privacy check 2026-11-20)', () => {
+  const htaccess = read('.htaccess');
+  const rules = htaccess.split('\n').filter((line) => line.trim() !== '' && !line.trim().startsWith('#'));
+
+  test('answers like GitHub Pages: index, pages without ".html" and 404.html for unknown addresses', () => {
+    assert.ok(rules.includes('DirectoryIndex index.html'));
+    assert.ok(rules.includes('ErrorDocument 404 /404.html'));
+    assert.ok(rules.includes('Options -Indexes'));
+    assert.match(htaccess, /RewriteCond %\{REQUEST_FILENAME\}\.html -f\nRewriteRule \^\(\.\+\)\$ \$1\.html \[L\]/);
+  });
+
+  test('sends every visitor to https://pagebite.eu without "www"', () => {
+    assert.match(htaccess, /RewriteCond %\{HTTP_HOST\} \^www\\\. \[NC\]\nRewriteRule \^\(\.\*\)\$ https:\/\/pagebite\.eu\/\$1 \[L,R=301\]/);
+    assert.match(htaccess, /RewriteCond %\{HTTPS\} off\nRewriteRule \^\(\.\*\)\$ https:\/\/pagebite\.eu\/\$1 \[L,R=301\]/);
+  });
+
+  test('sets no headers, because they would also reach start.pagebite.eu in its folder start/', () => {
+    assert.ok(!rules.some((line) => /^\s*Header\b|IfModule mod_headers/.test(line)));
+  });
+
+  test('uploads every page and the server rules, never the tests, tools, GitHub files or start/', async () => {
+    const { execFileSync } = await import('node:child_process');
+    const files = execFileSync('bash', [join(ROOT, 'tools/deploy.sh')], { env: { ...process.env, DRY_RUN: '1' }, encoding: 'utf8' })
+      .trim()
+      .split('\n');
+    for (const page of ['.htaccess', '404.html', 'index.html', 'privacy.html', 'en/privacy.html', 'imprint.html', 'delete-account.html', 'code/index.html', 'assets/stores.js']) {
+      assert.ok(files.includes(page), page);
+    }
+    for (const file of files) {
+      assert.doesNotMatch(file, /^(tests\/|tools\/|\.github\/|start\/)|^(README\.md|CNAME|\.nojekyll)$/, file);
+    }
+  });
+
+  test('the workflow uploads with the SITE_FTP secrets after a push to main', () => {
+    const workflow = read('.github/workflows/deploy.yml');
+    assert.match(workflow, /push:\n    branches: \[main\]/);
+    assert.match(workflow, /run: bash tools\/deploy\.sh/);
+    for (const name of ['SITE_FTP_HOST', 'SITE_FTP_USER', 'SITE_FTP_PASSWORD', 'SITE_FTP_DIR']) {
+      assert.ok(workflow.includes(`${name}: \${{ secrets.${name} }}`), name);
+    }
+    assert.match(read('tools/deploy.sh'), /--ssl-reqd/);
   });
 });

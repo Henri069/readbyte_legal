@@ -1,0 +1,25 @@
+# pagebite.eu on Hostinger (LiteSpeed reads this file; moved from GitHub Pages, privacy check 2026-11-20). It answers
+# like GitHub Pages did (tools/preview-server.mjs): "download" serves download.html, a folder serves its index.html,
+# a folder without "/" is redirected, and every unknown address gets 404.html, whose script turns the short creator
+# link "code/emelie" into "code/?code=emelie".
+# start.pagebite.eu is a subdomain whose folder "start/" sits inside this site. That folder has its own .htaccess with
+# its own rewrite rules, so the rewrite rules below never reach it. Nothing here sets headers, because headers would
+# also apply inside start/. tests/site.test.mjs checks this file.
+Options -Indexes
+AddDefaultCharset utf-8
+DirectoryIndex index.html
+ErrorDocument 404 /404.html
+
+RewriteEngine On
+
+# Always https, always without "www".
+RewriteCond %{HTTP_HOST} ^www\. [NC]
+RewriteRule ^(.*)$ https://pagebite.eu/$1 [L,R=301]
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://pagebite.eu/$1 [L,R=301]
+
+# "download" serves download.html, "en/privacy" serves en/privacy.html.
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.+)$ $1.html [L]

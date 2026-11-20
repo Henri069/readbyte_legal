@@ -1,0 +1,30 @@
+# Publishes pagebite.eu to Hostinger when main changes. Also startable by hand (Actions → Run workflow), for any branch.
+# Secrets (repository Settings → Secrets and variables → Actions): SITE_FTP_HOST, SITE_FTP_USER, SITE_FTP_PASSWORD,
+# optional SITE_FTP_DIR. Use an FTP account that Hostinger limits to the pagebite.eu website.
+name: Deploy pagebite.eu
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-site
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Upload to Hostinger
+        run: bash tools/deploy.sh
+        env:
+          SITE_FTP_HOST: ${{ secrets.SITE_FTP_HOST }}
+          SITE_FTP_USER: ${{ secrets.SITE_FTP_USER }}
+          SITE_FTP_PASSWORD: ${{ secrets.SITE_FTP_PASSWORD }}
+          SITE_FTP_DIR: ${{ secrets.SITE_FTP_DIR }}

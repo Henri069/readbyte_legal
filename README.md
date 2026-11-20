@@ -1,6 +1,6 @@
 # PageBite website (readbyte_legal)
 
-Static website for the PageBite app: start page, download page, creator links, privacy policy, terms of use, account deletion and imprint, in German (root) and English (`en/`). Published with GitHub Pages.
+Static website for the PageBite app: start page, download page, creator links, privacy policy, terms of use, account deletion and imprint, in German (root) and English (`en/`). Served by Hostinger since 2026-11-20 (before: GitHub Pages).
 
 This folder lives inside the app project (`readbyte/legal/`) but is its own Git repository. The app repository ignores it (`/legal/` in its `.gitignore`).
 
@@ -20,7 +20,7 @@ This folder lives inside the app project (`readbyte/legal/`) but is its own Git 
 | Friends link (`friends`, shared by the app) | `friends.html` | `en/friends.html` |
 | Not found, and the short creator link `code/emelie` | `404.html` | same page |
 
-Published address: `https://pagebite.eu/` (custom domain, file `CNAME`; DNS at Hostinger, nameservers `*.dns-parking.com`, records point to GitHub Pages). The old address `https://henri069.github.io/readbyte_legal/` forwards there, so links in app builds and store consoles keep working.
+Published address: `https://pagebite.eu/` (custom domain, file `CNAME`; DNS at Hostinger, nameservers `*.dns-parking.com`, records point to the Hostinger website since the move). The old address `https://henri069.github.io/readbyte_legal/` forwards there, so links in app builds and store consoles keep working.
 
 ## Start page
 
@@ -74,14 +74,14 @@ node --test 'tests/*.test.mjs'
 
 They check the platform detection, the redirects, the creator codes, the short links, that both languages exist and that no page loads anything from another server.
 
-## Publish with GitHub Pages
+## Publish (Hostinger)
 
-1. Create the public repository `readbyte_legal` on GitHub (empty, no README).
-2. In this folder: `git remote add origin https://github.com/Henri069/readbyte_legal.git`, then `git push -u origin main`.
-3. On GitHub: Settings → Pages → Build and deployment → Source "Deploy from a branch" → Branch `main`, folder `/ (root)` → Save.
-4. After a minute the site is live at the address above.
+Since 2026-11-20 `pagebite.eu` is a website at Hostinger (readbyte `docs/decisions.md`; GitHub Pages had no data processing agreement for a free account). `start.pagebite.eu` is a subdomain inside that website, in the folder `start/`, uploaded by readbyte's own workflow.
 
-`.nojekyll` turns off Jekyll, so GitHub serves the files as they are.
+- `.github/workflows/deploy.yml` runs `tools/deploy.sh` after every push to `main`, or by hand (Actions → Run workflow) for any branch. It uploads over FTP with TLS the files Git tracks, without `tests/`, `tools/`, `.github/`, this README, `CNAME` and `.nojekyll`, and never anything below `start/`. It only adds and replaces files.
+- Secrets in this repository: `SITE_FTP_HOST`, `SITE_FTP_USER`, `SITE_FTP_PASSWORD`, optional `SITE_FTP_DIR`.
+- `.htaccess` answers like GitHub Pages did (pages without `.html`, folders with their index, `404.html` for unknown addresses), forces https and drops `www`. It sets no headers, because they would also reach `start/`.
+- GitHub Pages stays on with `CNAME`, so the old address `https://henri069.github.io/readbyte_legal/` keeps forwarding to `pagebite.eu` (older app builds).
 
 ## Rules
 
