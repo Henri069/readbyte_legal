@@ -246,6 +246,15 @@
             <td>Until you change it or delete your browser data; we ask again after 12 months</td>
           </tr>
           <tr>
+            <td>Where you are on start.pagebite.eu: the step, the answers you tapped, email, country, postcode, account
+              identifier; with your consent also the visit identifier, counted steps, campaign and the ad's click
+              identifier</td>
+            <td>Only in this browser tab (session storage)</td>
+            <td>Carrying on at the same place after reloading the page</td>
+            <td>Section 25(2) No. 2 TDDDG and Art. 6(1)(b) GDPR; the additions only with consent, see <a href="#web-steps">below</a></td>
+            <td>Until you close the tab</td>
+          </tr>
+          <tr>
             <td>Meta Pixel on start.pagebite.eu (cookies <code>_fbp</code> and <code>_fbc</code>, the page opened, events
               such as "email entered" or "purchase", IP address, browser data)</td>
             <td>Meta (jointly responsible with us for collecting and sending)</td>
@@ -408,7 +417,14 @@
         whether you answer the quiz and open a flashcard yourself (never which answer), the language of the page
         and which of two versions of the page you see. The page picks the version at random, half and half. If you come
         from an ad, we also count the name of the campaign and the ad from the link. On top of that, a random visit
-        identifier. It only lasts while the page is open. If you reload the page, you get a new one.</li>
+        identifier. It lasts while the tab is open, also when you reload the page. If you close the tab, your next visit
+        gets a new one.</li>
+      <li><strong>Reloading:</strong> So that a reload does not start you over, the page remembers where you are in
+        this tab's session storage (<code>pagebite.funnel</code>): the step, the answers you tapped and, once you have
+        typed them, your email, country, postcode and your account's identifier. This is needed for the page to do what
+        you ask of it (Section 25(2) No. 2 TDDDG). It keeps the visit identifier, the counted steps and the campaign only
+        if you agreed to statistics, and the click identifier of a Meta ad only if you agreed to advertising. None of it
+        goes to a server from there. When you close the tab, it is all deleted.</li>
       <li><strong>Your answers:</strong> Each step carries the answers you have tapped so far: what you wish for, your
         goal and, in one of the two versions, how many books you read a year and how much you still know from your last
         book. These are always fixed answers to tap, never free text. We do not store the answers in our database. They
@@ -417,8 +433,8 @@
         stores the step with the day, visit identifier, language, version, campaign and ad. Then it passes the step with
         your answers on to PostHog (EU servers). PostHog gets no IP address and no location, and creates no profile of
         you.</li>
-      <li><strong>What not:</strong> no cookies, no analytics service in your browser, no email address, no IP
-        address.</li>
+      <li><strong>What not:</strong> no cookies, no analytics service in your browser, no email address and no IP
+        address in the counts.</li>
       <li><strong>Protection against abuse:</strong> So that nobody can skew the counts with masses of requests, our
         server limits the requests per IP address and hour. For this it does not store the IP address, only a check value
         (hash) that it forms from it with a secret key. It deletes this check value after one day.</li>

@@ -245,6 +245,15 @@
             <td>Bis du sie änderst oder deine Browserdaten löschst; nach 12 Monaten fragen wir neu</td>
           </tr>
           <tr>
+            <td>Wo du auf start.pagebite.eu stehst: Schritt, deine angetippten Antworten, E-Mail, Land, Postleitzahl,
+              Konto-Kennung; mit deiner Zustimmung auch Besuchs-Kennung, gezählte Schritte, Kampagne und die
+              Klick-Kennung der Anzeige</td>
+            <td>Nur in diesem Browser-Tab (Sitzungsspeicher)</td>
+            <td>Nach dem Neuladen der Seite an derselben Stelle weitermachen</td>
+            <td>§ 25 Abs. 2 Nr. 2 TDDDG und Art. 6 Abs. 1 lit. b DSGVO; die Zusätze nur mit Einwilligung, siehe <a href="#web-schritte">unten</a></td>
+            <td>Bis du den Tab schließt</td>
+          </tr>
+          <tr>
             <td>Meta Pixel auf start.pagebite.eu (Cookies <code>_fbp</code> und <code>_fbc</code>, aufgerufene Seite,
               Ereignisse wie „E-Mail eingegeben“ oder „Kauf“, IP-Adresse, Browser-Daten)</td>
             <td>Meta (gemeinsam mit uns verantwortlich für das Erheben und Übermitteln)</td>
@@ -410,8 +419,16 @@
         Beispielseite auch, ob du das Quiz beantwortest und selbst eine Karteikarte aufdeckst (nie, welche Antwort), die
         Sprache der Seite und welche von zwei Versionen der Seite du siehst. Die Version wählt die Seite zufällig, je zur Hälfte.
         Kommst du über eine Anzeige, zählen wir auch den Namen der Kampagne und der Anzeige aus dem Link. Dazu kommt eine
-        zufällige Besuchs-Kennung. Sie gilt nur, solange die Seite offen ist. Lädst du die Seite neu, gibt es eine neue.
+        zufällige Besuchs-Kennung. Sie gilt, solange der Tab offen ist, auch wenn du die Seite neu lädst. Schließt du
+        den Tab, gibt es beim nächsten Besuch eine neue.
       </li>
+      <li><strong>Neu laden:</strong> Damit du nach dem Neuladen nicht von vorn beginnst, merkt sich die Seite im
+        Sitzungsspeicher dieses Tabs (<code>pagebite.funnel</code>), wo du stehst: den Schritt, deine angetippten
+        Antworten und, sobald du sie eingegeben hast, E-Mail, Land, Postleitzahl und die Kennung deines Kontos. Das ist
+        nötig, damit die Seite tut, worum du sie bittest (§ 25 Abs. 2 Nr. 2 TDDDG). Besuchs-Kennung, gezählte Schritte
+        und Kampagne merkt sie sich nur, wenn du der Statistik zugestimmt hast, die Klick-Kennung einer Meta-Anzeige
+        nur, wenn du der Werbung zugestimmt hast. Nichts davon geht von dort an einen Server. Schließt du den Tab, ist
+        alles gelöscht.</li>
       <li><strong>Deine Antworten:</strong> Mit jedem Schritt gehen die Antworten mit, die du bis dahin angetippt hast:
         was du dir wünschst, dein Ziel und in einer der beiden Versionen, wie viele Bücher du im Jahr liest und wie viel
         du von deinem letzten Buch noch weißt. Das sind immer feste Antworten zum Antippen, nie freier Text. Die Antworten
@@ -421,7 +438,7 @@
         Schritt mit deinen Antworten an PostHog (EU-Server) weiter. PostHog bekommt dabei keine IP-Adresse, keinen
         Standort und legt kein Profil von dir an.</li>
       <li><strong>Was nicht:</strong> keine Cookies, kein Statistik-Dienst in deinem Browser, keine E-Mail-Adresse,
-        keine IP-Adresse.</li>
+        keine IP-Adresse in der Zählung.</li>
       <li><strong>Schutz vor Missbrauch:</strong> Damit niemand die Zählung mit massenhaften Anfragen verfälscht,
         begrenzt unser Server die Anfragen pro IP-Adresse und Stunde. Dafür speichert er nicht die IP-Adresse, sondern
         nur einen Prüfwert (Hash), den er mit einem geheimen Schlüssel aus ihr bildet. Diesen Prüfwert löscht er nach
