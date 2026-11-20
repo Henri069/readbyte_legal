@@ -143,11 +143,18 @@
             <td>Bis du dein Konto löschst</td>
           </tr>
           <tr>
-            <td>Konto (anonyme Kennung; freiwillig deine E-Mail-Adresse)</td>
+            <td>Konto (anonyme Kennung; freiwillig deine E-Mail-Adresse, beim Kauf im Web deine E-Mail-Adresse)</td>
             <td>Supabase</td>
             <td>Anmeldung, Sync</td>
             <td>Art. 6 Abs. 1 lit. b DSGVO</td>
-            <td>Bis du dein Konto löschst. Anonyme Konten ohne Abo: 30 Tage</td>
+            <td>Bis du dein Konto löschst. Anonyme Konten ohne Abo und Konten aus dem Web ohne Kauf: 30 Tage</td>
+          </tr>
+          <tr>
+            <td>Antworten von start.pagebite.eu (was du dir wünschst, dein Ziel)</td>
+            <td>Supabase</td>
+            <td>Die App übernimmt sie nach der Anmeldung</td>
+            <td>Art. 6 Abs. 1 lit. b DSGVO</td>
+            <td>Bis du dein Konto löschst. Ohne Kauf: 30 Tage</td>
           </tr>
           <tr>
             <td>Abo-Status</td>
@@ -341,10 +348,12 @@
         zertifiziert.</li>
       <li><strong>Keine Cookies, keine Tracker:</strong> Beide Websites setzen keine Cookies, speichern nichts auf
         deinem Gerät und laden keine Inhalte von anderen Servern. Schriften und Bilder kommen von unseren eigenen
-        Seiten. Was die Vorstellung von PageBite auf start.pagebite.eu zählt, steht im nächsten Abschnitt.</li>
+        Seiten. Einzige Ausnahme ist der Bezahlteil von Paddle ab der Preisseite auf start.pagebite.eu. Was die
+        Vorstellung von PageBite dort zählt und was beim Kauf passiert, steht in den nächsten beiden Abschnitten.</li>
       <li><strong>Rechtsgrundlage:</strong> unser berechtigtes Interesse an einer sicheren, erreichbaren Website
         (Art. 6 Abs. 1 lit. f DSGVO).</li>
-      <li><strong>Wie lange:</strong> nach den Löschfristen von GitHub und Hostinger.</li>
+      <li><strong>Wie lange:</strong> Hostinger löscht die Protokolle nach höchstens 7 Tagen. GitHub nennt keine feste
+        Frist; es löscht sie, wenn es sie für die Sicherheit nicht mehr braucht.</li>
       <!-- ANWALT (2026-11-16): GitHub Pages hat für Besucher keinen Auftragsverarbeitungsvertrag mit uns; GitHub
            nennt die Protokolle in seiner eigenen Datenschutzerklärung. Reicht das, oder brauchen wir einen
            anderen Anbieter für pagebite.eu? Wie lange Hostinger und GitHub die Zugriffsprotokolle speichern, steht
@@ -388,6 +397,52 @@
            speichert nichts auf dem Gerät und liest nichts aus, sie schickt per Skript die Schritte samt Antworten an
            unseren Server, der sie ohne IP-Adresse und ohne Profil an PostHog weitergibt (§ 25 TDDDG nicht berührt?).
            Ist der Satz zur Aufbewahrung bei PostHog konkret genug? -->
+    </ul>
+
+    <h3 id="web-kauf">Wenn du auf start.pagebite.eu ein Abo kaufst</h3>
+    <p>
+      Nach den Schritten zeigt dir start.pagebite.eu unsere Preise. Dort kannst du das Abo mit deiner E-Mail-Adresse
+      kaufen. Verkäufer ist Paddle (siehe <a href="#abo">Abschnitt 8</a>).
+    </p>
+    <ul>
+      <li><strong>Preise von Paddle:</strong> Erst wenn du die Preisseite erreichst, lädt die Seite das Bezahl-Skript
+        von Paddle (Paddle.js von cdn.paddle.com). Es fragt bei Paddle die Preise für dein Land ab, in deiner Währung und
+        mit Steuern. Dafür erhält Paddle technisch deine IP-Adresse und Angaben zu deinem Browser. Dein Land leitet
+        Paddle aus der IP-Adresse ab. Paddle.js speichert dabei nichts auf deinem Gerät. Ein Statistik-Werkzeug, das
+        Paddle.js nachladen kann (Paddle Retain), blockiert unsere Seite.</li>
+      <li><strong>Deine E-Mail-Adresse:</strong> Gibst du deine E-Mail-Adresse ein, legt unser Server bei Supabase (EU,
+        Frankfurt am Main) damit ein PageBite-Konto an. Gibt es schon ein Konto mit dieser Adresse, nutzt er dieses. Die
+        Seite bekommt nur die Konto-Kennung zurück und ob das Angebot mit Probezeit für dich gilt.</li>
+      <li><strong>Deine Antworten:</strong> Mit der E-Mail-Adresse gehen die Antworten mit, die du angetippt hast: was
+        du dir wünschst und dein Ziel. Diese speichern wir mit deinem Konto. Meldest du dich später in der App an,
+        übernimmt sie diese Antworten, und du musst die Fragen dort nicht noch einmal beantworten. Hatte das Konto schon
+        einmal ein Abo, ändern wir die Antworten nicht.</li>
+      <li><strong>Die Zahlung:</strong> Sie läuft in einem Bezahlfeld von Paddle (buy.paddle.com), das in unsere Seite eingebettet ist. Wir
+        geben Paddle deine E-Mail-Adresse und deine Konto-Kennung mit. Dein Land und, wo Paddle sie braucht, deine
+        Postleitzahl fragen wir auf der Seite davor; sie gehen nur an Paddle (für die Steuer und den Schutz vor Betrug),
+        nicht an unseren Server, und wir speichern sie nicht. Was du in Paddles Feld eingibst, geht direkt an Paddle. Wir
+        sehen es nicht. Für die Zahlung kann Paddles Feld Daten in deinem Browser speichern (zum Beispiel Cookies) und
+        für die Kartenzahlung Stripe laden. Das ist für die Zahlung, die du selbst startest, technisch nötig (§ 25 Abs. 2
+        Nr. 2 TDDDG).</li>
+      <li><strong>Nach dem Kauf:</strong> Wir schicken dir eine E-Mail mit dem Link, der dich in der App anmeldet. Sie
+        verschickt unser Dienstleister Brevo für uns (siehe <a href="#empfaenger">Abschnitt 10</a>).</li>
+      <li><strong>Schutz vor Missbrauch:</strong> Unser Server begrenzt die Anfragen pro IP-Adresse, pro E-Mail-Adresse
+        und Stunde. Dafür speichert er nur Prüfwerte (Hashes), die er mit einem geheimen Schlüssel bildet, nie die
+        Adressen selbst. Die Prüfwerte löscht er nach einem Tag.</li>
+      <li><strong>Was nicht:</strong> Deine E-Mail-Adresse geht nie an PostHog und nie in die gezählten Schritte. Die
+        Seite speichert sie nicht auf deinem Gerät.</li>
+      <li><strong>Rechtsgrundlage:</strong> Das Konto, die Antworten und die Zahlung brauchen wir, um dir das Abo
+        anzubieten und den Vertrag zu erfüllen (Art. 6 Abs. 1 lit. b DSGVO). Die Preise fragt die Seite schon ab, bevor du
+        etwas eingibst, damit du gleich den richtigen Preis für dein Land mit Steuern siehst. Das und der Schutz vor
+        Missbrauch sind unser berechtigtes Interesse (Art. 6 Abs. 1 lit. f DSGVO).</li>
+      <li><strong>Wie lange:</strong> Kaufst du nichts, löschen wir ein so angelegtes Konto nach 30 Tagen automatisch,
+        mit deinen Antworten. Kaufst du, bleiben Konto und Antworten, bis du dein Konto löschst.</li>
+      <!-- ANWALT (2026-11-19): (1) Paddle.js lädt ohne Einwilligung, sobald die Preisseite erscheint, und Paddle
+           erhält dabei die IP-Adresse. Reicht Art. 6 Abs. 1 lit. b (vorvertraglich), oder braucht es lit. f oder eine
+           Einwilligung? Das Bezahlfenster von buy.paddle.com kann in seinem eigenen Rahmen Cookies setzen; ist das
+           nach § 25 Abs. 2 Nr. 2 TDDDG unbedingt erforderlich? (2) Das Konto entsteht schon mit der E-Mail-Adresse, vor
+           dem Kauf. Passt lit. b, und sind 30 Tage ohne Kauf angemessen? (3) Unter dem E-Mail-Feld steht nur ein Hinweis
+           auf Nutzungsbedingungen und Datenschutz, kein Häkchen. Reicht das? -->
     </ul>
 
     <h2 id="scannen">4. Scannen: Fotos bleiben auf deinem Handy</h2>
@@ -580,7 +635,7 @@
           </tr>
           <tr>
             <td>Sendinblue SAS (Brevo), Paris</td>
-            <td>Versand der E-Mails mit dem Login-Code</td>
+            <td>Versand der E-Mails mit dem Login-Code und mit dem Link nach einem Kauf im Web</td>
             <td>EU (Frankreich, Deutschland, Belgien)</td>
             <td>Auftragsverarbeitungsvertrag (Teil der Brevo-Bedingungen)</td>
           </tr>
@@ -613,7 +668,8 @@
       </li>
       <li>Daten auf unseren Servern bleiben, solange dein Konto besteht. Endet dein Abo, bleiben sie gespeichert, bis du
         dein Konto löschst.</li>
-      <li>Anonyme Konten ohne Abo löschen wir nach 30 Tagen automatisch.</li>
+      <li>Anonyme Konten ohne Abo löschen wir nach 30 Tagen automatisch, ebenso Konten, die wir auf start.pagebite.eu
+        mit deiner E-Mail-Adresse angelegt haben, wenn du nichts kaufst.</li>
       <li>Feedback aus der App und Antworten auf die Frage nach einer Kündigung löschen wir spätestens nach 12 Monaten
         automatisch.</li>
       <li>Die gezählten Schritte auf start.pagebite.eu löschen wir nach 12 Monaten automatisch.</li>

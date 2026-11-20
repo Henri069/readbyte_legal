@@ -144,11 +144,18 @@
             <td>Until you delete your account</td>
           </tr>
           <tr>
-            <td>Account (anonymous identifier; optionally your email address)</td>
+            <td>Account (anonymous identifier; optionally your email address, your email address when you buy on the web)</td>
             <td>Supabase</td>
             <td>Sign-in, sync</td>
             <td>Art. 6(1)(b) GDPR</td>
-            <td>Until you delete your account. Anonymous accounts without a subscription: 30 days</td>
+            <td>Until you delete your account. Anonymous accounts without a subscription and web accounts without a purchase: 30 days</td>
+          </tr>
+          <tr>
+            <td>Answers from start.pagebite.eu (what you wish for, your goal)</td>
+            <td>Supabase</td>
+            <td>The app takes them over after you sign in</td>
+            <td>Art. 6(1)(b) GDPR</td>
+            <td>Until you delete your account. Without a purchase: 30 days</td>
           </tr>
           <tr>
             <td>Subscription status</td>
@@ -338,11 +345,13 @@
           rel="noopener">GitHub privacy statement</a> applies; GitHub is certified under the EU-US Data Privacy
         Framework.</li>
       <li><strong>No cookies, no trackers:</strong> Neither website sets cookies, stores anything on your device or
-        loads content from other servers. Fonts and images come from our own pages. What the introduction to PageBite on
-        start.pagebite.eu counts is in the next section.</li>
+        loads content from other servers. Fonts and images come from our own pages. The only exception is Paddle's
+        payment part from the price page on start.pagebite.eu. What the introduction to PageBite counts there and what
+        happens when you buy is in the next two sections.</li>
       <li><strong>Legal basis:</strong> our legitimate interest in a secure, reachable website (Art. 6(1)(f)
         GDPR).</li>
-      <li><strong>How long:</strong> according to the retention periods of GitHub and Hostinger.</li>
+      <li><strong>How long:</strong> Hostinger deletes the logs after 7 days at most. GitHub names no fixed period; it
+        deletes them when it no longer needs them for security.</li>
       <!-- LAWYER (2026-11-16): see the German version. -->
     </ul>
 
@@ -375,6 +384,46 @@
         Because the visit identifier only lives in the open tab, we cannot link counted steps to you later.</li>
       <li><strong>How long:</strong> We automatically delete the counted steps after 12 months, the check value for the
         limit after one day. At PostHog, the shortest retention period our plan there allows applies.</li>
+      <!-- LAWYER (2026-11-19): see the German version. -->
+    </ul>
+
+    <h3 id="web-purchase">If you buy a subscription on start.pagebite.eu</h3>
+    <p>
+      After the steps, start.pagebite.eu shows you our prices. There you can buy the subscription with your email
+      address. The seller is Paddle (see <a href="#subscription">section 8</a>).
+    </p>
+    <ul>
+      <li><strong>Prices from Paddle:</strong> Only when you reach the price page does the page load Paddle's payment
+        script (Paddle.js from cdn.paddle.com). It asks Paddle for the prices in your country, in your currency and with
+        taxes. For this, Paddle technically receives your IP address and details about your browser. Paddle derives your
+        country from the IP address. Paddle.js stores nothing on your device. Our page blocks a statistics tool that
+        Paddle.js can load (Paddle Retain).</li>
+      <li><strong>Your email address:</strong> When you enter your email address, our server at Supabase (EU, Frankfurt
+        am Main) creates a PageBite account with it. If an account with this address already exists, it uses that one.
+        The page only gets back the account identifier and whether the offer with a trial applies to you.</li>
+      <li><strong>Your answers:</strong> The answers you tapped go along with the email address: what you wish for and
+        your goal. We store them with your account. When you later sign in to the app, it takes over these answers, so you
+        do not have to answer the questions there again. If the account already had a subscription, we do not change the
+        answers.</li>
+      <li><strong>The payment:</strong> It runs in a Paddle payment form (buy.paddle.com) embedded in our page. We pass your
+        email address and your account identifier to Paddle. We ask for your country and, where Paddle needs it, your
+        postcode on the page before; they go only to Paddle (for tax and fraud protection), not to our server, and we do
+        not store them. What you enter in Paddle's form goes straight to Paddle. We do not see it. For the payment, Paddle's form may store
+        data in your browser (for example cookies) and load Stripe for card payments. This is technically necessary for the
+        payment you start yourself (Section 25(2) No. 2 TDDDG).</li>
+      <li><strong>After the purchase:</strong> We send you an email with the link that signs you in to the app. Our
+        service provider Brevo sends it for us (see <a href="#recipients">section 10</a>).</li>
+      <li><strong>Protection against abuse:</strong> Our server limits the requests per IP address, per email address
+        and hour. For this it only stores check values (hashes) that it forms with a secret key, never the addresses
+        themselves. It deletes the check values after one day.</li>
+      <li><strong>What not:</strong> Your email address never goes to PostHog and never into the counted steps. The page
+        does not store it on your device.</li>
+      <li><strong>Legal basis:</strong> We need the account, the answers and the payment to offer you the subscription
+        and to fulfil the contract (Art. 6(1)(b) GDPR). The page asks for the prices before you enter anything, so you see
+        the right price for your country with tax straight away. That and protection against abuse are our legitimate
+        interest (Art. 6(1)(f) GDPR).</li>
+      <li><strong>How long:</strong> If you do not buy, we automatically delete an account created this way after 30
+        days, together with your answers. If you buy, the account and the answers stay until you delete your account.</li>
       <!-- LAWYER (2026-11-19): see the German version. -->
     </ul>
 
@@ -556,7 +605,7 @@
           </tr>
           <tr>
             <td>Sendinblue SAS (Brevo), Paris</td>
-            <td>Sending the emails with the sign-in code</td>
+            <td>Sending the emails with the sign-in code and with the link after a purchase on the web</td>
             <td>EU (France, Germany, Belgium)</td>
             <td>Data processing agreement (part of Brevo's terms)</td>
           </tr>
@@ -588,7 +637,8 @@
       <li>Data on your phone stays until you delete it in the app, delete your account or uninstall the app.</li>
       <li>Data on our servers stays as long as your account exists. If your subscription ends, it stays stored until
         you delete your account.</li>
-      <li>We automatically delete anonymous accounts without a subscription after 30 days.</li>
+      <li>We automatically delete anonymous accounts without a subscription after 30 days. The same goes for
+        accounts we created with your email address on start.pagebite.eu if you do not buy.</li>
       <li>We automatically delete feedback from the app and answers to the question after a cancellation after 12
         months at the latest.</li>
       <li>We automatically delete the counted steps on start.pagebite.eu after 12 months.</li>
