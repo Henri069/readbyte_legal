@@ -868,10 +868,21 @@ describe('privacy policy covers the websites and the web purchase (privacy.html)
 
   test('both languages describe the consent banner and Meta, only with consent (readbyte spec section 13)', () => {
     const META = [
-      { file: 'privacy.html', texts: ['id="web-einwilligung"', 'id="meta"', '<code>pagebite.consent</code>', '„Datenschutz-Einstellungen“', 'Bevor du wählst, zählen wir nichts und laden nichts von Meta.', '„Alle ablehnen“ und „Alle annehmen“ sind gleich groß', 'Meta Platforms Ireland Ltd.', 'gemeinsam verantwortlich (Art. 26 DSGVO)', 'href="https://www.facebook.com/legal/controller_addendum"', 'Nie deine E-Mail-Adresse, deine IP-Adresse oder deine Antworten.', 'Käufe in der App melden wir Meta nie.', 'spätestens nach 7 Tagen', 'nie an Meta'] },
-      { file: 'en/privacy.html', texts: ['id="web-consent"', 'id="meta"', '<code>pagebite.consent</code>', '"Privacy settings"', 'Before you choose, we count nothing and load nothing from Meta.', '"Decline all" and "Accept all" are the same size', 'Meta Platforms Ireland Ltd.', 'jointly responsible for collecting the data on our page', 'href="https://www.facebook.com/legal/controller_addendum"', 'Never your email address, your IP address or your answers.', 'We never report purchases in the app to Meta.', 'after 7 days at the latest', 'never to Meta'] },
+      { file: 'privacy.html', texts: ['id="web-einwilligung"', 'id="meta"', '<code>pagebite.consent</code>', '„Datenschutz-Einstellungen“', 'Bevor du wählst, zählen wir nichts und laden nichts von Meta oder TikTok.', '„Alle ablehnen“ und „Alle annehmen“ sind gleich groß', 'Meta Platforms Ireland Ltd.', 'gemeinsam verantwortlich (Art. 26 DSGVO)', 'href="https://www.facebook.com/legal/controller_addendum"', 'Nie deine E-Mail-Adresse, deine IP-Adresse oder deine Antworten.', 'Käufe in der App melden wir Meta nie.', 'spätestens nach 7 Tagen', 'nie an Meta'] },
+      { file: 'en/privacy.html', texts: ['id="web-consent"', 'id="meta"', '<code>pagebite.consent</code>', '"Privacy settings"', 'Before you choose, we count nothing and load nothing from Meta or TikTok.', '"Decline all" and "Accept all" are the same size', 'Meta Platforms Ireland Ltd.', 'jointly responsible for collecting the data on our page', 'href="https://www.facebook.com/legal/controller_addendum"', 'Never your email address, your IP address or your answers.', 'We never report purchases in the app to Meta.', 'after 7 days at the latest', 'never to Meta'] },
     ];
     for (const { file, texts } of META) {
+      const page = flat(read(file));
+      for (const text of texts) assert.ok(page.includes(text), `${file}: ${text}`);
+    }
+  });
+
+  test('both languages describe the TikTok Pixel, only with its own consent (readbyte spec section 13, 2026-11-24)', () => {
+    const TIKTOK = [
+      { file: 'privacy.html', texts: ['id="tiktok"', 'TikTok Technology Limited, 10 Earlsfort Terrace, Dublin, D02 T380, Irland', 'nur, wenn du im Banner TikTok zustimmst', '<code>_ttp</code>', '<code>ttcsid</code>', '<code>ttclid</code>', 'Nie deine E-Mail-Adresse oder deine Antworten.', 'Advanced Matching) haben wir ausgeschaltet', 'Unser Server meldet TikTok nichts.', 'gemeinsam verantwortlich (Art. 26 DSGVO)', 'in den USA, in Malaysia und in Singapur', 'auch in China', 'die drei Schalter', 'höchstens 13 Monaten'] },
+      { file: 'en/privacy.html', texts: ['id="tiktok"', 'TikTok Technology Limited, 10 Earlsfort Terrace, Dublin, D02 T380, Ireland', 'only if you agree to TikTok in the banner', '<code>_ttp</code>', '<code>ttcsid</code>', '<code>ttclid</code>', 'Never your email address or your answers.', 'Advanced Matching)', 'Our server reports nothing to TikTok.', 'jointly responsible for collecting the data on our page and sending it to TikTok', 'USA, Malaysia and Singapore', 'including China', 'the three switches', '13 months at most'] },
+    ];
+    for (const { file, texts } of TIKTOK) {
       const page = flat(read(file));
       for (const text of texts) assert.ok(page.includes(text), `${file}: ${text}`);
     }

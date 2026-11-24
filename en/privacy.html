@@ -34,7 +34,7 @@
           The original text stays on your phone.</li>
         <li>You don't have to register. The app creates an anonymous account. Signing in with an email code is
           optional.</li>
-        <li>In the app we only collect usage statistics if you agree. On start.pagebite.eu we count which steps visitors reach and measure our ads with Meta, both only if you agree. Never page texts, card texts or book titles.</li>
+        <li>In the app we only collect usage statistics if you agree. On start.pagebite.eu we count which steps visitors reach and measure with Meta and TikTok what our ads and videos bring, all only if you agree. Never page texts, card texts or book titles.</li>
         <li>Your cards are stored on servers in the EU (Frankfurt am Main, Germany).</li>
       </ul>
     </div>
@@ -263,6 +263,14 @@
             <td>Cookies 90 days; at Meta under Meta's own rules</td>
           </tr>
           <tr>
+            <td>TikTok Pixel on start.pagebite.eu (cookies <code>_ttp</code>, <code>ttcsid</code> and <code>ttclid</code>,
+              the page opened, the events "page opened" and "purchase", IP address, browser data)</td>
+            <td>TikTok (jointly responsible with us for collecting and sending)</td>
+            <td>Measuring which videos lead to purchases; required for a product link on TikTok</td>
+            <td>Consent, Art. 6(1)(a) GDPR and Section 25(1) TDDDG, see <a href="#tiktok">below</a></td>
+            <td>Cookies 13 months at most; at TikTok under TikTok's own rules</td>
+          </tr>
+          <tr>
             <td>Meta's browser identifiers for a purchase on start.pagebite.eu (<code>_fbp</code>, <code>_fbc</code>,
               browser identifier, language of the page)</td>
             <td>Supabase (Frankfurt am Main); after the purchase sent to Meta with price and currency</td>
@@ -385,8 +393,9 @@
         <a href="#recipients">section 10</a>).</li>
       <li><strong>No cookies without your consent:</strong> pagebite.eu sets no cookies, stores nothing on your device
         and loads no content from other servers. Fonts and images come from our own pages. The same goes for
-        start.pagebite.eu, with three exceptions: the page remembers your choice in the privacy banner, it loads the Meta
-        Pixel if you agree to advertising, and from the price page on it loads Paddle's payment part. What happens there
+        start.pagebite.eu, with four exceptions: the page remembers your choice in the privacy banner, it loads the Meta
+        Pixel if you agree to advertising, the TikTok Pixel if you agree to TikTok, and from the price page on it loads
+        Paddle's payment part. What happens there
         is in the next sections.</li>
       <li><strong>Legal basis:</strong> our legitimate interest in a secure, reachable website (Art. 6(1)(f)
         GDPR).</li>
@@ -397,12 +406,13 @@
     <h3 id="web-consent">Your choice in the privacy banner on start.pagebite.eu</h3>
     <p>
       When you open start.pagebite.eu, a banner asks whether we may count which steps you see (statistics) and whether
-      Meta may measure whether our ads work (advertising). Before you choose, we count nothing and load nothing from Meta.
-      "Decline all" and "Accept all" are the same size. Under "Settings" you can switch the two purposes on one by one;
-      both stay off until you switch them on.
+      Meta may measure whether our ads work (advertising), and whether TikTok may measure which videos lead to purchases
+      (TikTok). Before you choose, we count nothing and load nothing from Meta or TikTok. "Decline all" and "Accept all"
+      are the same size. Under "Settings" you can switch the three on one by one; all stay off until you switch them
+      on.
     </p>
     <ul>
-      <li><strong>What we store:</strong> The page stores your choice (the two switches, the day and the version of the
+      <li><strong>What we store:</strong> The page stores your choice (the three switches, the day and the version of the
         banner) in your browser's local storage under <code>pagebite.consent</code>. It does not go to our server. That
         way we don't have to ask on every visit. This is necessary to respect your choice (Section 25(2) No. 2 TDDDG;
         Art. 6(1)(c) with Art. 7(1) GDPR).</li>
@@ -560,6 +570,39 @@
         email address, our server deletes the stored values.</li>
       <li><strong>How long:</strong> The cookies expire after 90 days. Our server deletes the values as soon as it has
         reported the purchase, after 7 days at the latest. At Meta, Meta's own rules apply.</li>
+    </ul>
+
+    <h3 id="tiktok">TikTok on start.pagebite.eu (only with consent)</h3>
+    <p>
+      We show PageBite in videos on TikTok and link from there to start.pagebite.eu. To see which videos lead to
+      purchases, we use the TikTok Pixel on start.pagebite.eu. TikTok also requires it before we can add a product link
+      to this page on TikTok. All of this only if you agree to TikTok in the banner. The provider is TikTok Technology
+      Limited, 10 Earlsfort Terrace, Dublin, D02 T380, Ireland.
+    </p>
+    <ul>
+      <li><strong>The TikTok Pixel:</strong> Only after you agree does the page load a script from TikTok
+        (analytics.tiktok.com). It can set the cookies <code>_ttp</code> (an identifier of your browser),
+        <code>ttcsid</code> (an identifier of your visit) and, if you come from a link on TikTok, <code>ttclid</code> (the
+        identifier of the click). It sends TikTok the page you opened, your IP address, details about your browser, these
+        identifiers and two events: page opened and purchase or trial completed, with price and currency. Never your
+        email address or your answers. If you are signed in to TikTok, TikTok can link this to your account there. We have
+        switched off the automatic matching of further data (Advanced Matching). Our server reports nothing to
+        TikTok.</li>
+      <li><strong>Joint responsibility:</strong> We and TikTok are jointly responsible for collecting the data on our page
+        and sending it to TikTok (Art. 26 GDPR). You can turn to us or to TikTok with your rights. What TikTok does with
+        the data afterwards is TikTok's sole responsibility. More in <a
+        href="https://www.tiktok.com/legal/page/eea/privacy-policy/en" rel="noopener">TikTok's privacy policy</a>.</li>
+      <li><strong>Transfer to countries outside the EU:</strong> According to TikTok, it stores the data on servers in the
+        USA, Malaysia and Singapore, and companies of the TikTok group in other countries, including China, have limited
+        access to it. For Malaysia, Singapore and China there is no adequacy decision of the European Commission; TikTok
+        uses EU Standard Contractual Clauses for them (Art. 46(2)(c) GDPR). In these countries your data may be less
+        protected than in the EU, and authorities may find it easier to access it.</li>
+      <li><strong>Legal basis:</strong> your consent (Art. 6(1)(a) GDPR and Section 25(1) TDDDG).</li>
+      <li><strong>Withdrawing:</strong> If you switch TikTok off under "Privacy settings", the pixel sends nothing more,
+        and the page deletes TikTok's cookies on our site. A cookie that TikTok keeps on its own domain can only be
+        deleted by TikTok or your browser.</li>
+      <li><strong>How long:</strong> The cookies expire after 13 months at most. At TikTok, TikTok's own rules
+        apply.</li>
     </ul>
 
     <h2 id="scanning">4. Scanning: photos stay on your phone</h2>
@@ -756,7 +799,7 @@
     </div>
     <p>
       Apple (App Store), Google (Google Play, and Google ML Kit on Android), Paddle for purchases on the web and, for the Kindle import, Amazon act under their own responsibility. Their
-      own privacy policies apply. For advertising on start.pagebite.eu we are jointly responsible with Meta (see <a href="#meta">above</a>).
+      own privacy policies apply. For advertising on start.pagebite.eu we are jointly responsible with Meta (see <a href="#meta">above</a>), and with TikTok for the TikTok Pixel there (see <a href="#tiktok">above</a>).
     </p>
 
     <h3>Transfers to the USA</h3>
@@ -765,7 +808,8 @@
       stored in the EU. For the USA, the European Commission's adequacy decision for the EU-US Data Privacy Framework
       applies (Art. 45 GDPR). In addition, the agreements include EU Standard Contractual Clauses (Art. 46(2)(c) GDPR).
       Your content such as cards and page texts stays in the EU, and our mailbox for your emails is with a provider
-      from the EU.
+      from the EU. With your consent, data of the TikTok Pixel also goes to the USA, Malaysia and Singapore, with access
+      from China (see <a href="#tiktok">above</a>).
     </p>
 
     <h2 id="retention">11. Retention and deletion</h2>
