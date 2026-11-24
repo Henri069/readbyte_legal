@@ -405,14 +405,17 @@
 
     <h3 id="web-consent">Your choice in the privacy banner on start.pagebite.eu</h3>
     <p>
-      When you open start.pagebite.eu, a banner asks whether we may count which steps you see (statistics) and whether
-      Meta may measure whether our ads work (advertising), and whether TikTok may measure which videos lead to purchases
-      (TikTok). Before you choose, we count nothing and load nothing from Meta or TikTok. "Decline all" and "Accept all"
-      are the same size. Under "Settings" you can switch the three on one by one; all stay off until you switch them
-      on.
+      When you open start.pagebite.eu, a banner asks whether we may count which steps you see (statistics). If you come
+      from a Meta ad, it also asks whether Meta may measure whether our ads work (advertising). If you come from TikTok,
+      it asks instead whether TikTok may measure which videos lead to purchases (TikTok). If you come from anywhere
+      else, it asks only about the statistics. The page tells where you come from by the link (for example
+      <code>utm_source=tiktok</code> or a click identifier) or by the page you came from; it does not store this. It
+      loads a pixel only if you come from its platform and agreed. Before you choose, we count nothing and load nothing
+      from Meta or TikTok. "Decline all" and "Accept all" are the same size. Under "Settings" you can switch the shown
+      purposes on one by one; all stay off until you switch them on.
     </p>
     <ul>
-      <li><strong>What we store:</strong> The page stores your choice (the three switches, the day and the version of the
+      <li><strong>What we store:</strong> The page stores your choice (the switches you were shown, the day and the version of the
         banner) in your browser's local storage under <code>pagebite.consent</code>. It does not go to our server. That
         way we don't have to ask on every visit. This is necessary to respect your choice (Section 25(2) No. 2 TDDDG;
         Art. 6(1)(c) with Art. 7(1) GDPR).</li>
@@ -538,8 +541,8 @@
     <h3 id="meta">Advertising with Meta on start.pagebite.eu (only with consent)</h3>
     <p>
       We advertise PageBite on Facebook and Instagram. To measure which ads lead to visits and purchases, and to improve
-      the ads with that, we use the Meta Pixel and Meta's Conversions API on start.pagebite.eu. Both only if you agree to
-      advertising in the banner. The provider is Meta Platforms Ireland Ltd., Merrion Road, Dublin 4, Ireland.
+      the ads with that, we use the Meta Pixel and Meta's Conversions API on start.pagebite.eu. Both only if you come from
+      a Meta ad and agree to advertising in the banner. The provider is Meta Platforms Ireland Ltd., Merrion Road, Dublin 4, Ireland.
     </p>
     <ul>
       <li><strong>The Meta Pixel:</strong> Only after you agree does the page load a script from Meta
@@ -576,7 +579,7 @@
     <p>
       We show PageBite in videos on TikTok and link from there to start.pagebite.eu. To see which videos lead to
       purchases, we use the TikTok Pixel on start.pagebite.eu. TikTok also requires it before we can add a product link
-      to this page on TikTok. All of this only if you agree to TikTok in the banner. The provider is TikTok Technology
+      to this page on TikTok. All of this only if you come from TikTok and agree to TikTok in the banner. The provider is TikTok Technology
       Limited, 10 Earlsfort Terrace, Dublin, D02 T380, Ireland.
     </p>
     <ul>
