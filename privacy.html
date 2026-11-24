@@ -23,7 +23,7 @@
 
   <main>
     <h1>Datenschutzerklärung</h1>
-    <p class="meta">PageBite · Stand: 20. November 2026</p>
+    <p class="meta">PageBite · Stand: 24. November 2026</p>
 
     <div class="note">
       <p><strong>Das Wichtigste in Kürze</strong></p>
@@ -270,6 +270,14 @@
             <td>Gelöscht, sobald an Meta gemeldet, spätestens nach 7 Tagen</td>
           </tr>
           <tr>
+            <td>Einwilligung in Werbemails (ja oder nein, Zeitpunkt, Fassung); nach Kauf und Anmeldung E-Mail-Adresse,
+              Konto-Kennung und Sprache in der Empfängerliste</td>
+            <td>Supabase (Frankfurt am Main); die Empfängerliste bei Brevo (EU)</td>
+            <td>Tipps, Neuigkeiten, Angebote und Fragen nach deiner Meinung per E-Mail</td>
+            <td>Einwilligung, Art. 6 Abs. 1 lit. a DSGVO, siehe <a href="#werbemails">unten</a></td>
+            <td>Bis du dich abmeldest oder dein Konto löschst</td>
+          </tr>
+          <tr>
             <td>Technische Protokolle (IP-Adresse, Zeitpunkt, Anfrage-Daten)</td>
             <td>Supabase, Google Cloud, PostHog, RevenueCat</td>
             <td>Sicherheit und Betrieb</td>
@@ -496,6 +504,41 @@
            nach § 25 Abs. 2 Nr. 2 TDDDG unbedingt erforderlich? (2) Das Konto entsteht schon mit der E-Mail-Adresse, vor
            dem Kauf. Passt lit. b, und sind 30 Tage ohne Kauf angemessen? (3) Unter dem E-Mail-Feld steht nur ein Hinweis
            auf Nutzungsbedingungen und Datenschutz, kein Häkchen. Reicht das? -->
+    </ul>
+
+    <h3 id="werbemails">Werbemails nach einem Kauf (nur mit Einwilligung)</h3>
+    <p>
+      Unter dem E-Mail-Feld auf start.pagebite.eu steht ein eigenes Häkchen: „Ich möchte Tipps, Neuigkeiten, Angebote und ab
+      und zu eine Frage nach meiner Meinung von PageBite per E-Mail bekommen. Abmelden geht jederzeit.“ Es ist nicht vorausgewählt, und ohne Häkchen kannst du
+      genauso weitermachen und kaufen.
+    </p>
+    <ul>
+      <li><strong>Was wir speichern:</strong> Setzt du das Häkchen, speichert unser Server bei Supabase (EU, Frankfurt am
+        Main) zu deinem Konto, dass und wann du eingewilligt hast und welche Fassung dieser Erklärung galt. Nimmst du das
+        Häkchen vor dem Kauf wieder weg, speichern wir auch das.</li>
+      <li><strong>Wann wir dich eintragen:</strong> Nur wenn du ein Abo kaufst und dich danach mit dem Link oder dem Code
+        aus unserer E-Mail anmeldest. Damit ist bestätigt, dass die Adresse dir gehört. Erst dann trägt unser Server
+        einmal am Tag deine E-Mail-Adresse, deine Konto-Kennung und die Sprache (Deutsch oder Englisch) in eine
+        Empfängerliste bei Brevo ein (siehe <a href="#empfaenger">Abschnitt 10</a>). Ohne Kauf bekommst du keine
+        Werbemails.</li>
+      <li><strong>Was du bekommst:</strong> Tipps zu PageBite, Neuigkeiten und Angebote von uns und ab und zu die Frage,
+        was wir besser machen können. Antwortest du darauf, landet deine Antwort in unserem Postfach (siehe
+        <a href="#e-mails">„Wenn du uns eine E-Mail schreibst“</a>). Brevo verschickt die
+        E-Mails für uns und zählt dabei, ob eine E-Mail geöffnet und ob ein Link darin angeklickt wurde.</li>
+      <li><strong>Abmelden:</strong> In jeder dieser E-Mails steht ein Link zum Abmelden; viele E-Mail-Programme zeigen
+        dafür auch einen eigenen Knopf. Danach bekommst du keine Werbemails mehr. Brevo merkt sich deine Adresse als
+        abgemeldet, damit das so bleibt. Du kannst uns auch einfach an <a href="mailto:info@pagebite.eu">info@pagebite.eu</a>
+        schreiben. E-Mails, die du für dein Konto brauchst (zum Beispiel den Login-Code), bekommst du weiter.</li>
+      <li><strong>Rechtsgrundlage:</strong> deine Einwilligung (Art. 6 Abs. 1 lit. a DSGVO, § 7 Abs. 2 Nr. 2 UWG). Du
+        kannst sie jederzeit mit Wirkung für die Zukunft widerrufen (Art. 7 Abs. 3 DSGVO).</li>
+      <li><strong>Wie lange:</strong> Den Nachweis deiner Einwilligung speichern wir, solange dein Konto besteht. Löschst
+        du dein Konto, löschen wir auch deinen Eintrag bei Brevo. Meldest du dich ab, bleibt bei Brevo nur der Vermerk,
+        dass du keine Werbemails willst.</li>
+      <!-- ANWALT (2026-11-24): (1) Reicht die Anmeldung mit Link oder Code aus der Zugangs-E-Mail nach dem Kauf als
+           Bestätigung der Adresse (Double-Opt-in), oder braucht es eine eigene Bestätigungsmail? (2) Reicht der Text am
+           Häkchen ("Tipps, Neuigkeiten, Angebote und ab und zu eine Frage nach meiner Meinung") als bestimmter Zweck,
+           auch für Feedback-Umfragen (BGH VI ZR 225/17)? (3) Öffnungs- und Klickzählung
+           bei Brevo: von der Einwilligung gedeckt, oder abschalten? -->
     </ul>
 
     <h3 id="meta">Werbung mit Meta auf start.pagebite.eu (nur mit Einwilligung)</h3>
@@ -728,7 +771,8 @@
           </tr>
           <tr>
             <td>Sendinblue SAS (Brevo), Paris</td>
-            <td>Versand der E-Mails mit dem Login-Code und mit dem Link nach einem Kauf im Web</td>
+            <td>Versand der E-Mails mit dem Login-Code und mit dem Link nach einem Kauf im Web; mit deiner Einwilligung die
+              Empfängerliste und der Versand der Werbemails</td>
             <td>EU (Frankreich, Deutschland, Belgien)</td>
             <td>Auftragsverarbeitungsvertrag (Teil der Brevo-Bedingungen)</td>
           </tr>
@@ -768,8 +812,9 @@
       <li>Die gezählten Schritte auf start.pagebite.eu löschen wir nach 12 Monaten automatisch.</li>
       <li>Metas Browser-Kennungen für die Meldung eines Kaufs löschen wir, sobald der Kauf gemeldet ist, spätestens
         nach 7 Tagen.</li>
-      <li>Wenn du dein Konto löschst, löschen wir deine Daten bei Supabase, deinen Kundeneintrag bei RevenueCat und,
-        falls du der Statistik zugestimmt hattest, deine Daten bei PostHog. So geht's: <a
+      <li>Wenn du dein Konto löschst, löschen wir deine Daten bei Supabase, deinen Kundeneintrag bei RevenueCat, falls
+        du in der Empfängerliste für Werbemails stehst, deinen Eintrag bei Brevo und, falls du der Statistik zugestimmt
+        hattest, deine Daten bei PostHog. So geht's: <a
           href="./delete-account.html">Konto löschen</a>.</li>
       <li>Gelöschte Daten können noch in Sicherungskopien von Supabase enthalten sein, bis diese turnusmäßig
         überschrieben werden.</li>
@@ -790,7 +835,7 @@
       <li>Berichtigung (Art. 16)</li>
       <li>Löschung (Art. 17)</li>
       <li>Einschränkung der Verarbeitung (Art. 18)</li>
-      <li>Datenübertragbarkeit (Art. 20). In der App: Einstellungen → Meine Daten exportieren (JSON)</li>
+      <li>Datenübertragbarkeit (Art. 20). In der App: Einstellungen → Meine Daten exportieren (JSON). Die Datei enthält die Daten auf deinem Gerät und, wenn du online bist, auch die Daten, die nur auf unserem Server liegen: deine E-Mail-Adresse, deine Einwilligungen, dein Abo, deine Antworten auf start.pagebite.eu, ob du Werbemails bekommst, deine Tageszähler und ein Eintrag je KI-Anfrage (ohne Text).</li>
       <li>Widerspruch gegen Verarbeitungen auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO (Art. 21)</li>
       <li>Widerruf einer Einwilligung mit Wirkung für die Zukunft (Art. 7 Abs. 3)</li>
     </ul>
